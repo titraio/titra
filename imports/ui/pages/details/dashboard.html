@@ -1,74 +1,93 @@
 <template name="dashboard">
-  {{#if isCustomerDashboard}}
-    <h4 class="mb-5 text-center">{{customer}} dashboard {{#if dashBoardResource}} ({{dashBoardResource}}) {{/if}}</h4>
-  {{else}}
-    {{#if dashboardId}}
-      <h4 class="mb-5 text-center">{{projectName}}</h4>
-    {{else}}
-      {{#unless timecards}}
-        <div class="text-center">{{t "tabular.sZeroRecords"}}</div>
-      {{/unless}}
-    {{/if}}
-      <div class="row mb-4">
-        <div class="col-md-6">
-        {{#if timecards}}
-          <h5 class="text-center">{{t "dashboard.time_per_date"}}</h5>
-        {{/if}}
-          <div class="js-linechart-container mb-4">
-          </div>
-        </div>
-        <div class="col-md-6">
-          {{#if timecards}}
-            <h5 class="text-center">{{t "dashboard.time_distribution_task"}}</h5>
-          {{/if}}
-          <div class="js-piechart-container mb-4">
+  {{#if hasPassword}}
+    {{#unless isAuthenticated}}
+    <div class="container">
+      <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+          <div class="row justify-content-center">This dashboard is protected</div>
+          <div class="password-box">
+            <input type="password" class="form-control" placeholder="Enter password" id="pwInput">
+            <button class="btn btn-primary mt-2 w-100" id="pwSubmit">Unlock</button>
           </div>
         </div>
       </div>
+    </div>
+    {{/unless}}
   {{/if}}
-  {{#if dashboardId}}
-    {{#if timecards}}
-      <h5 class="text-center">{{t "dashboard.detailed_working_time"}} ({{startDate}} - {{endDate}})</h5>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-4">
-              <strong>{{t "globals.date"}}</strong>
-            </div>
-            <div class="col-4">
-              <strong>{{t "globals.task"}}</strong>
-            </div>
-            <div class="col-4">
-              <strong>{{timeunit}}</strong>
+
+  {{#if isAuthenticated}}
+    {{#if isCustomerDashboard}}
+      <h4 class="mb-5 text-center">{{customer}} dashboard {{#if dashBoardResource}} ({{dashBoardResource}}) {{/if}}</h4>
+    {{else}}
+      {{#if dashboardId}}
+        <h4 class="mb-5 text-center">{{projectName}}</h4>
+      {{else}}
+        {{#unless timecards}}
+          <div class="text-center">{{t "tabular.sZeroRecords"}}</div>
+        {{/unless}}
+      {{/if}}
+        <div class="row mb-4">
+          <div class="col-md-6">
+          {{#if timecards}}
+            <h5 class="text-center">{{t "dashboard.time_per_date"}}</h5>
+          {{/if}}
+            <div class="js-linechart-container mb-4">
             </div>
           </div>
-        </li>
-        {{#each timecard in timecards}}
+          <div class="col-md-6">
+            {{#if timecards}}
+              <h5 class="text-center">{{t "dashboard.time_distribution_task"}}</h5>
+            {{/if}}
+            <div class="js-piechart-container mb-4">
+            </div>
+          </div>
+        </div>
+    {{/if}}
+    {{#if dashboardId}}
+      {{#if timecards}}
+      <h5 class="text-center">Period : {{period}}</h5>
+        <h5 class="text-center">{{t "dashboard.detailed_working_time"}} ({{startDate}} - {{endDate}})</h5>
+        <ul class="list-group">
           <li class="list-group-item">
             <div class="row">
               <div class="col-4">
-                {{formatDate (timecard.date)}}
+                <strong>{{t "globals.date"}}</strong>
               </div>
               <div class="col-4">
-              {{emojify (timecard.task)}}
+                <strong>{{t "globals.task"}}</strong>
+              </div>
+              <div class="col-4">
+                <strong>{{timeunit}}</strong>
+              </div>
             </div>
-            <div class="col-4">
-              {{timeInUnit (timecard.hours)}}
+          </li>
+          {{#each timecard in timecards}}
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-4">
+                  {{formatDate (timecard.date)}}
+                </div>
+                <div class="col-4">
+                {{emojify (timecard.task)}}
+              </div>
+              <div class="col-4">
+                {{timeInUnit (timecard.hours)}}
+              </div>
             </div>
-          </div>
-        </li>
-        {{/each}}
-        <li class="list-group-item">
-          <div class="row">
-            <div class="offset-4 col-4 text-end">
-              <strong>{{t "details.total"}}:</strong>
+          </li>
+          {{/each}}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="offset-4 col-4 text-end">
+                <strong>{{t "details.total"}}:</strong>
+              </div>
+              <div class="col-4">
+                <strong>{{totalHours}}</strong>
+              </div>
             </div>
-            <div class="col-4">
-              <strong>{{totalHours}}</strong>
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      {{/if}}
+      {{/if}}
     {{/if}}
-  {{/if}}
 </template>

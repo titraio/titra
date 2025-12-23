@@ -24,9 +24,9 @@ if (!Meteor.settings.public.sandstorm) {
 // FlowRouter.decodeQueryParamsOnce = true;
 
 FlowRouter.route('*', {
-  action: () => {
-    this.render('appLayout', '404')
-  },
+  action() {
+    this.render('appLayout', '404');
+  }
 })
 FlowRouter.route('/', {
   waitOn() {

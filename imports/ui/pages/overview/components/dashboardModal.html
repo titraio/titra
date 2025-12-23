@@ -13,8 +13,38 @@
                         <label for="selectedProject">{{t "globals.project"}}</label>
                     </div>
                     <div class="mb-3">
-                        {{>periodpicker}}
+                        {{>periodpicker id="dashboardPeriod"}}
                     </div>
+                    <div class="mb-3 position-relative form-floating">
+                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="Password"/>
+                        <label for="dashboard-password">Password</label>
+                        <!-- Eye icon positioned inside the input -->
+                        <span id="togglePassword"
+                              class="position-absolute top-50 end-0 translate-middle-y me-3"
+                              style="cursor:pointer; z-index: 10;">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </span>
+                        {{#if passwordWarningOn}}
+                            <small class="text-warning">⚠️ Without password anyone with the link can access the dashboard</small>
+                        {{/if}}
+
+                      </div>
+
+                    <div class="mb-3 form-floating">
+                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="Custom URL"/>
+                        <label for="dashboard-slug">Custom URL</label>
+                        {{#if slugStatusOn}}
+                            {{#if slugStatus}}
+                        <small class="text-success">This URL is available ✓</small>
+                            {{else}}
+                        <small class="text-danger">This URL is already taken ✗</small>
+                            {{/if}}
+                        {{/if}}
+                        {{#if slugSanitzed}}
+                            <small class="text-warning">⚠️ Your slug has been automatically sanitized</small>
+                        {{/if}}
+                    </div>
+
                     <button type="button" class="btn btn-primary border js-create-dashboard mb-3">{{t "administration.create"}}</button>
                     {{#if dashboardId}}
                         <div class="mb-3">

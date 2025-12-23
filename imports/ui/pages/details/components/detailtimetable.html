@@ -2,11 +2,11 @@
     <div class="row d-print-none">
         <div class="col-xl-7 col-lg-7 col-6 col-sm-12 mt-2">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary border js-track-time"> <i class="fa fa-plus"></i> <span class="d-none d-md-inline">{{t "navigation.track"}}</span></button> 
+                <button type="button" class="btn btn-primary border js-track-time"> <i class="fa fa-plus"></i> <span class="d-none d-md-inline">{{t "navigation.track"}}</span></button>
                 {{#if detailTimeEntries}}
                     <button type="button" class="btn btn-secondary border js-export-csv"><i class="fa fa-download"></i> <span class="d-none d-md-inline">CSV</span></button>
                     <button type="button" class="btn btn-secondary border js-export-xlsx"><i class="fa fa-download"></i> <span class="d-none d-md-inline">Excel</span></button>
-                    <button type="button" class="btn btn-secondary border js-share" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}"><i class="fa fa-link"></i> <span class="d-none d-md-inline">{{t "navigation.share"}}</span></button>
+                    <!-- <button type="button" class="btn btn-secondary border js-share" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}"><i class="fa fa-link"></i> <span class="d-none d-md-inline">{{t "navigation.share"}}</span></button> -->
                     {{#if showInvoiceButton}}
                         <button type="button" class="btn btn-secondary border js-invoice"><i class="fa fa-upload"></i> <span class="d-none d-md-inline">{{t "navigation.invoice"}}</span></button>
                     {{/if}}
@@ -38,7 +38,7 @@
                 <button type="button"  class="btn btn-secondary border"><i class="fa fa-search"></i></button>
             </div>
         </div>
-    </div> 
+    </div>
     <div id="datatable-container" class="my-3">
     </div>
     <div class="row">
@@ -47,10 +47,10 @@
                 {{>pagination totalEntries=totalDetailTimeEntries limit=limit}}
             {{/if}}
         </div>
-        <div class="col-md-3 ms-md-auto"> 
+        <div class="col-md-3 ms-md-auto">
             {{>limitpicker}}
         </div>
-    </div> 
+    </div>
     {{>editTimeEntryModal tcid=tcid selectedProjectId=project}}
     <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
         <div class="modal-dialog">

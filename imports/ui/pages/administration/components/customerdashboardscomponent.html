@@ -1,0 +1,127 @@
+<template name="customerdashboardscomponent">
+  <div class="card mb-3">
+      <div class="card-header">
+          <a href="#" class="text-reset text-decoration-none"> Dashboards</a>
+      </div>
+  </div>
+  {{#if dashboards}}
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>URL</th>
+                      <th>Project Name</th>
+                      <th>Customer</th>
+                      <th>Time Period</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {{#each dashboard in dashboards}}
+                      <tr>
+                          <td>{{dashboard._id}}</td>
+                          <td><a href="{{dashboardUrl dashboard._id}}"> {{dashboardLink dashboard._id}} </a></td>
+                          <td>{{projectName dashboard.projectId}}</td>
+                          <td>{{projectCustomer dashboard.projectId}}</td>
+                          <td>{{dashboardTimeperiod dashboard._id}}</td>
+                          <td>
+                              <a href="#" aria-label="Remove Dashboard" class="js-remove-dashboard" data-dashboard-id="{{dashboard._id}}"><i class="fas fa-trash"></i></a>
+                              <a href="#" aria-label="Edit Dashboard" class="js-edit-dashboard" data-dashboard-id="{{dashboard._id}}"><i class="fas fa-edit"></i></a>
+                          </td>
+                      </tr>
+                  {{/each}}
+              </tbody>
+          </table>
+      </div>
+  {{else}}
+      <p>No Customer Dashhboards are available</p>
+  {{/if}}
+
+
+    <div class="modal fade js-dashboard-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Edit Customer Dashboard</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 form-floating">
+                        <input class="form-control" name="selectedDashboard" id="selectedDashboard" type="text" disabled value="{{editDashboardId}}"/>
+                        <label for="selectedDashboard">Dashboard ID</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input class="form-control" name="selectedProject" id="selectedProject" type="text" disabled value="{{editSelectedProjectName}}"/>
+                        <label for="selectedProject">{{t "globals.project"}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <select id="dashboard-period" class="form-select form-control">
+                              <option {{isSelectedPeriod 'currentMonth' }} value="currentMonth">{{t "period.currentMonth"}}</option>
+                              <option {{isSelectedPeriod 'currentWeek' }} value="currentWeek">{{t "period.currentWeek"}}</option>
+                              <option {{isSelectedPeriod 'currentYear' }} value="currentYear">{{t "period.currentYear"}}</option>
+                              <option {{isSelectedPeriod 'lastMonth' }} value="lastMonth">{{t "period.lastMonth"}}</option>
+                              <option {{isSelectedPeriod 'last3months' }} value="last3months">{{t "period.last3months"}}</option>
+                              <option {{isSelectedPeriod 'lastWeek' }} value="lastWeek">{{t "period.lastWeek"}}</option>
+                              <option {{isSelectedPeriod 'lastYear' }} value="lastYear">{{t "period.lastYear"}}</option>
+                              <option {{isSelectedPeriod 'custom' }} value="custom">{{t "period.custom"}}</option>
+                              <option {{isSelectedPeriod 'all' }} value="all">{{t "period.all"}}</option>
+                            </select>
+                            <i class="fas fa-chevron-down fa-xs position-absolute top-0 end-0 m-3 opacity-50"></i>
+                            <label for="period">{{t "period.time_period"}}</label>
+                        </div>
+                    </div>
+                    {{#if showCustomDates}}
+                    <div class="mb-3 row g-2">
+                        <div class="col">
+                          <label for="customStartDate" class="form-label">{{t "details.startTime"}}</label>
+                          <input aria-label='{{t "details.startTime"}}'
+                                 class="form-control"
+                                 name="customStartDate"
+                                 id="customStartDate"
+                                 type="date"
+                                 value="{{EditStartDate}}"/>
+                        </div>
+                        <div class="col">
+                          <label for="customEndDate" class="form-label">{{t "details.endTime"}}</label>
+                          <input aria-label='{{t "details.endTime"}}'
+                                 class="form-control"
+                                 name="customEndDate"
+                                 id="customEndDate"
+                                 type="date"
+                                 value="{{EditEndDate}}"/>
+                        </div>
+                      </div>
+                      {{/if}}
+
+
+                    <div class="mb-3 position-relative form-floating">
+                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="Password" value="{{EditPassword}}"/>
+                        <label for="dashboard-password">Password</label>
+                        <!-- Eye icon positioned inside the input -->
+                        <span id="togglePassword"
+                                class="position-absolute top-50 end-0 translate-middle-y me-3"
+                                style="cursor:pointer; z-index: 10;">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </span>
+
+                        </div>
+
+                    <div class="mb-3 form-floating">
+                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="Custom URL" value="{{EditSlug}}"/>
+                        <label for="dashboard-slug">Custom URL</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <button type="button" class="btn btn-primary border js-save-dashboard mb-3">Save</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary border" data-bs-dismiss="modal">{{t "navigation.close"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

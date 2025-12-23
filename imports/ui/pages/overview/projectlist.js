@@ -21,7 +21,9 @@ Template.projectlist.onCreated(function createProjectList() {
   this.endDate = new ReactiveVar(null)
   this.autorun(() => {
     this.showArchived.set(FlowRouter.getQueryParam('showArchived') === 'true')
-    this.period.set(FlowRouter.getQueryParam('period') || 'all')
+    const periodKey = this.data?.periodKey || 'period'; // default fallback
+    const value = FlowRouter.getQueryParam(periodKey) || 'all';
+    this.period.set(value);
   })
   this.autorun(async () => {
     if(this.period.get() !== 'all') {

@@ -66,7 +66,7 @@
     "newLine": "New task",
     "cancel": "Cancel",
     "saving": "Saving ...",
-    "timeUnit_message": "Definition of the time unit for your tasks" 
+    "timeUnit_message": "Definition of the time unit for your tasks"
   },
   "tracktime": {
     "no_time": "No time tracked yet.",
@@ -372,7 +372,7 @@
   },
   "dashboard": {
     "share": "Share project dashboard",
-    "shareMessage": "You have the opportunity to share a link of the project",
+    "shareMessage": "You have the opportunity to create a sharable link for a project dashboard",
     "copy_instructions": "Copy & paste the link above to share your project information with someone.",
     "security_notice": "This dashboard is accessible to everybody on the web through this link.",
     "time_per_date": "Time per date",

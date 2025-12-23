@@ -148,6 +148,14 @@ function showToast(message) {
     new bs.Toast($('.toast').get(0), { delay: 2000 }).show()
   })
 }
+function showErrorToast(message) {
+  import('bootstrap').then((bs) => {
+    const $toast = $('.toast')
+    $toast.removeClass('d-none bg-success').addClass('bg-danger')
+    $toast.find('.toast-body').text(message)
+    new bs.Toast($toast.get(0), { delay: 4000 }).show()
+  })
+}
 function waitForElement(templateInstance, selector) {
   const targetElement = templateInstance?.view.firstNode().parentElement
     ? templateInstance?.view.firstNode().parentElement : document
@@ -236,6 +244,7 @@ export {
   getUserTimeUnitVerbose,
   getUserTimeUnitAbbreviated,
   showToast,
+  showErrorToast,
   waitForElement,
   dailyTimecardMapper,
   totalHoursForPeriodMapper,

@@ -36,7 +36,7 @@
     <div class="js-project-list">
       {{#each project in projects}}
         <div class="card mb-3" style="border: 1px solid {{colorOpacity project.color 50}}">
-          <div class="card-header" style="border-bottom: 1px solid {{colorOpacity project.color 50}}" >{{project.name}}  
+          <div class="card-header" style="border-bottom: 1px solid {{colorOpacity project.color 50}}" >{{project.name}}
             <div class="dropdown float-end">
               <a class="dropdown-toggle text-body-secondary project-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
@@ -44,11 +44,11 @@
               <ul class="dropdown-menu">
                 {{#if archived (project._id)}}
                 <li><a class="dropdown-item js-edit-project" data-id="{{project._id}}" href="#"><i class="fa fa-edit"></i> <span class="d-none d-md-inline">{{t "overview.properties"}}</span></a></li>
-                <li><a class="dropdown-item js-share" data-id="{{project._id}}" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}"  href="#"><i class="fa fa-link"></i> <span class="d-none d-md-inline">{{t "navigation.share"}}</span></a></li>
+                <li><a class="dropdown-item js-share" data-id="{{project._id}}" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}"  href="#"><i class="fa fa-link"></i> <span class="d-none d-md-inline">Create Dashboard</span></a></li>
                 {{else}}
                 <li><a class="dropdown-item js-edit-project" data-id="{{project._id}}" href="#"><i class="fa fa-edit"></i> <span class="d-none d-md-inline">{{t "overview.properties"}}</span></a></li>
                 <li><a class="dropdown-item js-archive-project" data-id="{{project._id}}" href="#"><i class="fa fa-archive"></i> <span class="d-none d-md-inline">{{t "navigation.archive"}}</span></a></li>
-                <li><a class="dropdown-item js-share" data-id="{{project._id}}" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}" href="#"><i class="fa fa-link"></i> <span class="d-none d-md-inline">{{t "navigation.share"}}</span></a></li>
+                <li><a class="dropdown-item js-share" data-id="{{project._id}}" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{t 'dashboard.shareMessage'}}" href="#"><i class="fa fa-link"></i> <span class="d-none d-md-inline">Create Dashboard</span></a></li>
                 {{/if}}
               </ul>
             </div>

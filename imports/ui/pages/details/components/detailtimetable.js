@@ -45,7 +45,7 @@ function detailedDataTableMapper(entry, forExport) {
       dayjs.utc(entry.date).format(getGlobalSetting('dateformat')),
       entry.task.replace(/^=/, '\\=')]
     if (getGlobalSetting('showResourceInDetails')) {
-      mapping.push(projectResources.findOne() ? projectResources.findOne({ _id: entry.userId })?.name : '')      
+      mapping.push(projectResources.findOne() ? projectResources.findOne({ _id: entry.userId })?.name : '')
     }
   }
   if (getGlobalSetting('showCustomFieldsInDetails')) {
@@ -599,25 +599,6 @@ Template.detailtimetable.events({
     event.preventDefault()
     templateInstance.tcid.set(undefined)
     new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
-  },
-  'click .js-share': (event, templateInstance) => {
-    event.preventDefault()
-    const projectId = FlowRouter.getParam('projectId')
-    if ($('#period').val() === 'all' || projectId === 'all' || projectId.split(',').length > 1) {
-      showToast(t('notifications.sanity'))
-      return
-    }
-    Meteor.call('addDashboard', {
-      projectId, resourceId: $('#resourceselect').val()[0], customer: $('#customerselect').val()[0], timePeriod: $('#period').val(),
-    }, (error, _id) => {
-      if (error) {
-        showToast(t('notifications.dashboard_creation_failed'))
-        // console.error(error)
-      } else {
-        $('#dashboardURL').val(FlowRouter.url('dashboard', { _id }))
-        new bootstrap.Modal($('.js-dashboard-modal')[0], { focus: false }).toggle()
-      }
-    })
   },
   'click .js-invoice': (event, templateInstance) => {
     event.preventDefault()

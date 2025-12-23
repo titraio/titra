@@ -15,7 +15,7 @@ async function getGlobalSettingAsync(name) {
 async function getDefaultVerificationSettingsAsync() {
   // Get default verification settings from the first active webhook
   const firstWebhook = await WebhookVerification.findOneAsync({ active: true })
-  
+
   if (!firstWebhook) {
     return {
       verificationPeriod: 30,
@@ -25,7 +25,7 @@ async function getDefaultVerificationSettingsAsync() {
       webhookInterfaceId: null,
     }
   }
-  
+
   return {
     verificationPeriod: firstWebhook.verificationPeriod || 30,
     serviceUrl: firstWebhook.serviceUrl || '',
@@ -181,7 +181,7 @@ function getProjectListByCustomer(customer) {
  * This function is designed to be used with MongoDB collections to aggregate and convert hours worked on projects
  * into a decimal format for easier calculations. It is particularly useful for generating reports or summaries
  * of work done over a specific period.
- * 
+ *
  * @param {string} projectId - The ID of the project to calculate hours for. This parameter can be used to filter
  *                             the aggregation to a specific project.
  * @param {string} period - The time period for which to calculate total hours. This parameter is expected to
@@ -198,15 +198,15 @@ function getProjectListByCustomer(customer) {
  *                         used to paginate the results.
  * @param {number} page - The page number of results to return, based on the limit. This parameter can be used in
  *                        conjunction with `limit` to paginate the results.
- * 
+ *
  * @returns {Array} projectList - An array that is intended to be populated with the results of the aggregation.
  *                                The initial value is an empty array, and the function does not directly populate
  *                                it within the provided code snippet.
- * 
+ *
  * @returns {Object} matchSelector - An object that is intended to be used as a MongoDB match filter in the
  *                                   aggregation pipeline. The initial value is an empty object, and the function
  *                                   does not directly populate it within the provided code snippet.
- * 
+ *
  * @returns {Object} addFields - A MongoDB aggregation pipeline stage that adds a new field `convertedHours` to
  *                               each document. This field contains the value of the `hours` field converted to
  *                               a decimal format. This stage is ready to be included in an aggregation pipeline.
