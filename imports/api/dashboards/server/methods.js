@@ -37,6 +37,8 @@ const addDashboard = new ValidatedMethod({
     check(args, {
       projectId: String,
       timePeriod: String,
+      resourceId: Match.Optional(String),
+      customer: Match.Optional(String),
       startDate: Match.Optional(String),
       endDate: Match.Optional(String),
       password: Match.Optional(String),
@@ -45,7 +47,7 @@ const addDashboard = new ValidatedMethod({
   },
   mixins: [authenticationMixin, transactionLogMixin],
   async run({
-    projectId, timePeriod, startDate, endDate, password, slug
+    projectId, timePeriod,resourceId,customer, startDate, endDate, password, slug
   }) {
     let inserted_slug
     if (slug) {
@@ -74,7 +76,7 @@ const addDashboard = new ValidatedMethod({
     }
     const _id = Random.id()
     await Dashboards.insertAsync({
-      _id, projectId, timePeriod, startDate, endDate, timeunit, hoursToDays, password:hashedPassword, slug:inserted_slug
+      _id, projectId, timePeriod, customer,resourceId, startDate, endDate, timeunit, hoursToDays, password:hashedPassword, slug:inserted_slug
     })
     return _id
   },
