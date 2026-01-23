@@ -41,6 +41,7 @@
   },
   "navigation": {
     "track": "Track time",
+    "dashboard" : "Customer Dashboards",
     "overview": "Overview",
     "details": "Details",
     "profile": "Profile",
