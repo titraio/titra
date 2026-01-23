@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import Projects from '../api/projects/projects.js'
+import { Dashboards } from '../api/dashboards/dashboards.js'
 import Transactions from '../api/transactions/transactions.js'
 import { periodToDates } from './periodHelpers.js'
 import { Globalsettings } from '../api/globalsettings/globalsettings.js'
@@ -11,6 +12,38 @@ async function getGlobalSettingAsync(name) {
   const globalSetting = await Globalsettings.findOneAsync({ name })
   return globalSetting ? globalSetting.value : false
 }
+
+async function assertCanModifyDashboard (userId, dashboardId) {
+
+  const meteorUser = await Meteor.users.findOneAsync({ _id: userId })
+  if (!userId || meteorUser?.inactive) {
+    throw new Meteor.Error('notifications.auth_error_method')
+  } else if (meteorUser && meteorUser.isAdmin) {
+    // Admins can do anything
+    return;
+  }
+
+
+  const dashboard = await Dashboards.findOneAsync(dashboardId);
+  if (!dashboard) {
+    throw new Meteor.Error('not-found', 'Dashboard not found');
+  }
+
+  const project = await Projects.findOneAsync(dashboard.projectId);
+  if (!project) {
+    throw new Meteor.Error('not-found', 'Project not found');
+  }
+
+  const isOwner = project.userId === userId;
+  const isTeamMember = Array.isArray(project.team) && project.team.includes(userId);
+
+  if (!isOwner && !isTeamMember) {
+    throw new Meteor.Error(
+      'not-authorized',
+      'You do not have permission to modify this dashboard'
+    );
+  }
+};
 
 async function getDefaultVerificationSettingsAsync() {
   // Get default verification settings from the first active webhook
@@ -740,6 +773,7 @@ export {
   buildworkingTimeSelectorAsync,
   buildDetailedTimeEntriesForPeriodSelectorAsync,
   getGlobalSettingAsync,
+  assertCanModifyDashboard,
   getUserSettingAsync,
   getDefaultVerificationSettingsAsync,
   calculateSimilarity,

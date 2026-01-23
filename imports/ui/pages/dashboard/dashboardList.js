@@ -21,22 +21,53 @@ Template.dashboardList.onCreated(function () {
   tpl.editingDashboard = new ReactiveVar(null);
   tpl.editingDashboardPasswordChanged = new ReactiveVar(false);
 
-  // 1) Subscribe to all dashboards
+  // 🔥 FILTER STATE
+  tpl.selectedCustomers = new ReactiveVar([]);
+  tpl.selectedProjects = new ReactiveVar([]);
+
   tpl.autorun(() => {
-    tpl.subscribe('allDashboardsDetails');
+    tpl.subscribe('myDashboards');
+    tpl.subscribe('myprojects'); // make sure this publication exists
   });
 
-  // 2) Whenever dashboards change, subscribe to their related projects
   tpl.autorun(() => {
-    const dashboards = Dashboards.find().fetch();
-
-    dashboards.forEach(d => {
+    Dashboards.find().forEach(d => {
       tpl.subscribe('singleProject', d.projectId);
     });
   });
+
 });
+
 Template.dashboardList.helpers({
-  dashboards: () => (Dashboards.find({}).fetch().length > 0 ? Dashboards.find({}) : false),
+  // dashboards: () => (Dashboards.find({}).fetch().length > 0 ? Dashboards.find({}) : false),
+  dashboards() {
+    const tpl = Template.instance();
+    const customers = tpl.selectedCustomers.get();
+    const projects  = tpl.selectedProjects.get();
+
+    let projectIds = [];
+
+    // Filter by customer → get matching projects
+    if (customers.length > 0) {
+      projectIds = Projects.find(
+        { customer: { $in: customers } },
+        { fields: { _id: 1 } }
+      ).map(p => p._id);
+
+    }
+
+    let query = {};
+
+    if (projects.length > 0) {
+      query.projectId = { $in: projects };
+    } else if (projectIds.length > 0) {
+      query.projectId = { $in: projectIds };
+    }
+
+    const result = Dashboards.find(query);
+    return result.count() ? result : false;
+  },
+
   projectName(projectId) {
     const p = Projects.findOne(projectId);
     return p ? p.name : 'N/A';
@@ -106,9 +137,79 @@ Template.dashboardList.helpers({
   EditDashboardURL() {
     const dashboard = Template.instance().editingDashboard.get()
     return dashboard ? FlowRouter.url('dashboard', { _id: dashboard._id }) : ''
-  }
+  },
+  customers() {
+    const customers = Projects.find(
+      {},
+      { fields: { customer: 1 } }
+    ).map(p => p.customer).filter(Boolean);
+
+    return [...new Set(customers)];
+  },
+  customerFilterLabel() {
+    const selected = Template.instance().selectedCustomers.get();
+    if (!selected.length) return 'Select customers';
+    return `${selected.length} customer(s) selected`;
+  },
+
+  projectFilterLabel() {
+    const selected = Template.instance().selectedProjects.get();
+    if (!selected.length) return 'Select projects';
+    return `${selected.length} project(s) selected`;
+  },
+
+  filteredProjects() {
+    const tpl = Template.instance();
+    const customers = tpl.selectedCustomers.get();
+
+    if (customers.length === 0) {
+      return Projects.find({}, { sort: { name: 1 } });
+    }
+
+    return Projects.find(
+      { customer: { $in: customers } },
+      { sort: { name: 1 } }
+    );
+  },
 })
 Template.dashboardList.events({
+  'change .js-customer-checkbox'(e, tpl) {
+    const value = e.target.value;
+    let selected = tpl.selectedCustomers.get();
+
+    if (e.target.checked) {
+      selected = [...new Set([...selected, value])];
+    } else {
+      selected = selected.filter(v => v !== value);
+    }
+
+    tpl.selectedCustomers.set(selected);
+    tpl.selectedProjects.set([]); // reset projects when customers change
+  },
+
+  'change .js-project-checkbox'(e, tpl) {
+    const value = e.target.value;
+    let selected = tpl.selectedProjects.get();
+
+    if (e.target.checked) {
+      selected = [...new Set([...selected, value])];
+    } else {
+      selected = selected.filter(v => v !== value);
+    }
+
+    tpl.selectedProjects.set(selected);
+  },
+
+  'click .js-clear-filters'(e, tpl) {
+    e.preventDefault();
+
+    tpl.selectedCustomers.set([]);
+    tpl.selectedProjects.set([]);
+
+    tpl.$('.js-customer-checkbox').prop('checked', false);
+    tpl.$('.js-project-checkbox').prop('checked', false);
+  },
+
   'change #dashboard-period': function (event, template) {
     template.currentPeriod.set(event.target.value)
   },

@@ -4,6 +4,80 @@
         <a href="#" class="text-reset text-decoration-none"> Dashboards</a>
     </div>
 </div>
+<div class="row g-2 mb-3">
+
+  <!-- Customer dropdown -->
+  <div class="col-md-4">
+    <label class="form-label">Customer</label>
+    <div class="dropdown w-100">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle w-100 text-start"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{customerFilterLabel}}
+      </button>
+
+      <ul class="dropdown-menu w-100 p-2">
+        {{#each customers}}
+          <li>
+            <div class="form-check">
+              <input
+                class="form-check-input js-customer-checkbox"
+                type="checkbox"
+                value="{{this}}"
+                id="customer-{{this}}">
+              <label class="form-check-label" for="customer-{{this}}">
+                {{this}}
+              </label>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Project dropdown -->
+  <div class="col-md-4">
+    <label class="form-label">Project</label>
+    <div class="dropdown w-100">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle w-100 text-start"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{projectFilterLabel}}
+      </button>
+
+      <ul class="dropdown-menu w-100 p-2">
+        {{#each filteredProjects}}
+          <li>
+            <div class="form-check">
+              <input
+                class="form-check-input js-project-checkbox"
+                type="checkbox"
+                value="{{_id}}"
+                id="project-{{_id}}">
+              <label class="form-check-label" for="project-{{_id}}">
+                {{name}}
+              </label>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Clear -->
+  <div class="col-md-4 d-flex align-items-end">
+    <button class="btn btn-outline-secondary w-100 js-clear-filters">
+      Clear filters
+    </button>
+  </div>
+
+</div>
+
+
 {{#if dashboards}}
     <div class="table-responsive">
         <table class="table">

@@ -1,7 +1,7 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import { Dashboards } from '../dashboards'
 import { sanitizeSlug } from '../../../utils/sanitizer'
-import { authenticationMixin, transactionLogMixin, getGlobalSettingAsync } from '../../../utils/server_method_helpers.js'
+import { assertCanModifyDashboard,authenticationMixin, transactionLogMixin, getGlobalSettingAsync } from '../../../utils/server_method_helpers.js'
 import bcrypt from 'bcrypt';
 
 // dashboard passwords salt rounds
@@ -109,12 +109,15 @@ const updateDashboard = new ValidatedMethod({
   async run({
     dashboardId, timePeriod, startDate, endDate, slug, password
   }) {
+
+    await assertCanModifyDashboard(this.userId, dashboardId);
+
     const update = {}
     const sanitizedSlug = sanitizeSlug(slug)
 
     if (slug) {
       const existing = await Dashboards.findOneAsync({ slug:sanitizedSlug });
-      if (existing._id != dashboardId) {
+      if (existing && (existing._id != dashboardId)) {
         throw new Meteor.Error('slug-exists', 'This URL is already taken.');
       }
     }
@@ -156,7 +159,14 @@ const removeDashboard = new ValidatedMethod({
     dashboardId
   }) {
 
+    console.log("Removing dashboad : ",dashboardId)
+    // console.log("")
+
+    await assertCanModifyDashboard(this.userId, dashboardId);
+
+    console.log("passed checks")
     const removedCount = await Dashboards.removeAsync(dashboardId);
+
     return removedCount; // usually 1 or 0
   },
 })

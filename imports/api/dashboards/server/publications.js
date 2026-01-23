@@ -5,8 +5,9 @@ import utc from 'dayjs/plugin/utc'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Dashboards } from '../dashboards.js'
 import Timecards from '../../timecards/timecards'
+import Projects from '../../projects/projects.js'
 import { periodToDates } from '../../../utils/periodHelpers.js'
-import { checkAdminAuthentication } from '../../../utils/server_method_helpers.js'
+import {checkAuthentication, checkAdminAuthentication } from '../../../utils/server_method_helpers.js'
 import bcrypt from 'bcrypt';
 
 const saltRounds = 10;
@@ -19,6 +20,39 @@ Meteor.publish('allDashboardsDetails', async function allDashboardsDetails() {
   await checkAdminAuthentication(this)
   return Dashboards.find({})
 })
+
+/**
+ * Publishes dashboards belonging to projects accessible by the current user.
+ * Normal users only.
+ */
+Meteor.publish('myDashboards', async function myDashboards() {
+  if (!this.userId) {
+    return this.ready();
+  }
+
+  await checkAuthentication(this);
+
+  // Find projects the user has access to
+  const projectIds = await Projects.find(
+    {
+      $or: [
+        { userId: this.userId },
+        { public: true },
+        { team: this.userId },
+      ],
+    },
+    { fields: { _id: 1 } }
+  ).map(p => p._id);
+
+  if (!projectIds.length) {
+    return this.ready();
+  }
+
+  // Return dashboards linked to those projects
+  return Dashboards.find(
+    { projectId: { $in: projectIds } },
+  );
+});
 
 /**
  * Publishes the dashboard matching the provided ID with timecards.

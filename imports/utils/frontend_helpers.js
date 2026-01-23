@@ -143,7 +143,7 @@ function getUserTimeUnitAbbreviated() {
 }
 function showToast(message) {
   import('bootstrap').then((bs) => {
-    $('.toast').removeClass('d-none')
+    $('.toast').removeClass('d-none').addClass('bg-success')
     $('.toast-body').text(message)
     new bs.Toast($('.toast').get(0), { delay: 2000 }).show()
   })
