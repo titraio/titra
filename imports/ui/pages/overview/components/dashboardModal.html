@@ -3,7 +3,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title">{{t "dashboard.share"}}</h5>
+                <h5 class="modal-title">{{#if editMode}}{{t "dashboard.edit"}}{{else}}{{t "dashboard.share"}}{{/if}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
                 </div>
@@ -12,39 +12,86 @@
                         <input class="form-control" name="selectedProject" id="selectedProject" type="text" disabled value="{{selectedProjectName}}"/>
                         <label for="selectedProject">{{t "globals.project"}}</label>
                     </div>
+                    {{#if editMode}}
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <select id="dashboard-period" class="form-select form-control">
+                                <option {{isSelectedPeriod 'currentMonth' }} value="currentMonth">{{t "period.currentMonth"}}</option>
+                                <option {{isSelectedPeriod 'currentWeek' }} value="currentWeek">{{t "period.currentWeek"}}</option>
+                                <option {{isSelectedPeriod 'currentYear' }} value="currentYear">{{t "period.currentYear"}}</option>
+                                <option {{isSelectedPeriod 'lastMonth' }} value="lastMonth">{{t "period.lastMonth"}}</option>
+                                <option {{isSelectedPeriod 'last3months' }} value="last3months">{{t "period.last3months"}}</option>
+                                <option {{isSelectedPeriod 'lastWeek' }} value="lastWeek">{{t "period.lastWeek"}}</option>
+                                <option {{isSelectedPeriod 'lastYear' }} value="lastYear">{{t "period.lastYear"}}</option>
+                                <option {{isSelectedPeriod 'custom' }} value="custom">{{t "period.custom"}}</option>
+                                <option {{isSelectedPeriod 'all' }} value="all">{{t "period.all"}}</option>
+                            </select>
+                            <i class="fas fa-chevron-down fa-xs position-absolute top-0 end-0 m-3 opacity-50"></i>
+                            <label for="period">{{t "period.time_period"}}</label>
+                        </div>
+                    </div>
+                    {{#if showCustomDates}}
+                    <div class="mb-3 row g-2">
+                        <div class="col">
+                            <label for="customStartDate" class="form-label">{{t "details.startTime"}}</label>
+                            <input aria-label='{{t "details.startTime"}}'
+                                   class="form-control"
+                                   name="customStartDate"
+                                   id="customStartDate"
+                                   type="date"
+                                   value="{{editStartDate}}"/>
+                        </div>
+                        <div class="col">
+                            <label for="customEndDate" class="form-label">{{t "details.endTime"}}</label>
+                            <input aria-label='{{t "details.endTime"}}'
+                                   class="form-control"
+                                   name="customEndDate"
+                                   id="customEndDate"
+                                   type="date"
+                                   value="{{editEndDate}}"/>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{else}}
                     <div class="mb-3">
                         {{>periodpicker id="dashboardPeriod"}}
                     </div>
+                    {{/if}}
                     <div class="mb-3 position-relative form-floating">
-                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="Password"/>
-                        <label for="dashboard-password">Password</label>
-                        <!-- Eye icon positioned inside the input -->
+                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="Password" value="{{editPassword}}" autocomplete="off" data-1p-ignore/>
+                        <label for="dashboard-password">{{t "globals.password"}}</label>
                         <span id="togglePassword"
                               class="position-absolute top-50 end-0 translate-middle-y me-3"
                               style="cursor:pointer; z-index: 10;">
                             <i class="fas fa-eye" id="eyeIcon"></i>
                         </span>
                         {{#if passwordWarningOn}}
-                            <small class="text-warning">⚠️ Without password anyone with the link can access the dashboard</small>
+                            <small class="text-warning">{{t "dashboard.noPasswordWarning"}}</small>
                         {{/if}}
 
                       </div>
 
                     <div class="mb-3 form-floating">
-                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="Custom URL"/>
-                        <label for="dashboard-slug">Custom URL</label>
+                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="Custom URL" value="{{editSlug}}" autocomplete="off"/>
+                        <label for="dashboard-slug">{{t "dashboard.customUrl"}}</label>
                         {{#if slugStatusOn}}
                             {{#if slugStatus}}
-                        <small class="text-success">This URL is available ✓</small>
+                        <small class="text-success">{{t "dashboard.slugAvailable"}}</small>
                             {{else}}
-                        <small class="text-danger">This URL is already taken ✗</small>
+                        <small class="text-danger">{{t "dashboard.slugTaken"}}</small>
                             {{/if}}
                         {{/if}}
                         {{#if slugSanitzed}}
-                            <small class="text-warning">⚠️ Your slug has been automatically sanitized</small>
+                            <small class="text-warning">{{t "dashboard.slugSanitized"}}</small>
                         {{/if}}
                     </div>
 
+                    {{#if editMode}}
+                    <div class="modal-footer p-0 border-0">
+                        <button type="button" class="btn btn-primary border js-save-dashboard">{{t "navigation.save"}}</button>
+                        <button type="button" class="btn btn-secondary border" data-bs-dismiss="modal">{{t "navigation.close"}}</button>
+                    </div>
+                    {{else}}
                     <button type="button" class="btn btn-primary border js-create-dashboard mb-3">{{t "administration.create"}}</button>
                     {{#if dashboardId}}
                         <div class="mb-3">
@@ -53,9 +100,10 @@
                         <p>{{t "dashboard.copy_instructions"}}<br/>
                             <small class="text-muted">{{t "dashboard.security_notice"}}</small></p>
                      {{/if}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary border" data-bs-dismiss="modal">{{t "navigation.close"}}</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary border" data-bs-dismiss="modal">{{t "navigation.close"}}</button>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
         </div>

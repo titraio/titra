@@ -37,7 +37,9 @@
     "definition": "Definition",
     "user": "User",
     "global_setting": "Global setting",
-    "status": "Status"
+    "status": "Status",
+    "password": "Password",
+    "actions": "Actions"
   },
   "navigation": {
     "track": "Track time",
@@ -372,13 +374,25 @@
     "quickFilter": "Quick filter"
   },
   "dashboard": {
+    "plural": "Dashboards",
     "share": "Share project dashboard",
     "shareMessage": "You have the opportunity to create a sharable link for a project dashboard",
     "copy_instructions": "Copy & paste the link above to share your project information with someone.",
     "security_notice": "This dashboard is accessible to everybody on the web through this link.",
     "time_per_date": "Time per date",
     "time_distribution_task": "Time distribution by task",
-    "detailed_working_time": "Detailed working time"
+    "detailed_working_time": "Detailed working time",
+    "create": "Create Dashboard",
+    "edit": "Edit Dashboard",
+    "no_dashboards": "No dashboards created yet",
+    "password_set": "Password protected",
+    "no_password": "No password",
+    "url": "URL",
+    "customUrl": "Custom URL",
+    "slugAvailable": "This URL is available ✓",
+    "slugTaken": "This URL is already taken ✗",
+    "slugSanitized": "⚠️ Your slug has been automatically sanitized",
+    "noPasswordWarning": "⚠️ Without password anyone with the link can access the dashboard"
   },
   "tabular": {
   	"sEmptyTable":     "No data available in table",

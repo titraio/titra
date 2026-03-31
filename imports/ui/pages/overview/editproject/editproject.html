@@ -13,6 +13,9 @@
           <a class="nav-link" id="importCSV-tab" data-bs-toggle="tab" href="#importCSV" role="tab" aria-controls="importCSV">{{t "project.import"}}</a>
         </li>
       {{/if}}
+      <li class="nav-item">
+        <a class="nav-link" id="dashboards-tab" data-bs-toggle="tab" href="#dashboards" role="tab" aria-controls="dashboards">{{t "dashboard.plural"}}</a>
+      </li>
     </ul>
     {{/unless}}
     <div class="tab-content" id="project-tab-content">
@@ -192,6 +195,11 @@
       <div class="tab-pane fade hide table-responsive p-3 tab-borders" id="importCSV">
         {{#if isActiveTab "importCSV-tab"}}
           {{>importProjectCSV}}
+        {{/if}}
+      </div>
+      <div class="tab-pane fade hide table-responsive p-3 tab-borders" id="dashboards">
+        {{#if isActiveTab "dashboards-tab"}}
+          {{>projectDashboards projectId=projectId}}
         {{/if}}
       </div>
     </div>

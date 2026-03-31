@@ -1,0 +1,63 @@
+<template name="projectDashboards">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>{{t "dashboard.plural"}}</span>
+      <button type="button" class="btn btn-sm btn-primary js-create-dashboard">
+        <i class="fas fa-plus"></i> {{t "dashboard.create"}}
+      </button>
+    </div>
+    <div class="card-body">
+      {{#if dashboards}}
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                {{#if showProjectColumn}}
+                  <th>{{t "globals.project"}}</th>
+                {{/if}}
+                <th>{{t "dashboard.url"}}</th>
+                <th>{{t "period.time_period"}}</th>
+                <th>{{t "globals.password"}}</th>
+                <th>{{t "globals.actions"}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each dashboard in dashboards}}
+                <tr>
+                  {{#if showProjectColumn}}
+                    <td>{{projectName dashboard.projectId}}</td>
+                  {{/if}}
+                  <td>
+                    <a href="{{dashboardUrl dashboard._id}}" target="_blank">{{dashboardLink dashboard._id}}</a>
+                  </td>
+                  <td>{{dashboardTimeperiod dashboard._id}}</td>
+                  <td>
+                    {{#if dashboard.password}}
+                      <i class="fas fa-lock text-success" title="{{t "dashboard.password_set"}}"></i>
+                    {{else}}
+                      <i class="fas fa-lock-open text-muted" title="{{t "dashboard.no_password"}}"></i>
+                    {{/if}}
+                  </td>
+                  <td>
+                    <a href="#" aria-label="{{t "navigation.edit"}}" class="js-edit-dashboard me-2" data-dashboard-id="{{dashboard._id}}">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="#" aria-label="{{t "navigation.delete"}}" class="js-remove-dashboard text-danger" data-dashboard-id="{{dashboard._id}}">
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{else}}
+        <p class="text-muted mb-0">{{t "dashboard.no_dashboards"}}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if editingDashboard}}
+    {{>dashboardModal projectId=projectId editDashboard=editingDashboard}}
+  {{/if}}
+</template>

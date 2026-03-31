@@ -177,23 +177,30 @@ const removeDashboard = new ValidatedMethod({
  * Checks a dashboard slug.
  *
  * @param {Object} args
- * @param {string} args.slug - The ID of the dashboard to remove.
+ * @param {string} args.slug - The slug to check for availability.
+ * @param {string} [args.currentDashboardId] - Optional: ID of dashboard to ignore (for edit mode).
  *
- * @return {Boolean} - True if it's availabe else false.
+ * @return {Boolean} - True if it's available else false.
  */
 const checkDashboardSlug = new ValidatedMethod({
   name: 'checkDashboardSlug',
   validate(args) {
     check(args, {
       slug: String,
+      currentDashboardId: Match.Optional(String),
     })
   },
   mixins: [authenticationMixin, transactionLogMixin],
   async run({
-    slug
+    slug,
+    currentDashboardId,
   }) {
     const sanitizedSlug = sanitizeSlug(slug)
-    const match = await Dashboards.findOneAsync({slug:sanitizedSlug});
+    const query = { slug: sanitizedSlug }
+    if (currentDashboardId) {
+      query._id = { $ne: currentDashboardId }
+    }
+    const match = await Dashboards.findOneAsync(query)
     return match ? false : true
   },
 })
