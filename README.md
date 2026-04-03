@@ -1,4 +1,4 @@
-[![Docker build](https://github.com/kromitgmbh/titra/actions/workflows/push.yml/badge.svg)](https://github.com/kromitgmbh/titra/actions/workflows/push.yml) ![Docker Pulls](https://badgen.net/docker/pulls/kromit/titra) ![Latest Release](https://img.shields.io/github/v/release/kromitgmbh/titra.svg)
+[![Docker build](https://github.com/titraio/titra/actions/workflows/push.yml/badge.svg)](https://github.com/titraio/titra/actions/workflows/push.yml) ![Docker Pulls](https://badgen.net/docker/pulls/kromit/titra) ![Latest Release](https://img.shields.io/github/v/release/titraio/titra.svg)
 
 
 # ![titra logo](public/favicons/favicon-32x32.png) titra
@@ -12,9 +12,9 @@ According to the philosophy described above, titra has been built to be the easi
 ## 🚀 Blazing fast
 Track your important project tasks in less than 10 seconds from login to done so you an focus on more important things.
 
-![titra_track_time](https://github.com/kromitgmbh/titra/assets/11456790/c22d850e-d9de-4452-b9e0-a029d35acd89)
+![titra_track_time](https://github.com/titraio/titra/assets/11456790/c22d850e-d9de-4452-b9e0-a029d35acd89)
 
-This is possible because we care a lot about performance and data sent over the wire, but you don't have to trust us on this one - just run a lighthouse audit to confirm the [performance score](https://github.com/kromitgmbh/titra/assets/11456790/84f26959-0000-40d4-a85c-4e968b1237f2) of 💯
+This is possible because we care a lot about performance and data sent over the wire, but you don't have to trust us on this one - just run a lighthouse audit to confirm the [performance score](https://github.com/titraio/titra/assets/11456790/84f26959-0000-40d4-a85c-4e968b1237f2) of 💯
 
 ## 👀 Try it!
 We are providing a hosted version of titra free of charge at [app.titra.io](https://app.titra.io). Create an account in seconds and start tracking your time!
@@ -24,7 +24,7 @@ There is no better time to get started, titra just got a dark mode 🌑 and it i
 ## 🐳 Running with Docker Compose
 Here is a one-line example on how to get started with titra locally if you have [docker-compose](https://docs.docker.com/compose/) installed:
 ```
-curl -L https://raw.githubusercontent.com/kromitgmbh/titra/refs/heads/master/docker-compose.yml | ROOT_URL=http://localhost:3000 docker-compose -f - up
+curl -L https://raw.githubusercontent.com/titraio/titra/refs/heads/master/docker-compose.yml | ROOT_URL=http://localhost:3000 docker-compose -f - up
 ```
 
 This will pull in the latest titra release and spin up a local Mongodb instance in the latest version supported and link them together.
