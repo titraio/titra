@@ -6,16 +6,16 @@
 
 meteor-base@1.5.2             # Packages every Meteor app needs to have
 mobile-experience@1.1.2       # Packages for a great mobile UX
-mongo@2.1.4                   # The database Meteor supports right now
+mongo@2.2.0                   # The database Meteor supports right now
 reactive-var@1.0.13            # Reactive variable for tracker
 tracker@1.3.4                 # Meteor's client-side reactive programming library
 
 es5-shim@4.8.1                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.16.13              # Enable ECMAScript2015+ syntax in app code
-shell-server@0.6.2            # Server-side component of the `meteor shell` command
+ecmascript@0.17.0              # Enable ECMAScript2015+ syntax in app code
+shell-server@0.7.0            # Server-side component of the `meteor shell` command
 
-accounts-password@3.2.1
-check@1.4.4
+accounts-password@3.2.2
+check@1.5.0
 random@1.2.2
 dynamic-import@0.7.4
 ostrio:loggerconsole
@@ -26,13 +26,14 @@ jquery@3.0.0
 mdg:validated-method
 service-configuration@1.3.5
 oauth@3.0.2
-accounts-base@3.1.2
+accounts-base@3.2.0
 accounts-oauth@1.4.6
 oauth2@1.3.3
 blaze-html-templates
 ddp-rate-limiter@1.2.2
-standard-minifier-css@1.9.3
-standard-minifier-js@3.1.1
+standard-minifier-css@1.10.0
+standard-minifier-js@3.2.0
 leonardoventurini:scss
 browser-policy-content@2.0.0
 faburem:accounts-anonymous
+rspack

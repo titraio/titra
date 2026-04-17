@@ -1,5 +1,5 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
-import Bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { t } from '../../../../../utils/i18n.js'
 import './taskModal.html'
 import Tasks from '../../../../../api/tasks/tasks'
@@ -52,7 +52,7 @@ Template.taskModal.events({
         if (error) {
           console.error(error)
         } else {
-          Bootstrap.Modal.getInstance(templateInstance.$('#task-modal')).hide()
+          Modal.getInstance(templateInstance.$('#task-modal')).hide()
           showToast(t('notifications.settings_saved_success'))
         }
       })
@@ -65,7 +65,7 @@ Template.taskModal.events({
             $(this).val('')
           })
           templateInstance.$('#start').val(new Date().toJSON().slice(0, 10))
-          Bootstrap.Modal.getInstance(templateInstance.$('#task-modal')).hide()
+          Modal.getInstance(templateInstance.$('#task-modal')).hide()
           showToast(t('notifications.settings_saved_success'))
         }
       })
@@ -79,7 +79,7 @@ Template.taskModal.events({
           if (error) {
             console.error(error)
           } else {
-            Bootstrap.Modal.getInstance(templateInstance.$('#task-modal')).hide()
+            Modal.getInstance(templateInstance.$('#task-modal')).hide()
             showToast(t('notifications.settings_saved_success'))
           }
         })

@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import { AccountsAnonymous } from 'meteor/faburem:accounts-anonymous'
 import '../../ui/layouts/appLayout.js'
@@ -14,19 +13,13 @@ if (!Meteor.settings.public.sandstorm) {
       redirect('/signIn')
     }
   }], { except: ['dashboard', 'signIn', 'changePassword', 'register', 'reset-password', 'try'] })
-  FlowRouter.triggers.exit([() => {
-    $("[data-bs-toggle='popover']").length > 0 ? $("[data-bs-toggle='popover']").popover('hide') : null
-    $("[data-bs-toggle='tooltip']").length > 0 ? $("[data-bs-toggle='tooltip']").tooltip('hide') : null
-    $('.tooltip').length > 0 ? $('.tooltip').remove() : null
-    $('.popover').length > 0 ? $('.popover').remove() : null
-  }], { except: ['claimAdmin'] })
 }
 // FlowRouter.decodeQueryParamsOnce = true;
 
 FlowRouter.route('*', {
   action() {
-    this.render('appLayout', '404');
-  }
+    this.render('appLayout', '404')
+  },
 })
 FlowRouter.route('/', {
   waitOn() {
@@ -97,17 +90,6 @@ FlowRouter.route('/list/timecards/:projectId', {
     this.render('appLayout', 'timecardlist')
   },
   name: 'timecards',
-})
-
-FlowRouter.route('/list/dashboards', {
-  waitOn() {
-    return import('../../ui/pages/dashboard/dashboardList.js')
-  },
-  action() {
-    document.title = 'titra - Customer Dashboard'
-    this.render('appLayout', 'dashboardList')
-  },
-  name: 'dashboardlist',
 })
 
 FlowRouter.route('/settings', {

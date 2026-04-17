@@ -1,7 +1,7 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import './periodpicker.html'
 import { getUserSetting } from '../../../../utils/frontend_helpers'
 
@@ -23,7 +23,7 @@ Template.periodpicker.events({
     // FlowRouter.setQueryParams({ period: value })
 
     if (value === 'custom') {
-      templateInstance.modal = new bootstrap.Modal(
+      templateInstance.modal = new Modal(
         templateInstance.$('.js-custom-period-modal')[0]
       )
       templateInstance.modal.show()

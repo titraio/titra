@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { Template } from 'meteor/templating'
-import bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import hex2rgba from '../../../../utils/hex2rgba.js'
 import Timecards from '../../../../api/timecards/timecards.js'
@@ -44,7 +44,8 @@ Template.calendar.onRendered(() => {
         height: 'auto',
         timeZone: 'UTC', // Ensure consistent timezone usage
         firstDay: getUserSetting('startOfWeek'),
-        themeSystem: 'bootstrap',
+        themeSystem: 'standard',
+        buttonIcons: false,
         events: (fetchInfo, successCallback) => {
           templateInstance.startDate.set(fetchInfo.start)
           templateInstance.endDate.set(fetchInfo.end)
@@ -102,21 +103,21 @@ Template.calendar.onRendered(() => {
           templateInstance.tcid.set(undefined)
           templateInstance.selectedDate.set(dropInfo.date)
           templateInstance.selectedProjectId.set($(dropInfo.draggedEl).data('project'))
-          new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+          new Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
         },
         eventClick: (eventClickInfo) => {
           if (eventClickInfo.event.id !== '') {
             templateInstance.selectedDate.set(undefined)
             templateInstance.selectedProjectId.set(undefined)
             templateInstance.tcid.set(eventClickInfo.event.id)
-            new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+            new Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
           }
         },
         dateClick: (dateClickInfo) => {
           templateInstance.tcid.set(undefined)
           templateInstance.selectedProjectId.set('all')
           templateInstance.selectedDate.set(dateClickInfo.date)
-          new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+          new Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
         },
         datesSet: (dateInfo) => {
           FlowRouter.setQueryParams({ date: dayjs.utc(dateInfo.view.currentStart).format('YYYY-MM-DD') }) // Ensure consistent timezone usage

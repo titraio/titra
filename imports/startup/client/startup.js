@@ -3,7 +3,6 @@ import isDarkMode from 'is-dark'
 import hotkeys from 'hotkeys-js'
 import { $ } from 'meteor/jquery'
 import Projects from '../../api/projects/projects.js'
-import Extensions from '../../api/extensions/extensions.js'
 import {
   timeInUserUnit,
   emojify,
@@ -18,8 +17,6 @@ import {
 } from '../../utils/i18n.js'
 
 const i18nextDebugMode = window.location.href.indexOf('localhost') > 0
-let lightThemeCSS
-let darkThemeCSS
 Template.registerHelper('t', (param, variables) => {
   // If variables is a Spacebars.kw object, extract .hash
   const vars = variables && variables.hash ? variables.hash : (variables || {})
@@ -33,7 +30,6 @@ Meteor.startup(() => {
   import('../../utils/google/google_client.js')
   window.BootstrapLoaded = new ReactiveVar(false)
   Meteor.subscribe('globalsettings')
-  const extensionHandle = Meteor.subscribe('extensions')
   let language = navigator.language.substring(0, 2)
   import('@fortawesome/fontawesome-free/js/all.js')
   import('bootstrap').then((bs) => {
@@ -43,58 +39,32 @@ Meteor.startup(() => {
       trigger: 'hover focus',
       container: 'body',
     })
+    import('../../ui/styles/general.scss')
   })
-  function cleanupStyles(theme) {
-    const darkTheme = []
-    const lightTheme = []
-    document
-      .querySelectorAll('style').forEach((style) => {
-        if (style.textContent.indexOf('.is-dark') === 0 || style.textContent.indexOf('.is-dark') === 1) {
-          darkTheme.push(style)
-          darkThemeCSS = style.cloneNode(true)
-        } else if (style.textContent.indexOf('.is-light') === 0) {
-          lightThemeCSS = style.cloneNode(true)
-          lightTheme.push(style)
-        }
-      })
-    if (theme === 'light') {
-      if (darkTheme.length > 0 && lightTheme.length > 0) {
-        darkTheme.forEach((element) => element.remove())
-      } else if (darkTheme.length > 0 && lightTheme.length <= 0 && lightThemeCSS) {
-        darkTheme.forEach((element) => element.remove())
-        document.head.append(lightThemeCSS)
-      }
-    } else if (theme === 'dark') {
-      if (lightTheme.length > 0 && darkTheme.length > 0) {
-        lightTheme.forEach((element) => element.remove())
-      } else if (lightTheme.length > 0 && darkTheme.length <= 0 && darkThemeCSS) {
-        lightTheme.forEach((element) => element.remove())
-        document.head.append(darkThemeCSS)
-      }
-    }
-  }
+
+  // Replace your existing theme Tracker.autorun with this:
   Tracker.autorun(() => {
-    if (!Meteor.loggingIn() && Meteor.user()
-      && Meteor.user().profile) {
-      if (getUserSetting('theme') === 'dark') {
-        cleanupStyles('dark')
-        import('../../ui/styles/dark.scss')
-      } else if (getUserSetting('theme') === 'light') {
-        cleanupStyles('light')
-        import('../../ui/styles/light.scss')
+    let activeTheme = 'light' // Default fallback
+
+    // Determine the correct theme
+    if (!Meteor.loggingIn() && Meteor.user() && Meteor.user().profile) {
+      const userTheme = getUserSetting('theme')
+      if (userTheme === 'dark' || userTheme === 'light') {
+        activeTheme = userTheme
       } else if (isDarkMode()) {
-        cleanupStyles('dark')
-        import('../../ui/styles/dark.scss')
-      } else {
-        cleanupStyles('light')
-        import('../../ui/styles/light.scss')
+        activeTheme = 'dark'
       }
     } else if (!Meteor.loggingIn() && isDarkMode()) {
-      cleanupStyles('dark')
-      import('../../ui/styles/dark.scss')
+      activeTheme = 'dark'
+    }
+
+    // Apply the theme by toggling classes on the body
+    if (activeTheme === 'dark') {
+      document.body.classList.remove('is-light')
+      document.body.classList.add('is-dark')
     } else {
-      cleanupStyles('light')
-      import('../../ui/styles/light.scss')
+      document.body.classList.remove('is-dark')
+      document.body.classList.add('is-light')
     }
   })
   Tracker.autorun(() => {
@@ -122,7 +92,7 @@ Meteor.startup(() => {
   Tracker.autorun(() => {
     if (getGlobalSetting('enableOpenIDConnect')) {
       import('../../utils/oidc/oidc_client.js').then((Oidc) => {
-        if(Accounts.oauth.serviceNames().indexOf('oidc') === -1) {
+        if (Accounts.oauth.serviceNames().indexOf('oidc') === -1) {
           Oidc.registerOidc()
         }
       })
@@ -172,15 +142,6 @@ Meteor.startup(() => {
     const prefix = window.__meteor_runtime_config__.ROOT_URL_PATH_PREFIX || ''
     navigator.serviceWorker.register(`${prefix}/sw.js`)
   }
-  Tracker.autorun(() => {
-    if (extensionHandle.ready()) {
-      for (const extension of Extensions.find({})) {
-        if (extension.isActive) {
-          eval(extension.client)
-        }
-      }
-    }
-  })
 })
 Template.registerHelper('i18nReady', () => i18nReady.get())
 Template.registerHelper('unit', () => {

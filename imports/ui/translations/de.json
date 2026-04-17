@@ -37,7 +37,10 @@
     "definition": "Definition",
     "user": "Benutzer",
     "global_setting": "Globale Einstellung",
-    "status": "Status"
+    "status": "Status",
+    "password": "Passwort",
+    "actions": "Aktionen",
+    "id": "ID"
   },
   "navigation": {
     "track": "Zeit erfassen",
@@ -66,7 +69,8 @@
     "newLine": "Neue Zeile",
     "cancel": "Abbrechen",
     "saving": "Speichern ...",
-    "timeUnit_message": "Definition der Zeiteinheit für Ihre Aufgaben" 
+    "timeUnit_message": "Definition der Zeiteinheit für Ihre Aufgaben",
+    "dashboard": "Dashboards"
   },
   "tracktime": {
     "no_time": "Keine Zeiten erfasst.",
@@ -79,7 +83,7 @@
     "start_timer": "Stoppuhr starten",
     "start_time": "Beginn",
     "timer": "Stoppuhr",
-    "timerMessage": "Mittels dieser Stoppuhr können Sie die Zeit verfolgen, welche für die Durchführung einer bestimmten Aufgabe benötigt wird",
+    "timerMessage": "Mit diesem Stoppuhr können Sie die Zeit verfolgen, welche für die Durchführung einer bestimmten Aufgabe benötigt wird",
     "user_placeholder": "Benutzer eingeben oder suchen ...",
     "timeline": "Zeitleiste"
   },
@@ -111,14 +115,14 @@
     "default_rate": "Standard Stundensatz",
     "target": "Ziel",
     "wekan_integration": "Wekan Integration",
-    "wekan_help": "Benötigen Sie Hilfe bei der Konfiguration? Werfen Sie einen Blick in unser titra ",
-    "wekan_list": "Wekan Liste(n) für die Zeiterfassung",
-    "wekan_swimlane": "Wekan Swimlane(s) für die Zeiterfassung",
+    "wekan_help": "Benötigen Sie Hilfe mit der Konfiguration? Werfen Sie einen Blick in unser titra",
+    "wekan_list": "Wekan-Liste(n) für die Zeiterfassung",
+    "wekan_swimlane": "Wekan-Swimlane(s) für die Zeiterfassung",
     "access_rights": "Berechtigungen",
     "check": "Prüfen",
     "add": "Hinzufügen",
-    "access_rights_placeholder": "E-mail Addresse des neuen Team Mitglieds",
-    "public_project": "Öffentliches Projekt (für alle sichtbar)",
+    "access_rights_placeholder": "E-Mail-Adresse des hinzuzufügenden Team-Mitglieds",
+    "public_project": "Öffentliches Projekt (für alle Benutzer sichtbar)",
     "owner": "Ersteller",
     "project_placeholder": "Projekt auswählen",
     "my_project_placeholder": "Mein Projekt",
@@ -126,9 +130,9 @@
     "billing_budget": "Verrechnung & Budget",
     "default_task": "Standard Tätigkeit",
     "default_task_help": "Der Wert in diesem Feld wird bei der Erfassung eines neuen Zeiteintrags in das Tätigkeitsfeld bei der Auswahl dieses Projektes automatisch eingetragen.",
-    "gitlab_integration": "GitLab Integration",
-    "gitlab_query": "Such Parameter",
-    "gitlab_help": "Sie können hier alle Parameter der GitLab Issues API verwenden wie z.B.",
+    "gitlab_integration": "GitLab-Integration",
+    "gitlab_query": "Abfrageparameter",
+    "gitlab_help": "Sie können alle Abfrageparameter verwenden, die in der GitLab Issues API verfügbar sind",
     "import": "Importieren",
     "importCSV": {
       "expectedFormatTitle": "Erwartetes CSV-Format",
@@ -144,7 +148,7 @@
       "dateExample": "2025-04-07, 2025-04-07T14:30:00.000Z",
       "expectedFormatHours": "Stunden",
       "hoursDescription": "Die Anzahl der geleisteten Stunden (numerisch).",
-      "hoursExample": "8, 4.5",
+      "hoursExample": "8, 4,5",
       "title": "CSV-Daten importieren",
       "chooseFile": "Datei auswählen",
       "removeFile.title": "Datei entfernen",
@@ -163,7 +167,10 @@
       "errorsNoFileSelected": "Bitte wählen Sie eine Datei zum Hochladen aus.",
       "errorsFileReadFailed": "Fehler beim Lesen der Datei.",
       "errorsImportFailed": "Daten konnten nicht importiert werden.",
-      "generalNoData": "Keine Daten zum Anzeigen."
+      "generalNoData": "Keine Daten zum Anzeigen.",
+      "removeFile": {
+        "title": null
+      }
     }
   },
   "settings": {
@@ -176,7 +183,7 @@
     "zh": "Chinesisch",
     "ru": "Russisch",
     "ukr": "Ukrainisch",
-	  "es": "Spanisch",
+    "es": "Spanisch",
     "user_interface": "Benutzeroberfläche",
     "theme": "Thema",
     "auto_detect": "Automatisch",
@@ -192,7 +199,7 @@
     "integrations": "Schnittstellen",
     "enable_wekan_integration": "Wekan Schnittstelle aktivieren?",
     "siwapp_url": "Siwapp URL",
-    "siwapp_api_token": "Siwapp API token",
+    "siwapp_api_token": "Siwapp API-Token",
     "titra_changelog": "titra Änderungsprotokoll",
     "titra_changelog_error": "Beim Abrufen des Änderungsprotokolls von Github ist ein Fehler aufgetreten.",
     "daily_start_time": "Beginn der Arbeitszeit",
@@ -311,7 +318,8 @@
   },
   "limit": {
     "show": "Zeilenlinien anzeigen",
-    "all": "Alle"
+    "all": "Alle",
+    "entries": "Einträge"
   },
   "period": {
     "time_period": "Periode",
@@ -377,37 +385,59 @@
     "security_notice": "Dieses Dashboard ist für jeden über das Internet zugänglich der den Link kennt.",
     "time_per_date": "Zeit pro Tag",
     "time_distribution_task": "Zeitverteilung nach Task",
-    "detailed_working_time": "Detaillierte Arbeitszeit"
+    "detailed_working_time": "Detaillierte Arbeitszeit",
+    "plural": "Dashboards",
+    "create": "Erstellen",
+    "edit": "Bearbeiten",
+    "no_dashboards": "Noch keine Dashboards erstellt",
+    "password_set": "Kennwort geschützt",
+    "no_password": "Kein Kennwort",
+    "url": "URL",
+    "customUrl": "Benutzerdefinierte URL",
+    "slugAvailable": "Diese URL ist verfügbar ✓",
+    "slugTaken": "Diese URL wird bereits verwendet ✗",
+    "slugSanitized": "⚠️ Ihr Slug wurde automatisch bereinigt",
+    "noPasswordWarning": "⚠️ Ohne Kennwort kann jeder mit dem Link auf das Dashboard zugreifen",
+    "clearFilters": "Filter löschen",
+    "id": "Dashboard-ID",
+    "noDashboardsAvailable": "Keine Dashboards verfügbar",
+    "editCustomerDashboard": "Kundendashboard bearbeiten",
+    "removeDashboardFailed": "Dashboard konnte nicht entfernt werden",
+    "removedSuccessfully": "Dashboard erfolgreich entfernt",
+    "updatedSuccessfully": "Dashboard erfolgreich aktualisiert",
+    "createdSuccessfully": "Dashboard erfolgreich erstellt",
+    "updateFailed": "Fehler beim Aktualisieren des Dashboards",
+    "createFailed": "Erstellung des Dashboards fehlgeschlagen"
   },
   "tabular": {
-    "sEmptyTable":   	"Keine Daten in der Tabelle vorhanden",
-  	"sInfo":         	"_START_ bis _END_ von _TOTAL_ Einträgen",
-  	"sInfoEmpty":    	"Keine Daten vorhanden",
-  	"sInfoFiltered": 	"(gefiltert von _MAX_ Einträgen)",
-  	"sInfoPostFix":  	"",
-  	"sInfoThousands":  	".",
-  	"sLengthMenu":   	"_MENU_ Einträge anzeigen",
-  	"sLoadingRecords": 	"Wird geladen ..",
-  	"sProcessing":   	"Bitte warten ..",
-  	"sSearch":       	"Suchen",
-  	"sZeroRecords":  	"Keine Einträge vorhanden",
-  	"oPaginate": {
-  		"sFirst":    	"Erste",
-  		"sPrevious": 	"Zurück",
-  		"sNext":     	"Nächste",
-  		"sLast":     	"Letzte"
-  	},
-  	"oAria": {
-  		"sSortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
-  		"sSortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
-  	},
-  	"select": {
-      	"rows": {
-  			"_": "%d Zeilen ausgewählt",
-  			"0": "",
-  			"1": "1 Zeile ausgewählt"
-  	    }
-  	}
+    "sEmptyTable": "Keine Daten in der Tabelle vorhanden",
+    "sInfo": "_START_ bis _END_ von _TOTAL_ Einträgen",
+    "sInfoEmpty": "Keine Daten vorhanden",
+    "sInfoFiltered": "(gefiltert von _MAX_ Einträgen)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ".",
+    "sLengthMenu": "_MENU_ Einträge anzeigen",
+    "sLoadingRecords": "Wird geladen ..",
+    "sProcessing": "Bitte warten ..",
+    "sSearch": "Suchen",
+    "sZeroRecords": "Keine Einträge vorhanden",
+    "oPaginate": {
+      "sFirst": "Erste",
+      "sPrevious": "Zurück",
+      "sNext": "Nächste",
+      "sLast": "Letzte"
+    },
+    "oAria": {
+      "sSortAscending": ": aktivieren, um Spalte aufsteigend zu sortieren",
+      "sSortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+    },
+    "select": {
+      "rows": {
+        "0": "",
+        "1": "1 Zeile ausgewählt",
+        "_": "%d Zeilen ausgewählt"
+      }
+    }
   },
   "notifications": {
     "sanity": "Zu Ihrer Sicherheit ist es nicht möglich alle Daten über den gesamten Zeitraum zu teilen. Bitte wählen Sie ein Projekt aus.",
@@ -452,6 +482,8 @@
     "unknown_error": "Ein unbekannter Fehler ist aufgetreten."
   },
   "login": {
+    "400": "Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut.",
+    "403": "Anmeldung fehlgeschlagen, bitte überprüfen Sie die Zugangsdaten.",
     "password": "Passwort",
     "forgot_password": "Passwort vergessen?",
     "no_account": "Noch kein Benutzerkonto?",
@@ -465,8 +497,6 @@
     "password_again": "Passwort (wiederholen)",
     "already_have_account": "Sie haben bereits ein Benutzerkonto? ",
     "email_unknown": "Wir konnten leider keinen Benutzer mit dieser E-mail Adresse finden.",
-    "403": "Anmeldung fehlgeschlagen, bitte überprüfen Sie die Zugangsdaten.",
-    "400": "Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut.",
     "reset_password_mail": "Die weiteren Schritte zum Zurücksetzen des Passworts haben Sie per E-mail erhalten.",
     "change_password": "Passwort ändern",
     "current_password": "Aktuelles Passwort",
@@ -522,7 +552,7 @@
     "extension_removed": "Die Erweiterung wurde erfolgreich entfernt",
     "edit_custom_field": "Benutzerdefiniertes Attribut bearbeiten",
     "oidc": "OpenID Connect",
-    "oidc_configure": "Sie müssen bei Ihrem Anbieter eine OpenID Connect-Clientkonfiguration erstellen. Legen Sie App-Callback-URLs fest auf",
+    "oidc_configure": "Sie müssen eine OpenID Connect-Clientkonfiguration mit Ihrem Anbieter erstellen. Legen Sie App-Rückruf-URLs fest auf",
     "custom_field_name_hint": "Leerzeichen und Sonderzeichen sind nicht erlaubt.",
     "inboundinterfaces": "Eingehende Schnittstellen",
     "outboundinterfaces": "Ausgehende Schnittstellen",
@@ -560,7 +590,7 @@
   },
   "weektable": {
     "sumProject_message": "Die Summe pro Projekt",
-    "sum_per_day":  "Die Summe pro Tag"
+    "sum_per_day": "Die Summe pro Tag"
   },
   "autocomplete": {
     "modal_title": "KI unterstützte Zeiterfassung",
@@ -569,5 +599,8 @@
     "authorize_now": "Jetzt autorisieren",
     "save_selected": "Ausgewählte Zeiteinträge speichern",
     "origin": "Datenursprung"
+  },
+  "notification": {
+    "only_administrator_can_register_time": "Nur Administratoren können Zeit für einen anderen Benutzer registrieren."
   }
 }

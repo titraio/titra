@@ -58,7 +58,7 @@
                     </div>
                     {{/if}}
                     <div class="mb-3 position-relative form-floating">
-                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="Password" value="{{editPassword}}" autocomplete="off" data-1p-ignore/>
+                        <input class="form-control" name="dashboard-password" id="dashboard-password" type="password" placeholder="{{t 'globals.password'}}" value="{{editPassword}}" autocomplete="off" data-1p-ignore/>
                         <label for="dashboard-password">{{t "globals.password"}}</label>
                         <span id="togglePassword"
                               class="position-absolute top-50 end-0 translate-middle-y me-3"
@@ -72,7 +72,7 @@
                       </div>
 
                     <div class="mb-3 form-floating">
-                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="Custom URL" value="{{editSlug}}" autocomplete="off"/>
+                        <input class="form-control" name="dashboard-slug" id="dashboard-slug" type="text" placeholder="{{t 'dashboard.customUrl'}}" value="{{editSlug}}" autocomplete="off"/>
                         <label for="dashboard-slug">{{t "dashboard.customUrl"}}</label>
                         {{#if slugStatusOn}}
                             {{#if slugStatus}}

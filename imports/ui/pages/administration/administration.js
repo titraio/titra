@@ -1,13 +1,11 @@
-import bootstrap from 'bootstrap'
+import { Collapse } from 'bootstrap'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import './administration.html'
 import '../details/components/limitpicker.js'
 import './components/globalsettingscomponent.js'
 import './components/customfieldscomponent.js'
 import './components/userscomponent.js'
-import './components/extensionscomponent.js'
 import './components/customerdashboardscomponent.js'
-import '../overview/editproject/components/projectDashboards.js'
 import './components/oidccomponent.js'
 import './components/transactionscomponent.js'
 import './components/inboundinterfacescomponent.js'
@@ -44,7 +42,7 @@ Template.administration.helpers({
 Template.administration.events({
   'click .accordion-button': (event) => {
     event.preventDefault()
-    bootstrap.Collapse
+    Collapse
       .getOrCreateInstance(event.currentTarget.parentNode.nextElementSibling).toggle()
   },
   'click .nav-link[data-bs-toggle]': (event, templateInstance) => {

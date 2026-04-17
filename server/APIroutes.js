@@ -6,6 +6,17 @@ import Timecards from '../imports/api/timecards/timecards'
 import Projects from '../imports/api/projects/projects'
 import Tasks from '../imports/api/tasks/tasks'
 
+function normalizeDomain(host) {
+  if (!host) return null
+  // Remove port
+  let domain = host.split(':')[0]
+  // Convert to lowercase
+  domain = domain.toLowerCase()
+  // Remove protocol prefix
+  domain = domain.replace(/^https?:\/\//, '')
+  return domain
+}
+
 function sendResponse(res, statusCode, message, payload) {
   const response = {}
   response.statusCode = statusCode
@@ -689,20 +700,20 @@ WebApp.handlers.use('/user/action-verification/webhook/', async (req, res) => {
 
   if (json) {
     // Get sender domain/IP from request headers for validation
-    let senderDomain = req.headers['x-forwarded-for'] || 
-                      req.headers['x-real-ip'] || 
-                      req.connection.remoteAddress ||
-                      req.socket.remoteAddress ||
-                      (req.connection.socket ? req.connection.socket.remoteAddress : null) ||
-                      'unknown'
-    
+    let senderDomain = req.headers['x-forwarded-for']
+                      || req.headers['x-real-ip']
+                      || req.connection.remoteAddress
+                      || req.socket.remoteAddress
+                      || (req.connection.socket ? req.connection.socket.remoteAddress : null)
+                      || 'unknown'
+
     // If we have a reverse DNS lookup result or explicit domain header, use that
     if (req.headers['x-forwarded-host']) {
       senderDomain = req.headers['x-forwarded-host']
     } else if (req.headers.host) {
       senderDomain = req.headers.host
     }
-    
+    senderDomain = normalizeDomain(senderDomain)
     try {
       // Import required modules
       const WebhookVerification = (await import('../imports/api/webhookverification/webhookverification.js')).default
@@ -724,8 +735,8 @@ WebApp.handlers.use('/user/action-verification/webhook/', async (req, res) => {
       }
 
       // Check if sender domain/IP is allowed (support both domains and IP addresses)
-      const allowedDomains = activeInterface.allowedDomains.split(',').map(d => d.trim())
-      const isAllowed = allowedDomains.some(allowed => {
+      const allowedDomains = activeInterface.allowedDomains.split(',').map((d) => d.trim())
+      const isAllowed = allowedDomains.some((allowed) => {
         // Exact match for domains or IPs
         if (senderDomain === allowed) return true
         // Support localhost variations for development
@@ -733,11 +744,11 @@ WebApp.handlers.use('/user/action-verification/webhook/', async (req, res) => {
         // Support wildcard matching for subdomains (*.example.com matches both subdomain.example.com and example.com)
         if (allowed.startsWith('*.')) {
           const domain = allowed.substring(2) // Remove *.
-          return senderDomain === domain || senderDomain.endsWith('.' + domain)
+          return senderDomain === domain || senderDomain.endsWith(`.${domain}`)
         }
         return false
       })
-      
+
       if (!isAllowed) {
         sendResponse(res, 403, `Sender ${senderDomain} not whitelisted for webhook verification.`)
         return
@@ -775,7 +786,6 @@ WebApp.handlers.use('/user/action-verification/webhook/', async (req, res) => {
           },
         })
         sendResponse(res, 200, 'User action verification completed successfully.')
-        
       } else if (result.action === 'revoke') {
         // Get verification period from the webhook interface and calculate new deadline
         const verificationPeriod = activeInterface.verificationPeriod || 30
@@ -793,11 +803,9 @@ WebApp.handlers.use('/user/action-verification/webhook/', async (req, res) => {
           },
         })
         sendResponse(res, 200, 'User action verification revoked successfully.')
-        
       } else {
         sendResponse(res, 400, 'Invalid action specified. Must be "complete" or "revoke".')
       }
-      
     } catch (error) {
       console.error('Webhook processing error:', error)
       sendResponse(res, 500, `Error processing webhook: ${error.message}`)

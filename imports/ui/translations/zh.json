@@ -35,7 +35,12 @@
     "cancel": "取消",
     "ok": "确定",
     "definition": "定义",
-    "status": "状态"
+    "status": "状态",
+    "user": "用户",
+    "global_setting": "全局设置",
+    "password": "密码",
+    "actions": "操作",
+    "id": "ID"
   },
   "navigation": {
     "track": "记录",
@@ -63,7 +68,9 @@
     "nextWeek": "下周",
     "newLine": "新建一行",
     "cancel": "取消",
-    "saving": "保存 ..."
+    "saving": "保存 ...",
+    "dashboard": "仪表板",
+    "timeUnit_message": "定义任务的时间单位"
   },
   "tracktime": {
     "no_time": "尚无工时记录",
@@ -75,7 +82,10 @@
     "actions": "动作",
     "start_timer": "启动计时器",
     "start_time": "开始时间",
-    "timer": "计时器"
+    "timer": "计时器",
+    "timerMessage": "通过使用计时器，您可以记录花费在特定任务上的时间",
+    "user_placeholder": "输入或搜索用户...",
+    "timeline": "时间表"
   },
   "overview": {
     "all_projects": "所有项目",
@@ -89,7 +99,13 @@
     "total_time": "总时间",
     "target": "目标",
     "turnover": "周转",
-    "number_projects": "项目数量"
+    "number_projects": "项目数量",
+    "summary": "摘要",
+    "properties": "属性",
+    "percentage": "项目进度",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "duration": "项目时长"
   },
   "project": {
     "title": "编辑项目",
@@ -99,14 +115,14 @@
     "default_rate": "违约率",
     "target": "目标 / 预算",
     "wekan_integration": "Wekan 集成",
-    "wekan_help": "不会设置，需要帮忙？请参考 titra ",
-    "wekan_list": "用于计时的 Wekan 列表",
-    "wekan_swimlane": "用于计时的 Wekan 泳道",
+    "wekan_help": "需要帮助设置？请查看 titra",
+    "wekan_list": "用于时间跟踪的 Wekan 列表",
+    "wekan_swimlane": "用于时间跟踪的 Wekan 泳道",
     "access_rights": "访问权限",
     "check": "检查",
     "add": "增加",
-    "access_rights_placeholder": "新增的团队成员电子邮件地址",
-    "public_project": "公开项目(所有用户可见)",
+    "access_rights_placeholder": "要添加的团队成员的电子邮件地址",
+    "public_project": "公开项目（对所有用户可见）",
     "owner": "属主",
     "project_placeholder": "请选择一个项目",
     "my_project_placeholder": "我的项目",
@@ -148,8 +164,14 @@
       "errorsNoFileSelected": "请选择要上传的文件。",
       "errorsFileReadFailed": "读取文件失败。",
       "errorsImportFailed": "导入数据失败。",
-      "generalNoData": "没有数据可以显示。"
-    }
+      "generalNoData": "没有数据可以显示。",
+      "removeFile": {
+        "title": null
+      }
+    },
+    "gitlab_integration": "GitLab集成",
+    "gitlab_query": "查询参数",
+    "gitlab_help": "您可以使用 GitLab Issues API 中提供的所有查询参数"
   },
   "settings": {
     "user_profile": "用户概要",
@@ -160,7 +182,7 @@
     "zh": "中文",
     "ru": "俄语",
     "ukr": "乌克兰语",
-	  "es": "西班牙语",
+    "es": "西班牙语",
     "user_interface": "用户界面",
     "theme": "主题",
     "auto_detect": "自动探测",
@@ -176,7 +198,7 @@
     "integrations": "集成",
     "enable_wekan_integration": "启用 Wekan 集成?",
     "siwapp_url": "Siwapp URL",
-    "siwapp_api_token": "Siwapp API token",
+    "siwapp_api_token": "Siwapp API 令牌",
     "titra_changelog": "titra 变更记录",
     "titra_changelog_error": "无法从 Github 获取变更记录.",
     "daily_start_time": "每天工作开始时间",
@@ -217,9 +239,9 @@
     "holiday_state": "假日州",
     "holiday_region": "假日地区",
     "xframe_options_origin": "frame-ancestors header origin URLs",
-    "google_clientid": "Google Workspace Client ID",
-    "google_secret": "Google Workspace Client Secret",
-    "openai": "Open AI API Key",
+    "google_clientid": "Google Workspace 客户端 ID",
+    "google_secret": "Google Workspace 客户端密钥",
+    "openai": "Open AI API 密钥",
     "show_resource_in_details": "在详细视图中显示/导出资源字段",
     "allow_individual_task_rates": "允许单独任务费率",
     "show_rate_in_details": "在详细视图中显示/导出费率字段",
@@ -231,7 +253,34 @@
     "user_action_verification_period": "用户操作验证期限（天）",
     "user_action_verification_service_url": "用户操作验证服务URL",
     "user_action_verification_url_param": "用户操作验证URL参数名称",
-    "user_action_verification_type": "用户操作验证类型"
+    "user_action_verification_type": "用户操作验证类型",
+    "userInterface_settings": "用户界面设置",
+    "enable_log_for_other_users": "Can administrator register time for other users?",
+    "project_search_num_results": "Number of projects displayed in the project search (default 5)",
+    "task_search_num_results": "Number of tasks displayed in the task search (default 5)",
+    "user_search_num_results": "Number of users displayed in the user search (default 5)",
+    "categories": {
+      "global": "全局",
+      "interfaces": "接口",
+      "customization": "定制",
+      "login": "登录",
+      "holidays": "节假日",
+      "security": "安全",
+      "workingtime_defaults": "工作时间视图默认设置",
+      "email": "电子邮件",
+      "user_defaults": "用户默认设置",
+      "time_tracking": "时间追踪",
+      "date_settings": "日期设置",
+      "no_category": "无类别"
+    },
+    "gitlab_url": "GitLab Instance URL",
+    "gitlab_api_token": "GitLab API Token",
+    "enable_gitlab": "Enable Gitlab interface?",
+    "rounding": "Rounding",
+    "rounding_tooltip": "Tracked time will be rounded up according to the selected time unit and the specified rounding value e.g. time unit minutes and round value 15 will round up to the next 15 minutes (input 5 minutes > result after rounding 15 minutes).",
+    "enable_siwapp": "Enable Siwapp integration?",
+    "custom_logo": "自定义徽标（URL 或 Data URI）",
+    "enable_googleapi": "启用 Google Workspace 集成？"
   },
   "verification": {
     "overdue_title": "需要操作 - 已逾期",
@@ -303,7 +352,8 @@
     "duration": "时长",
     "dependencies": "依赖",
     "newTask": "新建任务",
-    "editTask": "编辑任务"
+    "editTask": "编辑任务",
+    "addTask": "Add task"
   },
   "details": {
     "filter": "过滤器",
@@ -325,7 +375,8 @@
     "billed": "计费的",
     "notBillable": "不计费的",
     "charts": "图表",
-    "quickFilter": "快速过滤"
+    "quickFilter": "快速过滤",
+    "markAsBilled": "All billed"
   },
   "dashboard": {
     "share": "分享项目大盘",
@@ -333,30 +384,53 @@
     "security_notice": "这个大盘能被所有人看到",
     "time_per_date": "每日工时",
     "time_distribution_task": "任务的时间分布",
-    "detailed_working_time": "工作时间明细"
+    "detailed_working_time": "工作时间明细",
+    "plural": "仪表板",
+    "shareMessage": "You have the opportunity to create a sharable link for a project dashboard",
+    "create": "创建",
+    "edit": "编辑",
+    "no_dashboards": "尚未创建仪表板",
+    "password_set": "受密码保护",
+    "no_password": "无密码",
+    "url": "URL",
+    "customUrl": "自定义URL",
+    "slugAvailable": "此URL可用 ✓",
+    "slugTaken": "此URL已被使用 ✗",
+    "slugSanitized": "⚠️ 您的 slug 已自动清理",
+    "noPasswordWarning": "⚠️ 没有密码，任何拥有该链接的人都可以访问仪表板",
+    "clearFilters": "清除筛选器",
+    "id": "仪表板 ID",
+    "noDashboardsAvailable": "没有可用的仪表板",
+    "editCustomerDashboard": "编辑客户仪表板",
+    "removeDashboardFailed": "无法删除仪表板",
+    "removedSuccessfully": "仪表板已成功删除",
+    "updatedSuccessfully": "仪表板已成功更新",
+    "createdSuccessfully": "仪表板已成功创建",
+    "updateFailed": "仪表板更新失败",
+    "createFailed": "仪表板创建失败"
   },
   "tabular": {
-  	"sEmptyTable":     "表中没有数据",
-  	"sInfo":           "显示 _START_ 到 _END_ 共 _TOTAL_ 条记录",
-  	"sInfoEmpty":      "显示 0 到 0 共 0 条记录",
-  	"sInfoFiltered":   "(从总 _MAX_ 条记录中过滤出)",
-  	"sInfoPostFix":    "",
-  	"sInfoThousands":  ",",
-  	"sLengthMenu":     "显示 _MENU_ 条记录",
-  	"sLoadingRecords": "加载中...",
-  	"sProcessing":     "处理中...",
-  	"sSearch":         "查询:",
-  	"sZeroRecords":    "没有匹配的记录",
-  	"oPaginate": {
-  		"sFirst":    "首页",
-  		"sLast":     "尾页",
-  		"sNext":     "下一页",
-  		"sPrevious": "上一页"
-  	},
-  	"oAria": {
-  		"sSortAscending":  ": 激活升序排序",
-  		"sSortDescending": ": 激活降序排序"
-  	}
+    "sEmptyTable": "表中没有数据",
+    "sInfo": "显示 _START_ 到 _END_ 共 _TOTAL_ 条记录",
+    "sInfoEmpty": "显示 0 到 0 共 0 条记录",
+    "sInfoFiltered": "(从总 _MAX_ 条记录中过滤出)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ",",
+    "sLengthMenu": "显示 _MENU_ 条记录",
+    "sLoadingRecords": "加载中...",
+    "sProcessing": "处理中...",
+    "sSearch": "查询:",
+    "sZeroRecords": "没有匹配的记录",
+    "oPaginate": {
+      "sFirst": "首页",
+      "sLast": "尾页",
+      "sNext": "下一页",
+      "sPrevious": "上一页"
+    },
+    "oAria": {
+      "sSortAscending": ": 激活升序排序",
+      "sSortDescending": ": 激活降序排序"
+    }
   },
   "notifications": {
     "sanity": "很抱歉, 你不可以分享所有项目，请选择单个项目进行分享",
@@ -394,9 +468,15 @@
     "wekan_error": "无法获取Wekan 卡片，请检查项目设置！",
     "zammad_error": "无法获取Zammad 工单，请检查项目设置！",
     "no_entry_selected": "未选择任何条目。请选择至少一个条目以继续。",
-    "unknown_error": "未知错误"
+    "unknown_error": "未知错误",
+    "only_administrator_can_register_time": "Only administrators can register time for another user.",
+    "user_not_found_in_project": "No user with this e-mail address could be found in this project.",
+    "user_inactive": "This user has been de-activated, please activate it to continue.",
+    "extensionAlreadyLaunched": "The extension is already running."
   },
   "login": {
+    "400": "登录失败，请重试",
+    "403": "登录失败，请检查用户名或密码",
     "password": "密码",
     "forgot_password": "忘记密码？",
     "no_account": "还没有帐号？",
@@ -409,8 +489,6 @@
     "create_account": "创建帐号",
     "password_again": "再次输入密码",
     "already_have_account": "如果你已经有密码",
-    "403": "登录失败，请检查用户名或密码",
-    "400": "登录失败，请重试",
     "reset_password_mail": "我们已发送邮件告知你如何重置密码，请查收",
     "change_password": "修改密码",
     "current_password": "当前密码",
@@ -463,12 +541,12 @@
     "extension_removed": "扩展已删除",
     "edit_custom_field": "编辑自定义字段",
     "oidc": "OpenID Connect",
-    "oidc_configure": "你需要创建一个 OpenID Connect 客户端配置，并设置应用回调地址",
+    "oidc_configure": "您需要使用您的提供商创建 OpenID Connect 客户端配置。将应用回调 URL 设置为",
     "inboundinterfaces": "入站接口",
     "outboundinterfaces": "出站接口",
     "create_edit_interface": "创建或编辑接口",
     "process_data": "处理数据脚本",
-    "inbound_processdata_hint":"每当请求入站接口数据时，将执行此JavaScript。脚本必须返回具有以下结构的JSON对象（或返回此类对象的Promise）：[{name: 'name', description:'description'}]。",
+    "inbound_processdata_hint": "每当请求入站接口数据时，将执行此JavaScript。脚本必须返回具有以下结构的JSON对象（或返回此类对象的Promise）：[{name: 'name', description:'description'}]。",
     "active": "接口是否激活？",
     "total_users": "总用户数",
     "new_users": "新用户（最近7天）",
@@ -483,7 +561,11 @@
     "allowed_domains_hint": "允许发送webhook的域名列表，用逗号分隔（例如：api.stripe.com, webhook.example.com）",
     "webhook_process_data": "Webhook处理脚本",
     "webhook_processdata_hint": "每当收到webhook时都会执行此JavaScript。脚本可以访问'webhookData'（webhook载荷）和'senderDomain'变量。返回包含'action'（'complete'或'revoke'）和'userId'属性的对象来处理验证，或返回null忽略webhook。",
-    "confirm_delete": "您确定要删除此项目吗？"
+    "confirm_delete": "您确定要删除此项目吗？",
+    "user_inactive": "Inactive?",
+    "category": "Category",
+    "category_hint": "The category is used to group custom fields visually.",
+    "custom_field_name_hint": "不允许使用空格和特殊字符。"
   },
   "wekan": {
     "list": "Wekan 列表",
@@ -497,5 +579,20 @@
     "authorize_now": "现在授权",
     "save_selected": "保存所选时间记录",
     "origin": "起源"
+  },
+  "transactions": {
+    "transactions": "Transactions",
+    "enable_transactions": "Enable transaction logging",
+    "user": "User",
+    "method": "Method",
+    "payload": "Payload",
+    "timestamp": "Timestamp"
+  },
+  "weektable": {
+    "sumProject_message": "The sum per project",
+    "sum_per_day": "The sum per day"
+  },
+  "notification": {
+    "only_administrator_can_register_time": "只有管理员才能为其他用户记录时间。"
   }
 }

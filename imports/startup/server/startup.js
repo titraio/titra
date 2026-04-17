@@ -2,7 +2,6 @@ import { AccountsAnonymous } from 'meteor/faburem:accounts-anonymous'
 import { BrowserPolicy } from 'meteor/browser-policy-content'
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 import { ServiceConfiguration } from 'meteor/service-configuration'
-import Extensions from '../../api/extensions/extensions.js'
 import { defaultSettings, Globalsettings } from '../../api/globalsettings/globalsettings.js'
 import { getGlobalSettingAsync } from '../../utils/server_method_helpers.js'
 
@@ -40,12 +39,6 @@ Meteor.startup(async () => {
     import('../../utils/google/google_server.js').then((registerGoogleAPI) => {
       registerGoogleAPI.default()
     })
-  }
-  for (const extension of await Extensions.find({}).fetchAsync()) {
-    if (extension.isActive) {
-      // eslint-disable-next-line no-eval
-      eval(extension.server)
-    }
   }
   if (await getGlobalSettingAsync('XFrameOptionsOrigin')) {
     BrowserPolicy.content.allowFrameAncestorsOrigin(await getGlobalSettingAsync('XFrameOptionsOrigin'))

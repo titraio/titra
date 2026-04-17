@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
-import bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { t } from '../../../utils/i18n.js'
 import './projectlist.html'
 import Projects from '../../../api/projects/projects'
@@ -150,7 +150,7 @@ Template.projectlist.events({
   'click .js-share': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.projectId.set(event.currentTarget.dataset.id)
-    const dashboardModal = new bootstrap.Modal($('.js-dashboard-modal')[0], { focus: false }).toggle()
+    const dashboardModal = new Modal($('.js-dashboard-modal')[0], { focus: false }).toggle()
   },
 })
 

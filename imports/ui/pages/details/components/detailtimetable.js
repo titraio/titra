@@ -3,8 +3,8 @@ import utc from 'dayjs/plugin/utc'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { saveAs } from 'file-saver'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
-import { NullXlsx } from '@neovici/nullxlsx'
-import bootstrap from 'bootstrap'
+import { NullXlsx } from '@neovici/nullxlsx/src/nullxlsx.js'
+import { Modal } from 'bootstrap'
 import { i18nReady, t } from '../../../../utils/i18n.js'
 import Timecards from '../../../../api/timecards/timecards'
 import CustomFields from '../../../../api/customfields/customfields'
@@ -329,7 +329,7 @@ Template.detailtimetable.onRendered(() => {
                 {
                   label: 'Filter',
                   action(column) {
-                    const filterModal = new bootstrap.Modal('#filterModal')
+                    const filterModal = new Modal('#filterModal')
                     filterModal.show()
                     templateInstance.$('#genericFilter').html('')
                     const uniqueRowValues = new Map()
@@ -598,7 +598,26 @@ Template.detailtimetable.events({
   'click .js-track-time': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.tcid.set(undefined)
-    new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+  },
+  'click .js-share': (event, templateInstance) => {
+    event.preventDefault()
+    const projectId = FlowRouter.getParam('projectId')
+    if ($('#period').val() === 'all' || projectId === 'all' || projectId.split(',').length > 1) {
+      showToast(t('notifications.sanity'))
+      return
+    }
+    Meteor.call('addDashboard', {
+      projectId, resourceId: $('#resourceselect').val()[0], customer: $('#customerselect').val()[0], timePeriod: $('#period').val(),
+    }, (error, _id) => {
+      if (error) {
+        showToast(t('notifications.dashboard_creation_failed'))
+        // console.error(error)
+      } else {
+        $('#dashboardURL').val(FlowRouter.url('dashboard', { _id }))
+        new Modal($('.js-dashboard-modal')[0], { focus: false }).toggle()
+      }
+    })
   },
   'click .js-invoice': (event, templateInstance) => {
     event.preventDefault()
@@ -651,7 +670,7 @@ Template.detailtimetable.events({
   'click .js-edit': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.tcid.set(templateInstance.$(event.currentTarget).data('id'))
-    new bootstrap.Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal($('#edit-tc-entry-modal')[0], { focus: false }).show()
   },
   'change .js-search': (event, templateInstance) => {
     templateInstance.search.set($(event.currentTarget).val())

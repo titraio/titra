@@ -18,9 +18,6 @@
             </li>
         {{/if}}
         <li class="nav-item">
-            <a class="nav-link" id="extensions-tab" data-bs-toggle="tab" href="#extensions" role="tab" aria-controls="extensions" aria-selected="false">{{t "administration.extensions"}}</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" id="inboundinterfaces-tab" data-bs-toggle="tab" href="#inboundinterfaces" role="tab" aria-controls="outboundfinterfaces" aria-selected="false">{{t "administration.inboundinterfaces"}}</a>
         </li>
         <li class="nav-item">
@@ -53,7 +50,7 @@
             {{/if}}
         </div>
         <div class="tab-pane fade table-responsive p-3 tab-borders" id="customerdashboards">
-            {{>projectDashboards}}
+            {{>customerdashboardscomponent}}
         </div>
         <div class="tab-pane fade table-responsive p-3 tab-borders" id="customfields">
             {{#if isActive "customfields-tab"}}
@@ -66,13 +63,6 @@
             {{#if isActive "oidc-tab"}}
                 {{#if i18nReady}}
                     {{>oidccomponent}}
-                {{/if}}
-            {{/if}}
-        </div>
-        <div class="tab-pane fade table-responsive p-3 tab-borders" id="extensions">
-            {{#if isActive "extensions-tab"}}
-                {{#if i18nReady}}
-                    {{>extensionscomponent}}
                 {{/if}}
             {{/if}}
         </div>

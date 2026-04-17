@@ -1,7 +1,7 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import Bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { i18nReady, t } from '../../../../utils/i18n.js'
 import './projectTasks.html'
 import Tasks from '../../../../api/tasks/tasks'
@@ -180,7 +180,7 @@ Template.projectTasks.onRendered(() => {
               getEditor(colIndex, rowIndex, value, parent, column, row) {
                 templateInstance.editTaskID.set(row[0].content)
                 templateInstance.$(parent.parentNode).removeClass('dt-cell--editing')
-                new Bootstrap.Modal(templateInstance.$('#task-modal')).show()
+                new Modal(templateInstance.$('#task-modal')).show()
                 return null
               },
             }
@@ -215,7 +215,7 @@ Template.projectTasks.onRendered(() => {
         },
         on_click: (task) => {
           templateInstance.editTaskID.set(task.id)
-          new Bootstrap.Modal(templateInstance.$('#task-modal')).show()
+          new Modal(templateInstance.$('#task-modal')).show()
         },
       }
       if (!templateInstance.ganttchart) {
@@ -247,8 +247,8 @@ Template.projectTasks.events({
   'click .js-open-task-modal': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.editTaskID.set(false)
-    Bootstrap.Modal.getOrCreateInstance(templateInstance.$('#task-modal')).dispose()
-    Bootstrap.Modal.getOrCreateInstance(templateInstance.$('#task-modal')).show()
+    Modal.getOrCreateInstance(templateInstance.$('#task-modal')).dispose()
+    Modal.getOrCreateInstance(templateInstance.$('#task-modal')).show()
   },
   'focusout #projectGantt': (event, templateInstance) => {
     event.preventDefault()

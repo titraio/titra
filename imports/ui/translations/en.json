@@ -39,11 +39,12 @@
     "global_setting": "Global setting",
     "status": "Status",
     "password": "Password",
-    "actions": "Actions"
+    "actions": "Actions",
+    "id": "ID"
   },
   "navigation": {
     "track": "Track time",
-    "dashboard" : "Customer Dashboards",
+    "dashboard": "Customer Dashboards",
     "overview": "Overview",
     "details": "Details",
     "profile": "Profile",
@@ -179,7 +180,7 @@
     "zh": "Chinese",
     "ru": "Russian",
     "ukr": "Ukrainian",
-	  "es": "Spanish",
+    "es": "Spanish",
     "user_interface": "User interface",
     "theme": "Theme",
     "auto_detect": "Auto detect",
@@ -392,30 +393,40 @@
     "slugAvailable": "This URL is available ✓",
     "slugTaken": "This URL is already taken ✗",
     "slugSanitized": "⚠️ Your slug has been automatically sanitized",
-    "noPasswordWarning": "⚠️ Without password anyone with the link can access the dashboard"
+    "noPasswordWarning": "⚠️ Without password anyone with the link can access the dashboard",
+    "clearFilters": "Clear filters",
+    "id": "Dashboard ID",
+    "noDashboardsAvailable": "No dashboards available",
+    "editCustomerDashboard": "Edit Customer Dashboard",
+    "removeDashboardFailed": "Could not remove dashboard",
+    "removedSuccessfully": "Dashboard removed successfully",
+    "updatedSuccessfully": "Dashboard updated successfully",
+    "createdSuccessfully": "Dashboard created successfully",
+    "updateFailed": "Failed to update dashboard",
+    "createFailed": "Dashboard creation failed"
   },
   "tabular": {
-  	"sEmptyTable":     "No data available in table",
-  	"sInfo":           "Showing _START_ to _END_ of _TOTAL_ entries",
-  	"sInfoEmpty":      "Showing 0 to 0 of 0 entries",
-  	"sInfoFiltered":   "(filtered from _MAX_ total entries)",
-  	"sInfoPostFix":    "",
-  	"sInfoThousands":  ",",
-  	"sLengthMenu":     "Show _MENU_ entries",
-  	"sLoadingRecords": "Loading...",
-  	"sProcessing":     "Processing...",
-  	"sSearch":         "Search:",
-  	"sZeroRecords":    "No matching records found",
-  	"oPaginate": {
-  		"sFirst":    "First",
-  		"sLast":     "Last",
-  		"sNext":     "Next",
-  		"sPrevious": "Previous"
-  	},
-  	"oAria": {
-  		"sSortAscending":  ": activate to sort column ascending",
-  		"sSortDescending": ": activate to sort column descending"
-  	}
+    "sEmptyTable": "No data available in table",
+    "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+    "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+    "sInfoFiltered": "(filtered from _MAX_ total entries)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ",",
+    "sLengthMenu": "Show _MENU_ entries",
+    "sLoadingRecords": "Loading...",
+    "sProcessing": "Processing...",
+    "sSearch": "Search:",
+    "sZeroRecords": "No matching records found",
+    "oPaginate": {
+      "sFirst": "First",
+      "sLast": "Last",
+      "sNext": "Next",
+      "sPrevious": "Previous"
+    },
+    "oAria": {
+      "sSortAscending": ": activate to sort column ascending",
+      "sSortDescending": ": activate to sort column descending"
+    }
   },
   "notifications": {
     "sanity": "Sorry, but dashboards are currently limited to sharing one project. Please select a single project to share.",
@@ -460,6 +471,8 @@
     "unknown_error": "An unknown error occurred."
   },
   "login": {
+    "400": "Login failed, please try again.",
+    "403": "Login failed, please check your credentials.",
     "password": "Password",
     "forgot_password": "Forgot your password?",
     "no_account": "Don't have an account?",
@@ -472,8 +485,6 @@
     "create_account": "Create an account",
     "password_again": "Password (again)",
     "already_have_account": "If you already have an account - ",
-    "403": "Login failed, please check your credentials.",
-    "400": "Login failed, please try again.",
     "reset_password_mail": "We have sent you an E-mail with instructions on how to reset your password. Please check your inbox.",
     "change_password": "Change password",
     "current_password": "Current password",
@@ -535,7 +546,7 @@
     "outboundinterfaces": "Outbound interfaces",
     "create_edit_interface": "Create or edit interface",
     "process_data": "Process data script",
-    "inbound_processdata_hint":"This JavaScript will be executed whenever inbound interface data is requested. The script must return a JSON object (or a promise returning such an object) with the following structure: [{name: 'name', description:'description'}].",
+    "inbound_processdata_hint": "This JavaScript will be executed whenever inbound interface data is requested. The script must return a JSON object (or a promise returning such an object) with the following structure: [{name: 'name', description:'description'}].",
     "active": "Interface active?",
     "total_users": "Total users",
     "new_users": "New users (last 7 days)",
@@ -567,7 +578,7 @@
   },
   "weektable": {
     "sumProject_message": "The sum per project",
-    "sum_per_day":  "The sum per day"
+    "sum_per_day": "The sum per day"
   },
   "autocomplete": {
     "modal_title": "AI powered autocomplete",

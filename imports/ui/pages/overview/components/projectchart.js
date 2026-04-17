@@ -115,7 +115,7 @@ Template.projectchart.onRendered(() => {
   })
   templateInstance.autorun(() => {
     if (templateInstance.isVisible.get()) {
-      if (!this.singleProjectSub) {
+      if (!templateInstance.singleProjectSub) {
         templateInstance.singleProjectSub = templateInstance.subscribe('singleProject', templateInstance.data.projectId)
       }
       if (!templateInstance.projectStatsSub) {

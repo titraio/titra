@@ -1,87 +1,44 @@
-// @import "{}/node_modules/bootstrap/scss/bootstrap.scss";
-// @import "{}/node_modules/bootstrap/scss/functions";
-// @import "{}/node_modules/bootstrap/scss/variables";
-// @import "{}/node_modules/bootstrap/scss/mixins";
-// @import "{}/node_modules/bootstrap/scss/root";
-// @import "{}/node_modules/bootstrap/scss/reboot";
-// @import "{}/node_modules/bootstrap/scss/type";
-// @import "{}/node_modules/bootstrap/scss/images";
-// // @import "code";
-// @import "{}/node_modules/bootstrap/scss/grid";
-// @import "{}/node_modules/bootstrap/scss/tables";
-// @import "{}/node_modules/bootstrap/scss/forms";
-// @import "{}/node_modules/bootstrap/scss/buttons";
-// @import "{}/node_modules/bootstrap/scss/transitions";
-// @import "{}/node_modules/bootstrap/scss/dropdown";
-// @import "{}/node_modules/bootstrap/scss/button-group";
-// @import "{}/node_modules/bootstrap/scss/input-group";
-// @import "{}/node_modules/bootstrap/scss/custom-forms";
-// @import "{}/node_modules/bootstrap/scss/nav";
-// @import "{}/node_modules/bootstrap/scss/navbar";
-// @import "{}/node_modules/bootstrap/scss/card";
-// // @import "breadcrumb";
-// @import "{}/node_modules/bootstrap/scss/pagination";
-// @import "{}/node_modules/bootstrap/scss/badge";
-// // @import "jumbotron";
-// @import "{}/node_modules/bootstrap/scss/alert";
-// // @import "progress";
-// // @import "media";
-// @import "{}/node_modules/bootstrap/scss/list-group";
-// @import "{}/node_modules/bootstrap/scss/close";
-// // @import "{}/node_modules/bootstrap/scss/toasts";
-// @import "{}/node_modules/bootstrap/scss/modal";
-// @import "{}/node_modules/bootstrap/scss/tooltip";
-// @import "{}/node_modules/bootstrap/scss/popover";
-// // @import "carousel";
-// // @import "spinners";
-// @import "{}/node_modules/bootstrap/scss/utilities";
-// @import "{}/node_modules/bootstrap/scss/print";
-
-@import "{}/node_modules/bootstrap/scss/functions";
-@import "{}/node_modules/bootstrap/scss/variables";
-$enable-dark-mode: false;
-@import "{}/node_modules/bootstrap/scss/maps";
-@import "{}/node_modules/bootstrap/scss/mixins";
-@import "{}/node_modules/bootstrap/scss/utilities";
-@import "{}/node_modules/bootstrap/scss/helpers";
-@import "{}/node_modules/bootstrap/scss/utilities/api";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+//$enable-dark-mode: false;
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";
 
 // Layout & components
-@import "{}/node_modules/bootstrap/scss/root";
-@import "{}/node_modules/bootstrap/scss/reboot";
-@import "{}/node_modules/bootstrap/scss/type";
-@import "{}/node_modules/bootstrap/scss/images";
-@import "{}/node_modules/bootstrap/scss/containers";
-@import "{}/node_modules/bootstrap/scss/grid";
-@import "{}/node_modules/bootstrap/scss/tables";
-@import "{}/node_modules/bootstrap/scss/forms";
-@import "{}/node_modules/bootstrap/scss/buttons";
-@import "{}/node_modules/bootstrap/scss/transitions";
-@import "{}/node_modules/bootstrap/scss/dropdown";
-@import "{}/node_modules/bootstrap/scss/button-group";
-@import "{}/node_modules/bootstrap/scss/nav";
-@import "{}/node_modules/bootstrap/scss/navbar";
-@import "{}/node_modules/bootstrap/scss/card";
-@import "{}/node_modules/bootstrap/scss/accordion";
-// @import "breadcrumb";
-@import "{}/node_modules/bootstrap/scss/pagination";
-@import "{}/node_modules/bootstrap/scss/badge";
-@import "{}/node_modules/bootstrap/scss/alert";
-@import "{}/node_modules/bootstrap/scss/progress";
-@import "{}/node_modules/bootstrap/scss/list-group";
-@import "{}/node_modules/bootstrap/scss/close";
-@import "{}/node_modules/bootstrap/scss/toasts";
-@import "{}/node_modules/bootstrap/scss/modal";
-@import "{}/node_modules/bootstrap/scss/tooltip";
-@import "{}/node_modules/bootstrap/scss/popover";
-// @import "carousel";
-// @import "spinners";
-// @import "offcanvas";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
 
 $btn-link-color: $body-color;
 
 :root {
-  accent-color: $primary;
+  accent-color: var(--bs-primary);
 }
 .form-label {
   z-index: 3;
@@ -100,11 +57,14 @@ $btn-link-color: $body-color;
 .navbar .navbar-nav .nav-link {
   color: white;
 }
+.nav-link {
+  text-decoration: none !important;
+}
 .navbar .navbar-nav {
   flex-direction: row;
 }
 .navbar .navbar-nav .active {
-    border-bottom: 4px solid $primary;
+    border-bottom: 4px solid var(--bs-primary);
     padding-bottom: 4px;
 }
 .navbar .navbar-nav .nav-link {
@@ -144,8 +104,6 @@ $btn-link-color: $body-color;
     cursor: pointer;
   }
 }
-
-
 .card-block {
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
@@ -267,7 +225,7 @@ g.chart-legend {
       font-size: 1.5rem;
     }
     .fc-event:hover {
-      color: $primary !important;
+      color: var(--bs-primary) !important;
     }
     .fc-below, .fc-modal {
       z-index: 1060 !important;
@@ -279,14 +237,14 @@ g.chart-legend {
       background: rgba(0, 0, 0, 0.75);
     }
     .fc-cal-header {
-      background: $primary !important;
-      color: $gray-900;
+      background: var(--bs-primary) !important;
+      color: var(--bs-gray-900);
     }
     .fc-cal-month, .fc-cal-year, .fc-day, .fc-month, .fc-year {
-      color: $gray-900;
+      color: var(--bs-gray-900);
     }
     .fc-cal-footer {
-      background: $primary !important;
+      background: var(--bs-primary) !important;
     }
 }
 
@@ -295,7 +253,7 @@ button.dp-clear {
 }
 
 .dropdown-item:hover {
-  background-color: $primary;
+  background-color: var(--bs-primary);
 }
 
 .project-menu::after {                               
@@ -303,19 +261,19 @@ button.dp-clear {
 }
 
 .project-menu:hover svg path {
-  fill: $primary; 
+  fill: var(--bs-primary); 
 }
 .project-menug:hover {
-  border: 1px solid $primary;
+  border: 1px solid var(--bs-primary);
 }
 .holiday {
-  background-color: $dark;
-  color: $light !important;
+  background-color: var(--bs-dark);
+  color: var(--bs-light) !important;
 }
 
 .fc-bg-event {
-  background-color: $dark !important;
-  color: $light !important;
+  background-color: var(--bs-dark) !important;
+  color: var(--bs-light) !important;
   opacity: 1 !important;
 }
 
@@ -332,7 +290,7 @@ button.dp-clear {
   background-color: var(--bs-card-cap-bg) !important;
 }
 .cl-button:hover {
-  background-color: $light !important;
+  background-color: var(--bs-light) !important;
 }
 .cl-content {
   background-color: transparent !important;
@@ -353,7 +311,7 @@ button.dp-clear {
   transition-duration: 300ms;
 }
 .table > tr:hover {
-  background-color: $secondary;
+  background-color: var(--bs-secondary);
 }
 .btn-reveal {
   opacity: 0.1;
@@ -363,4 +321,833 @@ button.dp-clear {
 }
 select#period {
   background-image:     none;
+}
+body.is-dark {
+  --bs-primary:                           #005a52;       // Color/Background-Color for links, Save-, Selectbuttons 
+  --bs-primary-rgb:                       rgb(0,90,82);       // Color/Background-Color for links, Save-, Selectbuttons 
+
+  .bg-primary {
+    background:                       var(--bs-primary-rgb) !important;
+  }
+  .text-muted {
+    color: rgba(240,240,240,0.75) !important;
+  }
+  .dropdown-menu .dropdown-item {
+    text-decoration: none !important;
+    color: var(--bs-body-color) !important;
+  }
+  --bs-secondary:                         #272727;       // Background-Color for all fields, control buttons, checkboxes
+  --bs-success:                           #009688;       
+  --bs-info:                              #86a8a5;
+  --bs-warning:                           #cb9800;
+  --bs-danger:                            #f57c80;
+  --bs-light:                             #BDBDBD;
+  --bs-dark:                              #212529;
+  --dark-border:                          #3a3a3a;
+  --dark-form:                            #1d1d1d;
+  --grey:                                 #2d2d2d;
+  --lightgrey:                            #404040;
+  --bs-gray-900:                          #eeeeee;
+  --titra-dark:                           #006d62;
+  --none:                                 none;
+  --bs-border-color:                      var(--dark-border);
+
+  //Tabs/Container
+  --tab-background-color:                 var(--grey);           // Tab/Container-Background-Color
+  --tab-border-color:                     var(--grey);           // Tab/Container-Border-Color
+  .border {
+    --bs-border-color:                         var(--bs-dark);
+  }
+  //PrimaryButton
+  --prim-btn-color:                       #f0f0f0;       // Font-Color of primary buttons
+  --prim-btn-background-color:            #006d62;       // Background-Color of primary buttons
+  --prim-btn-bg-color-hover:              #009688;       // HoverBackground-Color of primary buttons
+  --bs-btn-close-color:                   white;
+  //SecondaryButton
+  --sec-btn-color:                        #bbbbbb;       // Font-Color of secondary buttons
+  --sec-btn-background-color:             var(--lightgrey);       // Background-Color of secondary buttons
+  --sec-btn-bg-color-hover:               #006d62;       // Hover-Background-Color of secondary buttons
+  --sec-btn-color-hover:                  #f0f0f0;       // Hover-Font-Color of secondary buttons
+  --sec-btn-border-color-hover:           var(--dark-border);    // Hover-border-Color of secondary buttons 
+
+  //InputFieldButtons
+  --input-button-background-color:        #2b2b2b;       // Background-Color for input-field-buttons
+  --input-button-bg-color-hover:          #006d62;       // Background-Color for input-field-buttons
+  --input-button-border-color:            var(--dark-border);    // Border-Color for input-field-buttons
+  --input-button-font-color:              var(--bs-primary);       // Font-Color of input-field-buttons (timer)
+
+  //InputFields
+  --input-background-color:               var(--bs-secondary);         // Background-Color for input-fields
+  --input-border-color:                   var(--dark-border);    // Border-Color for input-fields
+  --input-placeholder-color:              var(--lightgrey);
+
+  //DatePickr
+  --cal-pickr-main-color:                 #212529;       // Main-Color for CalDatePickr 
+  --cal-pickr-font-color:                 #009688;       // Font-Color for CalDatePickr
+  --cal-pickr-footer-color:               var(--grey);           // Footer-Color for CalDatePickr
+  --cal-pickr-header-color:               var(--grey);           // Header-Color for CalDatePickr
+  --cal-pickr-header-border:              0px;             // Header-Border for CalDatePickr
+  --cal-pickr-lightbox-color:             #292929bf;     // Lightbox-Color for CalDatePickr
+  --cal-pickr-today-mark:                 #949494;       // Marker-Color of todays date for CalDatePickr
+  --cal-pickr-current-color:              #2d3238;       // Current date color for CalDatePickr
+  --cal-pickr-focus-color:                #2d3238;       // focused date color for CalDatePickr
+  --cal-pickr-hover-color:                #2d3238;       // date hover color for CalDatePickr
+
+  //Navigation
+  --nav-link-color:                       #009688;       // Font-Color for Navigation
+  --nav-tab-border-color-highlight:       var(--bs-primary);        // Border-Color for Navigation Higlight active tab
+  --nav-tab-border-color:                 transparent;     // Border-Color for Navigation
+  --nav-tab-background-color:             var(--bs-dark);           // BG-Color for Navigation Tabs
+  --nav-link-color-hover:                 #f0f0f0;
+  --nav-link-bg-color-hover:              #24262800;
+  --nav-link-border-color-hover:          #ffffff00 #ffffff00 #ffffff00;
+  --nav-tabs-border-color:                #004842;       // Border-Color for Navigation Line
+
+  //RichTextEditor
+  --rte-background-color:                 var(--bs-secondary);      // Backround-color for RTE
+  --rte-font-color:                       #5e5e5e;       // Font-color for RTE
+  --rte-border-color:                     #5e5e5e00;     // Border-color for RTE
+  --rte-toolbar-bg-color:                 #9c9c9c;       // Background-color for RTE-Toolbar
+  --rte-toolbar-border-color:             #444444;       // Border-color for RTE-Toolbar
+
+  //WeekView-Table
+  --wv-table-font-color:                  #c1c1c1;       // Font-color for WeekView-Table
+  --wv-table-font-size:                   16px;            // Font-size for WeekView-Table
+  --wv-table-header-font-color:           #636363;       // Font-color for WeekView-Table-Header
+  --wv-table-header-font-size:            16px;            // Font-size for WeekView-Table-Header
+
+  //AllProjectsCard
+  --ap-card-bg-color-left-top:            #1d1d1d;       // 1. gradient color for allProjectsCard
+  --ap-card-bg-color-center:              #004842;       // 2. gradient color for allProjectsCard
+  --ap-card-bg-color-bottom-right:        #212529;       // 3. gradient color for allProjectsCard
+
+  //DataTable
+  --data-border-color:                    var(--grey);       // Border-Color for Tables
+  --data-text-color:                      #bdbdbd;       // Font-Color for Tables
+  --data-cell-bg-color:                   var(--bs-secondary);       // Cell-BG-Color for Tables
+  --data-header-bg-color:                 var(--lightgrey);       // Header-Cell-BG-Color for Tables
+  --data-header-text-color:               #adb5bd;       // Header-Font-Color for Tables
+  --data-header-dropdown-bg-color:        #08433e;       // dropdown-BG-Color for Table-DropDowns
+  --data-header-dropdown-bg-hover:        var(--bs-primary);        // dropdown-hover-BG-Color for Table-DropDowns
+  --data-header-indicator-color:          var(--bs-success);        // color of sorting arrow indicator for Table-Headers
+
+  //DangerAlert
+  --alert-danger-color:                   #cccccc;       // Danger-Alert Color
+  --alert-danger-background-color:        #3b1516;       // Danger-Alert-BG Color
+  --alert-danger-border-color:            #000000;       // Danger-Alert-Border Color
+
+  //InfoAlert
+  --alert-info-color:                     #dadada;
+  --alert-info-background-color:          #846301; 
+  --alert-info-border-color:              #1d1d1d; 
+
+  //ProjectDragCard
+  --drag-card-bg-color:                   #404044;       // Drag Card Background Color (Month-View)
+  --drag-card-bg-color-hover:             #2b2b2b;       // Drag Card hover Background Color
+
+  //InfoCard
+  --alert-secondary-color:                #a0a0a0;       // Info Drag Card Color (Month-View)
+  --alert-secondary-bg-color:             #1d2021;       // Info Drag Card BG-Color
+  --alert-secondary-border-color:         #1d2021;       // Info Drag Card Border-Color 
+
+  //Calendar
+  --fc-color:                             #eee;          // calendar pagination color, incl. today btn
+  --fc-bg-color:                          var(--bs-secondary);      // calendar pagination bg-color
+  --fc-border-color:                      var(--bs-dark);           // calendar pagination border-color
+  --fc-color-hover:                       #eee;          // calendar pagination color on hover
+  --fc-bg-color-hover:                    #006d62;       // calendar pagination bg-color on hover
+  --fc-border-color-hover:                var(--bs-dark);           // calendar pagination bg-color on hover
+  --fc-cell-border-color-width:           1px solid var(--grey); // calendar cell border width and border-color
+  --fc-cell-font-color:                   #a9a9a9;       // calendar cell font color 
+  --fc-cell-bg-color:                     #1d1f21;       // calendar cell BG-color 
+
+  //Body
+  --bs-body-bg:                              #1d1d1d;
+  --bs-body-font-weight:                     250;
+  --bs-body-color:                           #f0f0f0;
+  --bs-body-color-rgb:                       rgb(240,240,240);
+
+  //OverviewCards
+  .card {
+    --bs-card-bg:                           #303030;   // Card BG-color
+    --bs-card-cap-bg:                       var(--lightgrey);   // Card Header-BG-color
+    --bs-card-border-color:                 var(--lightgrey);   // Card Border-color
+  }
+  //Pagination
+  --bs-pagination-bg:                        var(--bs-secondary);
+  --bs-pagination-color:                     var(--bs-gray-900);
+  --bs-pagination-border-color:              var(--bs-dark);
+  --bs-pagination-hover-bg:                  var(--titra-dark);
+  --bs-pagination-hover-color:               var(--bs-gray-900);
+  --bs-pagination-hover-border-color:        var(--bs-dark);
+  --bs-pagination-active-bg:                 var(--bs-primary);
+  --bs-pagination-disabled-border-color:     var(--bs-dark);
+  --bs-pagination-disabled-bg:               #303030;
+
+  //Other
+  --bs-font-weight-base:                  250;
+  --form-file-button-bg:                  var(--bs-secondary);
+  --bs-progress-bg:                       var(--bs-secondary);
+
+  //Toast-Messages (⚠️ See note below about RGBA)
+  --bs-toast-bg:                          rgba(39, 39, 39, 0.85); // Converted from --secondary hex
+  --bs-toast-color:                       #dcdcdc;
+  --bs-toast-header-bg:                   rgba(0, 90, 82, 0.85);  // Converted from --primary hex
+  --bs-toast-header-color:                var(--bs-success);
+
+  //Modal 
+  --modal-header-bg-color:                var(--lightgrey);
+  --modal-header-border-b-color:          0px;
+  --modal-content-bg-color:               var(--grey);
+  --modal-content-color:                  #dadada;
+
+  //Dropdown
+  --bs-dropdown-color:                    var(--bs-body-color);
+  --bs-dropdown-bg:                       var(--grey);
+  --bs-dropdown-border-color:             var(--dark-border);
+
+  //Accordion
+  .accordion {
+    --bs-accordion-active-bg:               var(--lightgrey);
+    --bs-accordion-active-color:            var(--bs-body-color);
+    --bs-accordion-bg:                      var(--grey);
+  }
+  //Table
+  .table {
+    --bs-table-color:                       var(--data-text-color);
+  }
+  //Checkbox
+  --bs-form-check-input-border:           var(--bs-light) solid;
+
+    // Pseudo-selectors need the '& ' prefix when nested 
+    // so they target elements inside the body correctly
+    & ::selection {
+      color:                    var(--bs-success) !important;
+      background:               var(--lightgrey) !important;
+    }
+    & ::-moz-selection {
+      color:                    var(--bs-success) !important;
+      background:               var(--lightgrey) !important;
+    }
+    
+    .is-dark-theme {
+        color: black;
+    }
+    
+    .nav-tabs {
+        border-bottom:          0px solid #dee2e6 !important;
+    }
+    .dt-scrollable {
+        border-top:             0px solid var(--dt-border-color) !important;
+    }
+    .dt-scrollable__no-data {
+        border:                 0px !important;
+    }
+    .table-responsive {
+        background-color:       var(--bs-secondary) !important;
+    }
+    .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu), .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3) {
+        color:                  var(--bs-gray-900) !important;
+    }
+    .form-select, .form-control {
+        background-color:       var(--input-background-color);
+    }
+    .form-check-input {
+        background-color:       var(--bs-secondary) !important;
+        border-color:           var(--lightgrey);
+    }
+    .form-check-input:checked {
+        border-color:           var(--bs-primary);
+    }
+    .modal-header {
+        border-bottom:          var(--modal-header-border-b-color) !important;
+        background-color:       var(--modal-header-bg-color) !important;
+    }
+    .modal-content {
+        background-color:       var(--modal-content-bg-color) !important;
+        color:                  var(--modal-content-color) !important;
+    }
+    .popover {
+        background-color:       var(--bs-secondary) !important;
+    }
+    .popover-header {
+        background-color:       var(--lightgrey) !important;
+        border-bottom:          0px solid rgba(0, 0, 0, 0.2)!important;
+    }
+    .popover-arrow::after, .popover-header::before {
+        border-bottom-color:    var(--lightgrey) !important;
+    }
+    .input-group .btn {
+        background-color:       var(--input-button-background-color) !important;
+        border-color:           var(--bs-border-color) !important;
+    }
+    .dp-modal {
+        background-color:       var(--cal-pickr-lightbox-color) !important;
+    }
+    .dp-months, .dp-years, .dp-cal, .dp-cal-month:hover, .dp-cal-year:hover, .dp-cal-year:focus  {
+        background-color:       var(--cal-pickr-main-color) !important;
+    }
+    .dp-cal-footer {
+        background-color:       var(--cal-pickr-footer-color) !important;
+    }
+    .dp-cal-header {
+        background-color:       var(--cal-pickr-header-color) !important;
+    }
+    .dp-cal-month, .dp-cal-year, .dp-day, .dp-month, .dp-year {
+        color:                  var(--cal-pickr-font-color) !important;
+    }
+    .dp-day-today:after {
+        content:                '';
+        height:                 0;
+        width:                  0;
+        border:                 7px solid var(--cal-pickr-today-mark);
+        border-bottom-color:    transparent;
+        border-left-color:      transparent;
+        position:               absolute;
+        top:                    0;
+        right:                  0;
+    }
+    .dp-day:hover, .dp-month:hover, .dp-year:hover {
+        outline:                none;
+        background-color:       var(--cal-pickr-hover-color) !important;
+    }
+    .dp-current {
+        outline:                none;
+        background-color:       var(--cal-pickr-current-color) !important;
+    }
+    .dp-day:focus, .dp-month:focus, .dp-current:focus, .dp-year:focus {
+        outline:                none;
+        background-color:       var(--cal-pickr-focus-color) !important;
+    }
+    .btn-outline-secondary {
+        border-color:           var(--input-border-color) !important;
+        color:                  var(--input-button-font-color) !important;
+    }
+    .btn-primary {
+        color:                  var(--prim-btn-color) !important;
+        background-color:       var(--prim-btn-background-color) !important;
+        border-color:           var(--prim-btn-background-color) !important;
+    }
+    .btn-primary:hover {
+        background-color:       var(--prim-btn-bg-color-hover) !important;
+    }
+    .ql-editor {
+        line-height:            1em;
+        background-color:       var(--rte-background-color) !important;
+        border:                 1px solid var(--rte-border-color) !important;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        font-size:              1rem !important;
+    }
+    .ql-toolbar.ql-snow {
+        border:                 1px solid var(--rte-toolbar-border-color) !important;
+        background-color:       var(--rte-toolbar-bg-color) !important;
+    }
+    .ql-container.ql-snow {
+        border:                 var(--rte-border-color) !important;
+    }
+    .btn-secondary:hover {
+        color:                  var(--sec-btn-color-hover) !important;
+        background-color:       var(--sec-btn-bg-color-hover) !important;
+        border-color:           var(--sec-btn-border-color-hover) !important;
+    }
+    .btn-secondary {
+        color:                  var(--sec-btn-color) !important;
+        background-color:       var(--sec-btn-background-color) !important;
+    }
+    .page-link:focus {
+        z-index:                0;
+        outline:                0;
+        box-shadow:             none !important;
+    }   
+    .tab-borders {
+      background-color:         var(--tab-background-color) !important;
+      border-left:              1px solid var(--bs-dark) !important;
+      border-right:             1px solid var(--bs-dark) !important;
+      border-bottom:            1px solid var(--bs-dark) !important;
+      border-top:               1px solid var(--bs-dark) !important;
+      border-top-right-radius:  0.25rem !important;
+      border-bottom-right-radius: 0.25rem !important;
+      border-bottom-left-radius:  0.25rem !important;
+    }
+
+    .tab-content {
+        background-color:       var(--tab-background-color) !important;
+    }
+    .table {
+        color:                  var(--wv-table-font-color) !important;
+        font-size:              var(--wv-table-font-size) !important;
+    }
+    .table > thead {
+        font-size:              var(--wv-table-header-font-size) !important;
+        font-variant:           all-petite-caps !important;
+        color:                  var(--wv-table-header-font-color) !important;
+    }
+    .all-projects-bg {
+      background-image:         linear-gradient(to right bottom, var(--ap-card-bg-color-left-top), var(--ap-card-bg-color-center), var(--ap-card-bg-color-bottom-right)) !important;
+    }
+    .p-2 {
+        padding:                0.5rem !important;
+        background-color:       var(--sec-btn-background-color) !important;
+        border:                 1px solid var(--grey) !important;
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        background-color:       var(--nav-tab-background-color) !important;
+        border-color:           var(--nav-tab-border-color) var(--nav-tab-border-color) var(--nav-tab-border-color-highlight) !important;
+    }  
+    .nav-link:hover {
+        color:                  var(--nav-link-color-hover) !important;
+        background-color:       var(--nav-link-bg-color-hover) !important;
+        border-color:           var(--nav-link-border-color-hover)!important;
+    }
+    .drag.card:hover {
+        background-color:       var(--drag-card-bg-color-hover) !important;    
+    }
+    .drag.card {
+        background-color:       var(--drag-card-bg-color) !important;      
+    }
+    .alert-secondary {
+        color:                  var(--alert-secondary-color) !important;
+        background-color:       var(--alert-secondary-bg-color) !important;
+        border-color:           var(--alert-secondary-border-color) !important;
+    }
+    .fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {
+        top:                    0;
+        background:             none !important;
+    }
+    .fc-bg-event {
+        background-color:       #636363 !important;
+        color:                  #d1d1d1 !important;
+        opacity:                1 !important;
+    }
+    .fc-daygrid-day-frame:hover {
+        background-color:       #494949 !important;
+    }
+    .fc-button-primary {
+        color:                  var(--fc-color) !important;
+        background-color:       var(--fc-bg-color) !important;
+        border-color:           var(--fc-border-color) !important;
+    } 
+    .fc-button-primary:hover {
+        color:                  var(--fc-color-hover) !important;
+        background-color:       var(--fc-bg-color-hover) !important;
+        border-color:           var(--fc-border-color-hover) !important;
+    }
+    .fc-theme-standard td, .fc-theme-standard th {
+        border:                 var(--fc-cell-border-color-width) !important;
+        background-color:       var(--fc-cell-bg-color) !important;
+    }
+    .fc a {
+        color:                  var(--fc-cell-font-color) !important;
+        text-decoration:        underline;
+    }
+    .fc-theme-standard .fc-scrollgrid {
+        border:                 0px solid transparent !important;
+    }
+    .dropdown-item{
+       font-weight:             var(--bs-font-weight-base) !important; 
+    }
+    .nav-link {
+        color:                  var(--nav-link-color) !important;
+    }
+    
+    .datatable {
+        // Redefined internal CSS variables inside datatable component to map to our new global CSS variables
+        --dt-border-color:              var(--data-border-color) !important;
+        --dt-text-color:                var(--data-text-color) !important;
+        --dt-cell-bg:                   var(--data-cell-bg-color) !important;
+        --dt-focus-border-width:        none;
+        --dt-toast-message-border:      none;
+        --dt-header-cell-bg:            var(--data-header-bg-color) !important;
+    }
+
+    .dt-cell__content {
+        color:                  var(--data-text-color) !important;
+        background-color:       var(--data-cell-bg-color) !important;
+        border:                 1px solid var(--data-border-color) !important;
+        text-align:             left !important;
+    }
+    .dt-cell--header .dt-cell__content:hover {
+        font-weight:            400 !important;
+        color:                  var(--data-text-color) !important;
+        background-color:       var(--bs-primary) !important;
+        border:                 1px solid var(--data-border-color) !important;
+    }
+    .dt-dropdown__list {
+        background-color:       var(--data-header-dropdown-bg-color) !important;    
+    }
+    .dt-dropdown__list-item:hover {
+        background-color:       var(--data-header-dropdown-bg-hover) !important; 
+    }
+    .list-group-item {
+        color:                  var(--bs-gray-900) !important;
+        background-color:       var(--bs-secondary) !important;
+        border:                 1px solid var(--lightgrey) !important;
+
+    }
+    .dt-cell--header .dt-cell__content {    
+        font-weight:            400 !important;
+        color:                  var(--data-header-text-color) !important;
+        background-color:       var(--data-header-bg-color) !important;
+        border:                 1px solid var(--data-border-color) !important;
+        cursor:                 pointer !important;
+        text-align:             left !important;
+    }
+    .dt-cell--header .sort-indicator {
+        color:                  var(--data-header-indicator-color) !important;
+    }
+    .alert-danger {
+        color:                  var(--alert-danger-color) !important;
+        background-color:       var(--alert-danger-background-color) !important;
+        border-color:           var(--alert-danger-border-color) !important;
+    }
+    .alert-info {
+        color:                  var(--alert-info-color) !important;
+        background-color:       var(--alert-info-background-color) !important;
+        border-color:           var(--alert-info-border-color) !important;
+    }
+    .text-center {
+        text-align:             center !important;
+        font-weight:            200 !important;
+    }
+    thead, tbody, tfoot, tr, td, th {
+        border-color:           var(--lightgrey) !important;
+    }
+    .card-block  {
+        background-color:       var(--bs-card-bg) !important;
+    }
+    .drag .card-block:hover  {
+        background-color:       var(--bs-primary) !important;
+    }
+    .btn-outline-primary {
+        color:                  var(--bs-success) !important;
+        border-color:           var(--bs-primary) !important;
+    }
+    a {
+        color:                  var(--bs-success) !important;
+    //    text-decoration:        underline;
+    }
+    g > text {
+        fill:                   #FFFFFF;
+    }
+    .gantt .grid-header {
+        fill:                   var(--grey) !important;
+        stroke:                 var(--grey) !important;
+    }
+    .gantt .grid-row {
+        fill:                   var(--grey) !important;
+    }
+    .gantt .grid-row:nth-child(even) {
+        fill:                   var(--dark-form) !important;
+    }
+    .gantt .row-line {
+        stroke:                 var(--bs-dark) !important;
+    }
+    .gantt .lower-text {
+        fill:                   var(--bs-body-color) !important;
+    }
+    .gantt .upper-text {
+        fill:                   var(--bs-body-color) !important;
+    }
+    .gantt .bar {
+        fill:                   var(--lightgrey) !important;
+    }
+    #period {
+        background-color:       var(--input-button-background-color) !important;
+    }
+    select#language, select#theme, 
+    select#holidayCountry, select#holidayState,
+    select#holidayRegion, select#timetrackview {            // Settings Bootstrap fixed
+        background:             #272727 !important;
+    }
+    table.table.table-sm.mb-0 {                             // Update Bootstrap fixed 
+        --bs-table-bg:          #2d2d2d !important;
+    }
+    .tooltip-inner {
+        color:                  white !important;         // Tooltip color 
+    }
+}
+body.is-light {
+  --bs-primary:                 #009688;
+  --bs-secondary:               #f7f7f7;
+  --bs-primary-rgb:             rgb(0, 150, 136);       // Color/Background-Color for links, Save-, Selectbuttons 
+  --bs-nav-link-color:          var(--bs-primary); 
+  --bs-link-color:              var(--bs-primary);
+  --bs-link-color-rgb:          0, 150, 136;
+  --bs-secondary-rgb:           247,247,247;
+  --bs-primary-bg-subtle:       #cceae7;
+  .bg-primary {
+    background:                       var(--bs-primary-rgb) !important;
+  }
+  --bs-success:                 #009688;
+  --bs-form-check-bg:           var(--bs-primary);
+  --bs-info:                    #b2dfdb;
+  --bs-warning:                 #ffc107;
+  --bs-danger:                  #ff5722;
+  --bs-light:                   #BDBDBD;
+  --bs-dark:                    #455A64;
+  --bs-dark-rgb:                69,90,100;
+  --bs-dropdown-link-hover-bg:  var(--bs-dark) !important;
+  --bs-progress-bg:             var(--bs-secondary);
+  --ap-card-bg-color-left-top:    #c6d9e4;    // 1. gradient color for allProjectsCard
+  --ap-card-bg-color-center:      #c9e6e4;       // 2. gradient color for allProjectsCard
+  // $ap-card-bg-color-bottom-right:         #23937e;       // 3. gradient color for allProjectsCard
+  --ap-card-bg-color-bottom-right:#21917d;       // 3. gradient color for allProjectsCard
+    .form-check-input {
+        background-color:       var(--bs-secondary) !important;
+        border-color:           var(--bs-light) !important;
+    }
+    .form-check-input:checked {
+        border-color:           var(--bs-primary);
+        background-color:       var(--bs-primary) !important;
+    }
+  .is-light-theme {
+    color:                white;
+  }
+  th.holiday {                                            // Week Holiday 
+    color:                #455A64!important;
+    background-color:     #f7f7f7;
+    font-weight:          bolder;
+    text-decoration:      underline;
+    font-style:           italic;
+  }
+  table.table.table-sm.mb-0 {                             // Update Bootstrap fixed 
+    --bs-table-bg:        #f7f7f7;
+  }
+  select#language, select#theme, 
+  select#holidayCountry, select#holidayState,
+  select#holidayRegion, select#timetrackview {            // Settings Bootstrap fixed
+    background:           white !important;
+  }
+  svg.svg-inline--fa.fa-circle-user {                     // Icon NavbarProfile
+    margin-right: 4px;
+  }
+  svg.svg-inline--fa.fa-circle-info {                
+    margin-right: 4px;
+  }
+  svg.svg-inline--fa.fa-arrow-right-from-bracket {
+    margin-right: 4px;
+  }
+  svg.svg-inline--fa.fa-box-archive {                     // Icon Overview Dropdown
+    margin-right: 10px;
+  }
+  svg.svg-inline--fa.fa-link {
+    margin-right: 6px;
+  }
+  svg.rounded {                                           // User Foto 
+    opacity: 0.7;
+    transition:           opacity 0.3s ease;
+  }
+  svg.rounded:hover {                                     
+      opacity:                  1;
+      cursor:             pointer;
+  }
+  .card-header.js-toggle-timecards {                      //  Time tracked table
+    color:                var(--bs-primary) !important;
+    font-weight:          bold;
+  }
+  svg.svg-inline--fa.fa-chevron-down.float-end {          //  Icon Time tracked table
+    color:                var(--bs-primary) !important;
+  }
+  .css-progresspopup .progress.w-100 {                     //  Progress-bar
+    --bs-progress-height: 1.3rem !important;
+  }
+  small.text-nowrap {                                     //  Progress percent
+      font-size:          small;
+  }
+  .btn-primary {
+      color:              #fff !important;
+      background-color:   #009688 !important;
+      border-color:       #009688 !important; 
+  }
+  .btn-primary:hover {
+      color:              #fff!important;
+      background-color:   #006e63!important; 
+      border-color:       #006e63!important;
+  }
+  .btn-secondary {
+      color:              #000 !important;
+      background-color:   #ffffff !important;
+//      border-color:       #006e63!important; 
+  }
+  .btn-secondary:hover {
+      color:              #fff !important;
+      background-color:   #009688 !important;
+  }
+  button#addNewMember {      
+    color:                #fff !important;
+    background-color:     #009688 !important;
+  }
+  button#addNewMember:hover{
+    color:                #fff !important;
+    background-color:     #006e63 !important;
+  }
+  .list-group-item {
+    color:                #495057;
+  }
+  .tab-borders {
+    background-color:     var(--bs-secondary);
+    border-left:          1px solid #dee2e6;
+    border-right:         1px solid #dee2e6;
+    border-bottom:        1px solid #dee2e6;
+  }
+  // .form-select {
+  //   background:           $secondary !important;
+  // }
+  .all-projects-bg {                                                     // Schatten 
+    background-image:      linear-gradient(to right bottom, var(--ap-card-bg-color-left-top), var(--ap-card-bg-color-center), var(--ap-card-bg-color-bottom-right)) !important;
+  }
+  .fc-unthemed td.fc-today {
+    background:           rgba(0, 150, 136, 0.5) !important;
+  }
+  .fc-bg-event {
+    background-color:     #d1d1d1 !important;
+    color:                #636363 !important;
+    opacity: 1 !important;
+  }
+  .alert-secondary {
+      color:              #7b7b7b;
+      background-color:   #ffffff;
+      border-color:       #e8e8e8;
+  }
+  .btn-outline-secondary {
+    border-color:         #ced4da !important;
+    color:                #212529 !important;
+  }
+  .btn-outline-secondary:hover{
+    background-color:     #ececec !important;
+  }
+  .fc-button-primary{
+      color:              #000000 !important; 
+      background-color:   var(--bs-secondary) !important; 
+      border-color:       var(--bs-light) !important;
+  }
+  button.fc-today-button.fc-button.fc-button-primary {
+    color:                #fff !important;
+    background-color:     #009688 !important;
+    font-weight:             400;
+  }
+  .fc-button-primary:hover {
+      color:               #000000 !important;
+      background-color:    #eee !important;
+      border-color:        var(--bs-light) !important; 
+  }
+  .datatable {
+      --dt-border-color:     #d1d8dd;
+      --dt-light-bg:         #f5f7fa;
+      --dt-text-color:       #000000;
+      --dt-text-light:       #dfe2e5;
+      --dt-cell-bg:          #fff;
+      --dt-focus-border-width: 1px;
+      --dt-selection-highlight-color:   var(--dt-light-yellow);
+      --dt-toast-message-border:        none;
+      --dt-header-cell-bg:              var(--dt-cell-bg);
+  }
+  svg.svg-inline--fa.fa-pen-to-square {
+    margin-right: 10px;
+  }
+  .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color:                    #495057;
+    background-color:         #fff;
+    border-color:             #dee2e6 #dee2e6 #fff;
+    
+  }
+  .fc-theme-standard td, .fc-theme-standard th {
+    background-color:         #ffffff !important;
+  }
+  .fc-daygrid-day-frame:hover {
+    background-color:         #f8f8f8 !important;
+  }
+  .nav-tabs {
+    border-bottom:  0px solid #dee2e6 !important;
+  }
+  .dt-scrollable {
+      //border-top: 0px solid #d1d8dd;
+      border-top:   0px solid var(--dt-border-color) !important;
+  }
+  .dt-scrollable__no-data {
+  border: 0px !important;
+  }
+  .nav-tabs .nav-link:hover {
+    color:                    #495057;
+    background-color:         #fff;
+    border-color:             #dee2e6 #dee2e6 #fff;
+  }
+  .drag.card {
+    background-color:         var(--bs-secondary);  
+  }
+  span.d-inline-block.align-middle {
+    padding-right: 6px;
+  }
+  .row.d-print-none {
+    margin-right:        calc(-.3 * var(--bs-gutter-x));
+  }
+  .card-header-filter{
+    padding:                    var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x); 
+    background-color:           var(--bs-card-cap-bg);
+    border-bottom:              var(--bs-card-border-width) solid var(--bs-card-border-color);
+    --bs-card-border-radius:    0.375rem;
+    border-top-right-radius:    0.300rem;
+    border-top-left-radius:     0.300rem;
+    //border-bottom-color: $primary !important;
+    
+  }
+  .card-block .list-group-item {
+    background-color:           var(--bs-secondary);
+  }
+  .at-link {
+    color:                      var(--bs-dark);
+  }
+  .dp-current {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-cal-month:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-cal-year:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-day:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-day:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-prev:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-next:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-today:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-clear:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp-close:hover {
+    background-color:           var(--bs-primary) !important;
+  }
+  .dp:before {
+    background:                 var(--bs-primary) !important;
+  }
+  g>text {
+    fill:                       #212529;
+  }
+  #period {
+    background-color:           white !important;
+  }
+  .tab-borders {
+      background-color:       #f7f7f7 !important;
+      border-left:            1px solid #dee2e6 !important;
+      border-right:           1px solid #dee2e6 !important;
+      border-bottom:          1px solid #dee2e6 !important;
+      border-top:             1px solid #dee2e6 !important;
+      border-top-right-radius:            0.25rem !important;
+      border-bottom-right-radius:         0.25rem !important;
+      border-bottom-left-radius:          0.25rem !important;
+  }
 }

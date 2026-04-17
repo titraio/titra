@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import duration from 'dayjs/plugin/duration'
-import bootstrap from 'bootstrap'
+import { Modal, Popover } from 'bootstrap'
 import TinyDatePicker from 'tiny-date-picker'
 import 'tiny-date-picker/tiny-date-picker.css'
 import { t, weekDaysMin, months } from '../../../utils/i18n.js'
@@ -316,9 +316,9 @@ Template.tracktime.events({
   'click .js-time-row': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.$('.js-time-row').each((index, element) => {
-      bootstrap.Popover.getInstance(element)?.hide()
+      Popover.getInstance(element)?.hide()
     })
-    const timerowpopover = bootstrap.Popover
+    const timerowpopover = Popover
       .getOrCreateInstance(templateInstance.$(event.currentTarget), {
         trigger: 'manual',
         container: templateInstance.$('form'),
@@ -334,7 +334,7 @@ Template.tracktime.events({
   'click .js-delete-time-entry': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.$('.js-time-row').each((index, element) => {
-      bootstrap.Popover.getInstance(element)?.hide()
+      Popover.getInstance(element)?.hide()
     })
     const timecardId = event.currentTarget.href.split('/').pop()
     Meteor.call('deleteTimeCard', { timecardId }, (error) => {
@@ -384,10 +384,10 @@ Template.tracktime.events({
   'click .js-edit-time-entry': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.$('.js-time-row').each((index, element) => {
-      bootstrap.Popover.getInstance(element)?.hide()
+      Popover.getInstance(element)?.hide()
     })
     templateInstance.edittcid.set(event.currentTarget.href.split('/').pop())
-    new bootstrap.Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
     $('#edit-tc-entry-modal').on('hidden.bs.modal', () => {
       templateInstance.edittcid.set(undefined)
     })

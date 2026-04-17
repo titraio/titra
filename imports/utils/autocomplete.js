@@ -1,4 +1,4 @@
-import * as bootstrap from 'bootstrap'
+import { Dropdown } from 'bootstrap'
 import { emojify } from './frontend_helpers'
 
 const DEFAULTS = {
@@ -27,7 +27,7 @@ class Autocomplete {
 
     insertAfter(dropdown, field)
 
-    this.dropdown = new bootstrap.Dropdown(field, this.options.dropdownOptions)
+    this.dropdown = new Dropdown(field, this.options.dropdownOptions)
     field.addEventListener('click', (e) => {
       if (this.createItems() === 0) {
         e.stopPropagation()

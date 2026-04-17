@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { saveAs } from 'file-saver'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
-import { NullXlsx } from '@neovici/nullxlsx'
+import { NullXlsx } from '@neovici/nullxlsx/src/nullxlsx.js'
 import { i18nReady, t } from '../../../../utils/i18n.js'
 import {
   addToolTipToTableCell,

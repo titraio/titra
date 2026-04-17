@@ -1,4 +1,4 @@
-import bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { t } from '../../utils/i18n.js'
 
 class BsDialogs {
@@ -126,7 +126,7 @@ class BsDialogs {
       btnEl.dataset.ret = button[2]
       this._modal_footer.appendChild(btnEl)
     }
-    this._modal_bs = new bootstrap.Modal(this._modal_div, this._bs_options)
+    this._modal_bs = new Modal(this._modal_div, this._bs_options)
     this._modal_bs.show()
     return new Promise((resolve, reject) => {
       for (const button of this._modal_div.querySelectorAll('button[data-ret]')) {
@@ -160,7 +160,7 @@ class BsDialogs {
   form(header, okBtnText, form) {
     this._modal_header.innerHTML = header
     this._modal_body.innerHTML = form
-    this._modal_bs = new bootstrap.Modal(this._modal_div, this._bs_options)
+    this._modal_bs = new Modal(this._modal_div, this._bs_options)
     this._form_el = this._modal_body.querySelector('form')
     //
     const submitBtn = document.createElement('button')

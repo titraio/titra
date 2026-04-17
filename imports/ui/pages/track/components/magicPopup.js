@@ -1,7 +1,7 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import dayjs from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
-import bootstrap from 'bootstrap'
+import { Popover } from 'bootstrap'
 import './magicPopup.html'
 import './projectsearch.js'
 import { t } from '../../../../utils/i18n.js'
@@ -92,7 +92,7 @@ Template.magicPopup.events({
   },
   'mouseover .js-origin-icon': (event) => {
     const element = event.currentTarget
-    bootstrap.Popover.getOrCreateInstance(element)
+    Popover.getOrCreateInstance(element)
   },
   'click .js-save': (event, templateInstance) => {
     event.preventDefault()

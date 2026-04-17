@@ -30,14 +30,17 @@
     "time_entry": "Entrée de temps",
     "class": "Classe",
     "type": "Type",
-	  "yes": "Oui",
+    "yes": "Oui",
     "no": "Non",
     "cancel": "Annuler",
     "ok": "Ok",
-    "definition": "Definition",
+    "definition": "Définition",
     "user": "Utilisateur",
     "global_setting": "Réglage général",
-    "status": "Statut"
+    "status": "Statut",
+    "password": "Mot de passe",
+    "actions": "Actions",
+    "id": "ID"
   },
   "navigation": {
     "track": "Suivi",
@@ -65,7 +68,9 @@
     "nextWeek": "Semaine suivante",
     "newLine": "Nouvelle ligne",
     "cancel": "Annuler",
-    "saving": "Sauvegarde ..."
+    "saving": "Sauvegarde ...",
+    "dashboard": "Tableaux de bord",
+    "timeUnit_message": "Définition de l'unité de temps pour vos tâches"
   },
   "tracktime": {
     "no_time": "Aucun temps suivi pour le moment.",
@@ -79,7 +84,8 @@
     "start_time": "Arrêter le chronomètre",
     "timer": "chronomètre",
     "user_placeholder": "Saisir ou rechercher un utilisateur...",
-    "timeline": "Chronologie"
+    "timeline": "Chronologie",
+    "timerMessage": "En utilisant un chronomètre, vous pouvez enregistrer le temps consacré à une tâche spécifique"
   },
   "overview": {
     "all_projects": "Tous les projets",
@@ -94,7 +100,12 @@
     "target": "Cible: ",
     "turnover": "Chiffre d'affaires",
     "number_projects": "Nombre de projets",
-    "summary": "Résumé"
+    "summary": "Résumé",
+    "properties": "Propriétés",
+    "percentage": "Progression du projet",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "duration": "Durée du projet"
   },
   "project": {
     "title": "Editer le projet",
@@ -104,13 +115,13 @@
     "default_rate": "Taux de défaut",
     "target": "Cible",
     "wekan_integration": "Intégration Wekan",
-    "wekan_help": "Besoin d'aide avec l'installation ? Consultez le Titra ",
-    "wekan_list": "Listes Wekan list(s) utilisées pour le suivi temps",
-    "wekan_swimlane": "Couloirs Wekan swimlane(s) utilisées pour le suivi temps",
+    "wekan_help": "Besoin d'aide pour la configuration ? Consultez le titra",
+    "wekan_list": "Listes Wekan utilisées pour le suivi du temps",
+    "wekan_swimlane": "Couloirs Wekan utilisés pour le suivi du temps",
     "access_rights": "Droits d'accès",
     "check": "Vérifier",
     "add": "Ajouter",
-    "access_rights_placeholder": "Courriels des membres d'équipe à ajouter",
+    "access_rights_placeholder": "Adresse e-mail du membre d'équipe à ajouter",
     "public_project": "Projet public (visible pour tous les utilisateurs)",
     "owner": "Propriétaire",
     "project_placeholder": "Sélectionner un projet",
@@ -119,9 +130,9 @@
     "billing_budget": "Facturation & Budget",
     "default_task": "Tâche par défaut",
     "default_task_help": "Cette valeur sera utilisée comme tâche par défaut lors du suivi du temps sur ce projet.",
-    "gitlab_integration": "Intégration de GitLab",
-    "gitlab_query": "Paramètre de la requête",
-    "gitlab_help": "Vous pouvez utiliser tous les paramètres de requête disponibles dans l'API GitLab Issues, par exemple",
+    "gitlab_integration": "Intégration GitLab",
+    "gitlab_query": "Paramètre de requête",
+    "gitlab_help": "Vous pouvez utiliser tous les paramètres de requête disponibles dans les API GitLab Issues",
     "import": "Importer",
     "importCSV": {
       "expectedFormatTitle": "Formato CSV Esperado",
@@ -137,7 +148,7 @@
       "dateExample": "2025-04-07, 2025-04-07T14:30:00.000Z",
       "expectedFormatHours": "Horas",
       "hoursDescription": "El número de horas trabajadas (numérico).",
-      "hoursExample": "8, 4.5",
+      "hoursExample": "8, 4,5",
       "title": "Importer des données CSV",
       "chooseFile": "Choisir un fichier",
       "removeFile.title": "Supprimer le fichier",
@@ -156,7 +167,10 @@
       "errorsNoFileSelected": "Veuillez sélectionner un fichier à télécharger.",
       "errorsFileReadFailed": "Échec de la lecture du fichier.",
       "errorsImportFailed": "Impossible d'importer les données.",
-      "generalNoData": "Aucune donnée à afficher."
+      "generalNoData": "Aucune donnée à afficher.",
+      "removeFile": {
+        "title": null
+      }
     }
   },
   "settings": {
@@ -168,7 +182,7 @@
     "zh": "Chinois",
     "ru": "Russe",
     "ukr": "Ukrainien",
-	  "es": "Espagnol",
+    "es": "Espagnol",
     "user_interface": "Interface utilisateur",
     "theme": "Thème",
     "auto_detect": "Détection automatique",
@@ -184,7 +198,7 @@
     "integrations": "Intégrations",
     "enable_wekan_integration": "Activer l'intégration Wekan?",
     "siwapp_url": "URL Siwapp",
-    "siwapp_api_token": "Clef d'API Siwapp",
+    "siwapp_api_token": "Jeton API Siwapp",
     "titra_changelog": "changelog de Titra",
     "titra_changelog_error": "Impossible de récupérer le changelog depuis Github.",
     "daily_start_time": "Démarrage journalier de l'heure de travail",
@@ -249,9 +263,9 @@
     "rounding": "Arrondi",
     "rounding_tooltip": "Le temps suivi sera arrondi en fonction de l'unité de temps sélectionnée et de la valeur d'arrondi spécifiée, par exemple l'unité de temps minutes et la valeur d'arrondi 15 arrondiront au quart d'heure supérieur (entrée 5 minutes > résultat après arrondi à 15 minutes).",
     "enable_siwapp": "Activer l'intégration Siwapp ?",
-    "google_clientid": "Google Workspace Client ID",
-    "google_secret": "Google Workspace Client Secret",
-    "openai": "Open AI API Key",
+    "google_clientid": "ID de Client Google Workspace",
+    "google_secret": "Secret de Client Google Workspace",
+    "openai": "Clé API Open AI",
     "show_resource_in_details": "Afficher/exporter le champ ressource dans la vue détaillée ?",
     "allow_individual_task_rates": "Autoriser des taux de tâche individuels?",
     "show_rate_in_details": "Afficher/exporter le champ taux dans la vue détaillée ?",
@@ -263,7 +277,10 @@
     "user_action_verification_period": "Période de vérification d'action utilisateur (jours)",
     "user_action_verification_service_url": "URL du service de vérification d'action utilisateur",
     "user_action_verification_url_param": "Nom du paramètre URL de vérification d'action utilisateur",
-    "user_action_verification_type": "Type de vérification d'action utilisateur"
+    "user_action_verification_type": "Type de vérification d'action utilisateur",
+    "userInterface_settings": "Paramètres d'interface utilisateur",
+    "custom_logo": "Logo personnalisé (URL ou URI de données)",
+    "enable_googleapi": "Activer l'intégration Google Workspace?"
   },
   "verification": {
     "overdue_title": "Action requise - En retard",
@@ -335,7 +352,8 @@
     "duration": "Durée",
     "dependencies": "Dépendances",
     "newTask": "Nouvelle tâche",
-    "editTask": "Modifier la tâche"
+    "editTask": "Modifier la tâche",
+    "addTask": "Add task"
   },
   "details": {
     "filter": "Filtre",
@@ -357,7 +375,7 @@
     "billed": "Facturé",
     "notBillable": "Non-facturable",
     "charts": "Graphiques",
-	  "markAsBilled": "Marquer comme facturé",
+    "markAsBilled": "Marquer comme facturé",
     "quickFilter": "Filtre rapide"
   },
   "dashboard": {
@@ -366,30 +384,53 @@
     "security_notice": "Ce dashboard est accessible à tous sur le web par ce lien.",
     "time_per_date": "Temps par date",
     "time_distribution_task": "Temps par tâche",
-    "detailed_working_time": "Temps de travail détaillé"
+    "detailed_working_time": "Temps de travail détaillé",
+    "plural": "Tableaux de bord",
+    "shareMessage": "You have the opportunity to create a sharable link for a project dashboard",
+    "create": "Créer",
+    "edit": "Modifier",
+    "no_dashboards": "Aucun tableau de bord créé",
+    "password_set": "Protégé par mot de passe",
+    "no_password": "Pas de mot de passe",
+    "url": "URL",
+    "customUrl": "URL personnalisée",
+    "slugAvailable": "Cette URL est disponible ✓",
+    "slugTaken": "Cette URL est déjà utilisée ✗",
+    "slugSanitized": "⚠️ Votre slug a été automatiquement assaini",
+    "noPasswordWarning": "⚠️ Sans mot de passe, n'importe qui avec le lien peut accéder au tableau de bord",
+    "clearFilters": "Effacer les filtres",
+    "id": "ID du tableau de bord",
+    "noDashboardsAvailable": "Aucun tableau de bord disponible",
+    "editCustomerDashboard": "Modifier le tableau de bord client",
+    "removeDashboardFailed": "Impossible de supprimer le tableau de bord",
+    "removedSuccessfully": "Tableau de bord supprimé avec succès",
+    "updatedSuccessfully": "Tableau de bord mis à jour avec succès",
+    "createdSuccessfully": "Tableau de bord créé avec succès",
+    "updateFailed": "Échec de la mise à jour du tableau de bord",
+    "createFailed": "Échec de la création du tableau de bord"
   },
   "tabular": {
-  	"sEmptyTable":     "Pas de données disponibles",
-  	"sInfo":           "Affiche de _START_ à _END_ sur un total de _TOTAL_ entrées",
-  	"sInfoEmpty":      "Affiche 0 à 0 sur 0 entrées",
-  	"sInfoFiltered":   "(filtré d'un total de _MAX_ entrées)",
-  	"sInfoPostFix":    "",
-  	"sInfoThousands":  ",",
-  	"sLengthMenu":     "Voir entrée _MENU_",
-  	"sLoadingRecords": "Chargement...",
-  	"sProcessing":     "Traitement...",
-  	"sSearch":         "Recherche:",
-  	"sZeroRecords":    "Aucun résultat trouvé",
-  	"oPaginate": {
-  		"sFirst":    "Première",
-  		"sLast":     "Dernière",
-  		"sNext":     "Suivante",
-  		"sPrevious": "Précédente"
-  	},
-  	"oAria": {
-  		"sSortAscending":  ": activer pour un tri ascendant de la colonne",
-  		"sSortDescending": ": activer pour un tri descendant de la colonne"
-  	}
+    "sEmptyTable": "Pas de données disponibles",
+    "sInfo": "Affiche de _START_ à _END_ sur un total de _TOTAL_ entrées",
+    "sInfoEmpty": "Affiche 0 à 0 sur 0 entrées",
+    "sInfoFiltered": "(filtré d'un total de _MAX_ entrées)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ",",
+    "sLengthMenu": "Voir entrée _MENU_",
+    "sLoadingRecords": "Chargement...",
+    "sProcessing": "Traitement...",
+    "sSearch": "Recherche:",
+    "sZeroRecords": "Aucun résultat trouvé",
+    "oPaginate": {
+      "sFirst": "Première",
+      "sLast": "Dernière",
+      "sNext": "Suivante",
+      "sPrevious": "Précédente"
+    },
+    "oAria": {
+      "sSortAscending": ": activer pour un tri ascendant de la colonne",
+      "sSortDescending": ": activer pour un tri descendant de la colonne"
+    }
   },
   "notifications": {
     "sanity": "Désolé, mais pour votre propre sécurité, vous ne pouvez pas partager tous les temps de tous les projets. Merci de sélectionner un seul projet à partager.",
@@ -431,9 +472,11 @@
     "user_inactive": "Cet utilisateur a été désactivé, veuillez l'activer pour continuer.",
     "extensionAlreadyLaunched": "L'extension est déjà en cours d'exécution.",
     "no_entry_selected": "Aucune entrée sélectionnée. Veuillez sélectionner au moins une entrée pour continuer.",
-    "unknown_error" : "Une erreur inconnue s'est produite. Veuillez réessayer."
+    "unknown_error": "Une erreur inconnue s'est produite. Veuillez réessayer."
   },
   "login": {
+    "400": "Connexion échouée, veuillez réessayer.",
+    "403": "Connexion échouée, vérifiez vos identifiants.",
     "password": "Mot de passe",
     "forgot_password": "Mot de passe oublié?",
     "no_account": "Pas de compte?",
@@ -446,8 +489,6 @@
     "create_account": "Créer un compte",
     "password_again": "Mot de passe (encore)",
     "already_have_account": "Si vous avez déjà un compte - ",
-    "403": "Connexion échouée, vérifiez vos identifiants.",
-    "400": "Connexion échouée, veuillez réessayer.",
     "reset_password_mail": "Nous vous avons envoyé un courriel avec les instructions pour réinitialiser votre mot de passe. Veuillez vérifier votre boîte de réception.",
     "change_password": "Changement de mot de passe",
     "current_password": "Mot de passe actuel",
@@ -503,8 +544,8 @@
     "extension_removed": "L'extension a été supprimée avec succès.",
     "edit_custom_field": "Modifier un champ personnalisé",
     "oidc": "OpenID Connect",
-    "oidc_configure": "Vous devrez créer une configuration client OpenID Connect avec votre fournisseur. Définissez les URL de rappel d'application sur",
-    "custom_field_name_hint": "Les espaces et les caractères spéciaux ne sont pas autorisés.",
+    "oidc_configure": "Vous devez créer une configuration de client OpenID Connect avec votre fournisseur. Définissez les URL des rappels d'application sur",
+    "custom_field_name_hint": "Les espaces et caractères spéciaux ne sont pas autorisés.",
     "inboundinterfaces": "Interfaces entrantes",
     "outboundinterfaces": "Interfaces sortantes",
     "create_edit_interface": "Créer ou modifier l'interface",
@@ -546,5 +587,12 @@
     "authorize_now": "Autoriser maintenant",
     "save_selected": "Enregistrer les entrées de temps sélectionnées",
     "origin": "Origine"
+  },
+  "weektable": {
+    "sumProject_message": "The sum per project",
+    "sum_per_day": "The sum per day"
+  },
+  "notification": {
+    "only_administrator_can_register_time": "Seuls les administrateurs peuvent enregistrer l'heure d'un autre utilisateur."
   }
 }

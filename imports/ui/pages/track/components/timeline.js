@@ -2,7 +2,7 @@ import './timeline.html'
 import './editTimeEntryModal.js'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import bootstrap from 'bootstrap'
+import { Modal } from 'bootstrap'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import Projects from '../../../../api/projects/projects'
 import Timecards from '../../../../api/timecards/timecards'
@@ -123,20 +123,20 @@ Template.timeline.events({
     templateInstance.selectedDate.set(event.currentTarget.dataset.date)
     templateInstance.selectedProjectId.set()
     templateInstance.tcid.set()
-    new bootstrap.Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
   },
   'click .js-edit-time-entry': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.tcid.set(event.currentTarget.dataset.tcid)
     templateInstance.selectedDate.set()
     templateInstance.selectedProjectId.set()
-    new bootstrap.Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
   },
   'click .js-add-time-entry-project': (event, templateInstance) => {
     event.preventDefault()
     templateInstance.selectedDate.set(event.currentTarget.dataset.date)
     templateInstance.selectedProjectId.set(event.currentTarget.dataset.projectid)
     templateInstance.tcid.set()
-    new bootstrap.Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
+    new Modal(templateInstance.$('#edit-tc-entry-modal')[0], { focus: false }).show()
   },
 })

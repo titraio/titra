@@ -145,9 +145,9 @@ Template.dashboardModal.events({
         : templateInstance.data.projectId, timePeriod: period, startDate, endDate, password, slug,
     }, (error, _id) => {
       if (error) {
-        showErrorToast(t('notifications.dashboard_creation_failed') + '\n' + error.reason)
+        showErrorToast(t('dashboard.createFailed') + '\n' + error.reason)
       } else {
-        showToast('Dashboard created successfully')
+        showToast(t('dashboard.createdSuccessfully'))
         templateInstance.dashboardId.set({ _id, slug })
       }
     })
@@ -174,9 +174,9 @@ Template.dashboardModal.events({
       password,
     }, (err) => {
       if (err) {
-        showErrorToast('Failed to update dashboard: ' + (err.reason || 'Unknown error'))
+        showErrorToast(t('dashboard.updateFailed') + ': ' + (err.reason || t('notifications.unknown_error')))
       } else {
-        showToast('Dashboard updated successfully')
+        showToast(t('dashboard.updatedSuccessfully'))
         bootstrap.Modal.getInstance(templateInstance.$('.js-dashboard-modal')[0])?.hide()
       }
     })
