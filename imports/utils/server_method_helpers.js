@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import Projects from '../api/projects/projects.js'
+import { Dashboards } from '../api/dashboards/dashboards.js'
 import Transactions from '../api/transactions/transactions.js'
 import { periodToDates } from './periodHelpers.js'
 import { Globalsettings } from '../api/globalsettings/globalsettings.js'
@@ -12,10 +13,42 @@ async function getGlobalSettingAsync(name) {
   return globalSetting ? globalSetting.value : false
 }
 
+async function assertCanModifyDashboard (userId, dashboardId) {
+
+  const meteorUser = await Meteor.users.findOneAsync({ _id: userId })
+  if (!userId || meteorUser?.inactive) {
+    throw new Meteor.Error('notifications.auth_error_method')
+  } else if (meteorUser && meteorUser.isAdmin) {
+    // Admins can do anything
+    return;
+  }
+
+
+  const dashboard = await Dashboards.findOneAsync(dashboardId);
+  if (!dashboard) {
+    throw new Meteor.Error('not-found', 'Dashboard not found');
+  }
+
+  const project = await Projects.findOneAsync(dashboard.projectId);
+  if (!project) {
+    throw new Meteor.Error('not-found', 'Project not found');
+  }
+
+  const isOwner = project.userId === userId;
+  const isTeamMember = Array.isArray(project.team) && project.team.includes(userId);
+
+  if (!isOwner && !isTeamMember) {
+    throw new Meteor.Error(
+      'not-authorized',
+      'You do not have permission to modify this dashboard'
+    );
+  }
+};
+
 async function getDefaultVerificationSettingsAsync() {
   // Get default verification settings from the first active webhook
   const firstWebhook = await WebhookVerification.findOneAsync({ active: true })
-  
+
   if (!firstWebhook) {
     return {
       verificationPeriod: 30,
@@ -25,7 +58,7 @@ async function getDefaultVerificationSettingsAsync() {
       webhookInterfaceId: null,
     }
   }
-  
+
   return {
     verificationPeriod: firstWebhook.verificationPeriod || 30,
     serviceUrl: firstWebhook.serviceUrl || '',
@@ -181,7 +214,7 @@ function getProjectListByCustomer(customer) {
  * This function is designed to be used with MongoDB collections to aggregate and convert hours worked on projects
  * into a decimal format for easier calculations. It is particularly useful for generating reports or summaries
  * of work done over a specific period.
- * 
+ *
  * @param {string} projectId - The ID of the project to calculate hours for. This parameter can be used to filter
  *                             the aggregation to a specific project.
  * @param {string} period - The time period for which to calculate total hours. This parameter is expected to
@@ -198,15 +231,15 @@ function getProjectListByCustomer(customer) {
  *                         used to paginate the results.
  * @param {number} page - The page number of results to return, based on the limit. This parameter can be used in
  *                        conjunction with `limit` to paginate the results.
- * 
+ *
  * @returns {Array} projectList - An array that is intended to be populated with the results of the aggregation.
  *                                The initial value is an empty array, and the function does not directly populate
  *                                it within the provided code snippet.
- * 
+ *
  * @returns {Object} matchSelector - An object that is intended to be used as a MongoDB match filter in the
  *                                   aggregation pipeline. The initial value is an empty object, and the function
  *                                   does not directly populate it within the provided code snippet.
- * 
+ *
  * @returns {Object} addFields - A MongoDB aggregation pipeline stage that adds a new field `convertedHours` to
  *                               each document. This field contains the value of the `hours` field converted to
  *                               a decimal format. This stage is ready to be included in an aggregation pipeline.
@@ -740,6 +773,7 @@ export {
   buildworkingTimeSelectorAsync,
   buildDetailedTimeEntriesForPeriodSelectorAsync,
   getGlobalSettingAsync,
+  assertCanModifyDashboard,
   getUserSettingAsync,
   getDefaultVerificationSettingsAsync,
   calculateSimilarity,

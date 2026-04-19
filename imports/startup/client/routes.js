@@ -24,9 +24,9 @@ if (!Meteor.settings.public.sandstorm) {
 // FlowRouter.decodeQueryParamsOnce = true;
 
 FlowRouter.route('*', {
-  action: () => {
-    this.render('appLayout', '404')
-  },
+  action() {
+    this.render('appLayout', '404');
+  }
 })
 FlowRouter.route('/', {
   waitOn() {
@@ -98,6 +98,18 @@ FlowRouter.route('/list/timecards/:projectId', {
   },
   name: 'timecards',
 })
+
+FlowRouter.route('/list/dashboards', {
+  waitOn() {
+    return import('../../ui/pages/dashboard/dashboardList.js')
+  },
+  action() {
+    document.title = 'titra - Customer Dashboard'
+    this.render('appLayout', 'dashboardList')
+  },
+  name: 'dashboardlist',
+})
+
 FlowRouter.route('/settings', {
   waitOn() {
     return import('../../ui/pages/settings.js')

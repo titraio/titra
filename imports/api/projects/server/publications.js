@@ -11,7 +11,7 @@ import { checkAuthentication, getGlobalSettingAsync } from '../../../utils/serve
  * @param {Number} projectLimit - The number of projects to return.
  * @returns {Array} - The list of projects for the current user.
  */
-Meteor.publish('myprojects', async function myProjects({ projectLimit }) {
+Meteor.publish('myprojects', async function myProjects({ projectLimit } = {}) {
   if(this.userId) {
     await checkAuthentication(this)
   } else {

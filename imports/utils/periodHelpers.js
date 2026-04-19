@@ -3,6 +3,7 @@ import utc from 'dayjs/plugin/utc'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import { getGlobalSetting, getUserSetting } from './frontend_helpers'
 import { getUserSettingAsync, getGlobalSettingAsync } from './server_method_helpers'
+import { t } from './i18n'
 
 async function periodToDates(period) {
   check(period, String)
@@ -50,6 +51,32 @@ async function periodToDates(period) {
   }
   return { startDate, endDate }
 }
+function periodToString(period) {
+  check(period, String)
+  switch (period) {
+    case 'currentMonth':
+      return t( "period.currentMonth");
+    case 'currentWeek' :
+      return t( "period.currentWeek" );
+    case 'currentYear' :
+      return t( "period.currentYear" );
+    case 'lastMonth'   :
+      return t( "period.lastMonth"   );
+    case 'last3months' :
+      return t( "period.last3months" );
+    case 'lastWeek'    :
+      return t( "period.lastWeek"    );
+    case 'lastYear'    :
+      return t( "period.lastYear"    );
+    case 'custom'      :
+      return t( "period.custom"      );
+    case 'all'         :
+      return t( "period.all"         );
+    default:
+      return 'N/A'
+  }
+}
+
 function timeInUserUnit(time, meteorUser) {
   const precision = meteorUser?.profile?.precision ? meteorUser.profile.precision : getGlobalSetting('precision')
   if (meteorUser?.profile?.timeunit === 'd') {
@@ -82,4 +109,4 @@ async function timeInUserUnitAsync(time, meteorUser) {
   }
   return Number(time).toFixed(precision)
 }
-export { periodToDates, timeInUserUnit, timeInUserUnitAsync }
+export { periodToString,periodToDates, timeInUserUnit, timeInUserUnitAsync }

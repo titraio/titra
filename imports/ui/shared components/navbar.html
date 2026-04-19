@@ -15,7 +15,9 @@
               <li class="nav-item"><a class="nav-link {{isRouteActive 'tracktime'}}" href="{{ prefix }}/tracktime"><i class="fa fa-plus"></i> {{#if displayLinkText 'tracktime'}}<span>{{t "navigation.track"}}</span>{{else}}<span class="d-none d-md-inline">{{t "navigation.track"}}</span>{{/if}}</a></li>
               <li class="nav-item"><a class="nav-link {{isRouteActive 'projectlist'}}" href="{{ prefix }}/list/projects"><i class="fa fa-chart-pie"></i> {{#if displayLinkText 'projectlist'}}<span>{{t "navigation.overview"}}</span>{{else}}<span class="d-none d-md-inline">{{t "navigation.overview"}}</span>{{/if}}</a></li>
               <li class="nav-item"><a class="nav-link {{isRouteActive 'timecards'}}" href="{{ prefix }}/list/timecards/all"><i class="fa fa-list"></i> {{#if displayLinkText 'timecards'}}<span>{{t "navigation.details"}}</span>{{else}}<span class="d-none d-md-inline">{{t "navigation.details"}}</span>{{/if}}</a></li>
-          </ul>
+              <li class="nav-item"><a class="nav-link {{isRouteActive 'dashboardlist'}}" href="{{ prefix }}/list/dashboards"><i class="fa fa-window-restore"></i> {{#if displayLinkText 'dashboardlist'}}<span>{{t "navigation.dashboard"}}</span>{{else}}<span class="d-none d-md-inline">{{t "navigation.dashboard"}}</span>{{/if}}</a></li>
+
+            </ul>
           <div class="nav-item me-2 d-none d-md-inline-block" style="width:130px;">
             {{#unless isRouteActive 'tracktime'}}
               {{#if getUserSetting 'timer'}}
