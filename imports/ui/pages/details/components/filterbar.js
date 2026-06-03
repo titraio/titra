@@ -9,9 +9,12 @@ import Customers from '../../../../api/customers/customers.js'
 Template.filterbar.onCreated(function filterbarCreated() {
   this.subscribe('myprojects', {})
   this.autorun(() => {
-    const projectId = FlowRouter.getParam('projectId').split(',').length > 1 ? FlowRouter.getParam('projectId').split(',') : FlowRouter.getParam('projectId')
-    this.subscribe('projectResources', { projectId })
-    this.subscribe('projectCustomers', { projectId })
+    const projectIdParam = FlowRouter.getParam('projectId')
+    if (projectIdParam) {
+      const projectId = projectIdParam.split(',').length > 1 ? projectIdParam.split(',') : projectIdParam
+      this.subscribe('projectResources', { projectId })
+      this.subscribe('projectCustomers', { projectId })
+    }
   })
 })
 Template.filterbar.onRendered(() => {

@@ -34,6 +34,11 @@ module.exports = defineConfig((Meteor) => ({
           },
         ],
       },
+      // Handle plain CSS files (e.g. tiny-date-picker.css)
+      {
+        test: /\.css$/i,
+        type: 'css/auto',
+      },
       {
         test: /\.m?js$/,
         resolve: {
@@ -45,7 +50,7 @@ module.exports = defineConfig((Meteor) => ({
   resolve: {
     // make sure webpack resolves the extensions we use and skip .d.ts
     // Added .scss and .sass here just to be safe
-    extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx', '.json', '.scss', '.sass'],
+    extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx', '.json', '.css', '.scss', '.sass'],
     extensionAlias: {
       '.js': ['.ts', '.js'],
     },

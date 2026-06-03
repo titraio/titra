@@ -144,112 +144,103 @@ Meteor.publish('adminUserList', async function adminUserList({ limit, search }) 
 
 /**
  * Publishes the users who tracked time on a project based on the provided project ID.
- * @param {String} projectId - The project ID.
+ * @param {String|Array} projectId - The project ID or list of project IDs.
  * @returns {Array} - The list of users that have time tracked for the project ID.
  */
 Meteor.publish('projectResources', async function projectResources({ projectId }) {
   check(projectId, Match.OneOf(String, Array))
   await checkAuthentication(this)
-  let userIds = []
-  let handle
-  let initializing = true
-  let uniqueUsers
-  if (projectId.includes('all')) {
-    let projectList = await Projects.find(
+
+  let resolvedProjectId = projectId
+  let selector = {}
+
+  // Resolve selector based on projectId type and value
+  if (resolvedProjectId instanceof Array && resolvedProjectId.includes('all')) {
+    resolvedProjectId = 'all'
+  }
+
+  if (resolvedProjectId === 'all') {
+    const projectList = await Projects.find(
       { $or: [{ userId: this.userId }, { public: true }, { team: this.userId }] },
       { _id: 1 },
     ).fetchAsync()
-    projectList = projectList.map((value) => value._id)
-    if (await Timecards.find({ projectId: { $in: projectList } }).countAsync() <= 0) {
-      return this.ready()
-    }
-    Timecards.find({ projectId: { $in: projectList } }).forEach((timecard) => {
-      userIds.push(timecard.userId)
-    })
-    handle = await Timecards.find({ projectId: { $in: projectList } }).observeChangesAsync({
-      added: async (_id) => {
-        if (!initializing) {
-          const newUserId = await Timecards.findOneAsync(_id).userId
-          if (!userIds.includes(newUserId)) {
-            userIds.push(newUserId)
-            let meteorUser = await Meteor.users
-              .findOneAsync({ _id: newUserId, inactive: { $ne: true } }, { profile: 1 })
-            meteorUser = meteorUser?.profile
-            if (meteorUser) {
-              this.added('projectResources', newUserId, meteorUser)
-            }
-          }
-        }
-      },
-      removed: async () => {
-        if (!initializing) {
-          userIds = []
-          Timecards.find({ projectId: { $in: projectList } }).forEach((timecard) => {
-            userIds.push(timecard.userId)
-          })
-          uniqueUsers = [...new Set(userIds)]
-          for (const userId of uniqueUsers) {
-            // eslint-disable-next-line no-await-in-loop
-            let meteorUser = await Meteor.users
-              .findOneAsync({ _id: userId, inactive: { $ne: true } }, { profile: 1 })
-            meteorUser = meteorUser?.profile
-            if (meteorUser) {
-              this.changed('projectResources', userId, meteorUser)
-            }
-          }
-        }
-      },
-      // don't care about changed
-    })
+    const projectIds = projectList.map((proj) => proj._id)
+    selector = { projectId: { $in: projectIds } }
+  } else if (resolvedProjectId instanceof Array) {
+    selector = { projectId: { $in: resolvedProjectId } }
   } else {
-    let selector = { projectId }
-    if (projectId instanceof Array) { selector = { projectId: { $in: projectId } } }
-    Timecards.find(selector).forEach((timecard) => {
-      userIds.push(timecard.userId)
-    })
-    handle = await Timecards.find(selector).observeChangesAsync({
-      added: async (_id) => {
-        let newUser = await Timecards.findOneAsync(_id)
-        if (!userIds.includes(newUser?.userId)) {
-          let meteorUser = await Meteor.users
-            .findOneAsync({ _id: newUser?.userId, inactive: { $ne: true } }, { profile: 1 })
-          meteorUser = meteorUser?.profile
-          if (meteorUser && newUser?.userId) {
-            userIds.push(newUser.userId)
-            this.added('projectResources', newUser.userId, newUser)
-          }
-        }
-      },
-      removed: () => {
-        if (!initializing) {
-          userIds = []
-          Timecards.find(selector).forEach((timecard) => {
-            userIds.push(timecard.userId)
-          })
-          uniqueUsers = [...new Set(userIds)]
-          uniqueUsers.forEach(async (userId) => {
-            let meteorUser = await Meteor.users
-              .findOneAsync({ _id: userId, inactive: { $ne: true } }, { profile: 1 })
-            meteorUser = meteorUser?.profile
-            if (meteorUser) {
-              this.changed('projectResources', userId, meteorUser)
-            }
-          })
-        }
-      },
-    })
+    selector = { projectId: resolvedProjectId }
   }
-  uniqueUsers = [...new Set(userIds)]
-  initializing = false
-  for (const userId of uniqueUsers) {
-    // eslint-disable-next-line no-await-in-loop
-    let meteorUser = await Meteor.users
-      .findOneAsync({ _id: userId, inactive: { $ne: true } }, { profile: 1 })
-    meteorUser = meteorUser?.profile
-    if (meteorUser) {
-      this.added('projectResources', userId, meteorUser)
+
+  let initializing = true
+  const publishedUserIds = new Set()
+
+  // Helper to publish a user's profile
+  const publishUser = async (userId) => {
+    if (!userId || publishedUserIds.has(userId)) {
+      return
+    }
+    const meteorUser = await Meteor.users.findOneAsync(
+      { _id: userId, inactive: { $ne: true } },
+      { profile: 1 },
+    )
+    if (meteorUser?.profile) {
+      this.added('projectResources', userId, meteorUser.profile)
+      publishedUserIds.add(userId)
     }
   }
+
+  // Get initial users
+  const timecardsCollection = await Timecards.find(selector).fetchAsync()
+  const uniqueUserIds = [...new Set(
+    timecardsCollection
+      .map((tc) => tc.userId)
+      .filter((id) => id),
+  )]
+
+  // Publish initial users
+  for (const userId of uniqueUserIds) {
+    // eslint-disable-next-line no-await-in-loop
+    await publishUser(userId)
+  }
+
+  // Observe for changes
+  const handle = await Timecards.find(selector).observeChangesAsync({
+    added: async (_id) => {
+      if (!initializing) {
+        const timecard = await Timecards.findOneAsync(_id)
+        if (timecard?.userId) {
+          await publishUser(timecard.userId)
+        }
+      }
+    },
+    removed: async () => {
+      if (!initializing) {
+        const currentTimecards = await Timecards.find(selector).fetchAsync()
+        const currentUserIds = new Set(
+          currentTimecards
+            .map((tc) => tc.userId)
+            .filter((id) => id),
+        )
+
+        // Remove users no longer in timecards
+        for (const userId of publishedUserIds) {
+          if (!currentUserIds.has(userId)) {
+            this.removed('projectResources', userId)
+            publishedUserIds.delete(userId)
+          }
+        }
+
+        // Add any new users
+        for (const userId of currentUserIds) {
+          // eslint-disable-next-line no-await-in-loop
+          await publishUser(userId)
+        }
+      }
+    },
+  })
+
+  initializing = false
   this.ready()
   this.onStop(() => {
     handle.stop()

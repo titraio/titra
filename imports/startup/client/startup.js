@@ -17,6 +17,11 @@ import {
 } from '../../utils/i18n.js'
 
 const i18nextDebugMode = window.location.href.indexOf('localhost') > 0
+
+// Load default language immediately on startup
+let language = navigator.language.substring(0, 2)
+loadLanguage(language, i18nextDebugMode)
+
 Template.registerHelper('t', (param, variables) => {
   // If variables is a Spacebars.kw object, extract .hash
   const vars = variables && variables.hash ? variables.hash : (variables || {})
@@ -30,7 +35,6 @@ Meteor.startup(() => {
   import('../../utils/google/google_client.js')
   window.BootstrapLoaded = new ReactiveVar(false)
   Meteor.subscribe('globalsettings')
-  let language = navigator.language.substring(0, 2)
   import('@fortawesome/fontawesome-free/js/all.js')
   import('bootstrap').then((bs) => {
     window.BootstrapLoaded.set(true)

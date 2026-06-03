@@ -1,12 +1,12 @@
 {
   "name": "titra",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "scripts": {
     "start": "meteor run"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.2",
+    "@babel/runtime": "^7.29.7",
     "@dashboardcode/bsmultiselect": "^1.1.18",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@fullcalendar/core": "6.1.20",
@@ -14,21 +14,21 @@
     "@fullcalendar/interaction": "6.1.20",
     "@neovici/nullxlsx": "^3.1.0",
     "@popperjs/core": "^2.11.8",
-    "@swc/helpers": "^0.5.21",
+    "@swc/helpers": "^0.5.23",
     "adm-zip": "^0.5.17",
     "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.8",
     "cl-editor": "^2.3.0",
-    "content-type": "^1.0.5",
-    "date-holidays": "^3.27.0",
-    "dayjs": "^1.11.20",
+    "content-type": "^2.0.0",
+    "date-holidays": "^3.30.2",
+    "dayjs": "^1.11.21",
     "dayjs-precise-range": "^1.0.1",
     "docker-names": "^1.2.1",
     "file-saver": "^2.0.5",
     "frappe-charts": "1.6.2",
-    "frappe-datatable": "^1.20.0",
+    "frappe-datatable": "^1.20.4",
     "frappe-gantt": "^0.6.1",
-    "hotkeys-js": "^4.0.3",
+    "hotkeys-js": "^4.0.4",
     "is-dark": "^1.0.4",
     "jquery": "4.0.0",
     "jquery-serializejson": "^3.2.1",
@@ -44,11 +44,11 @@
     "tiny-date-picker": "^3.2.8"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.28.6",
-    "@eslint/compat": "^2.0.5",
+    "@babel/eslint-parser": "^7.29.7",
+    "@eslint/compat": "^2.1.0",
     "@eslint/js": "^9.0.0",
     "@meteorjs/rspack": "^2.0.1",
-    "@rsdoctor/rspack-plugin": "^1.5.9",
+    "@rsdoctor/rspack-plugin": "^1.5.12",
     "@rspack/cli": "^1.7.11",
     "@rspack/core": "^1.7.11",
     "eslint": "^9.0.0",
@@ -58,12 +58,12 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-meteor": "^7.3.0",
     "ignore-loader": "^0.1.2",
-    "sass": "^1.99.0",
-    "sass-loader": "^16.0.7"
+    "sass": "^1.100.0",
+    "sass-loader": "^17.0.0"
   },
   "apidoc": {
     "name": "titra API",
-    "version": "0.99.53",
+    "version": "1.0.6",
     "description": "<div class='h5'>This is the official titra API documentation. For more information about the open source timetracking application developed with lots of ❤️ and ☕️ checkout <a href='https://titra.io'>titra.io</a>.</div>",
     "sampleUrl": "https://app.titra.io"
   },

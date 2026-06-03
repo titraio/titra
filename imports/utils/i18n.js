@@ -58,12 +58,12 @@ const loadLanguage = (language, i18nextDebugMode) => {
     import('dayjs/locale/zh')
     import('../ui/translations/ru.json')
     import('dayjs/locale/ru')
-    import('../ui/translations/uk.json')
+    import('../ui/translations/ukr.json')
     import('dayjs/locale/uk')
-	import('../ui/translations/es.json')
+    import('../ui/translations/es.json')
     import('dayjs/locale/es')
   }
-  import(`/imports/ui/translations/${language}.json`).then((lang) => {
+  import(`../ui/translations/${language}.json`).then((lang) => {
     i18nReady.set(false)
     setup(lang.default, language, i18nextDebugMode)
     import(`dayjs/locale/${language}`).then((locale) => {
