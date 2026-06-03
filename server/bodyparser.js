@@ -1,4 +1,4 @@
-import contentType from 'content-type'
+import { parse as parseContentType } from 'content-type'
 import getRawBody from 'raw-body'
 
 /**
@@ -50,7 +50,7 @@ export const getBuffer = (req, { limit = '1mb', encoding } = {}) => Promise.reso
   const length = req.headers['content-length']
   // eslint-disable-next-line no-undefined
   if (encoding === undefined) {
-    encoding = contentType.parse(type).parameters.charset
+    encoding = parseContentType(type).parameters.charset
   }
   const body = rawBodyMap.get(req)
   if (body) {

@@ -91,7 +91,7 @@ Template.signIn.events({
 Template.signIn.onRendered(function signInRendered() {
   const templateInstance = this
   this.autorun(() => {
-    if(oidcReady.get() && isAutoLoginEnabled()) {
+    if (oidcReady.get() && isAutoLoginEnabled() && !Meteor.loggingIn() && !Meteor.user()) {
       debugLog('[OIDC] Auto OIDC login triggered')
       Meteor.loginWithOidc((error) => {
         debugLog('[OIDC] OIDC callback invoked (auto login)', { error })
