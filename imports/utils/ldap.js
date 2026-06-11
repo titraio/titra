@@ -706,7 +706,7 @@ getGlobalSettingAsync('enableLDAP').then((ldapEnabled) => {
       if (user) {
         if (user.authenticationMethod !== 'ldap' && LDAP.getSettings('LDAP_MERGE_EXISTING_USERS') !== true) {
           debugLog('User exists without "authenticationMethod : ldap"')
-          throw new Meteor.Error('LDAP-login-error', 'LDAP Authentication succeded, but there\'s already a matching titra account in MongoDB')
+          throw new Meteor.Error('LDAP-login-error', 'LDAP Authentication succeeded, but there\'s already a matching titra account in MongoDB')
         }
 
         debugLog('Logging user')
@@ -985,7 +985,7 @@ async function addLdapUser(ldapUser, username, password) {
   } else if (LDAP.getSettings('LDAP_DEFAULT_DOMAIN') !== '') {
     userObject.email = `${username || uniqueId.value}@${LDAP.getSettings('LDAP_DEFAULT_DOMAIN')}`
   } else {
-    const error = new Meteor.Error('LDAP-login-error', 'LDAP Authentication succeded, there is no email to create an account. Have you tried setting your Default Domain in LDAP Settings?')
+    const error = new Meteor.Error('LDAP-login-error', 'LDAP Authentication succeeded, there is no email to create an account. Have you tried setting your Default Domain in LDAP Settings?')
     debugLog(error)
     throw error
   }

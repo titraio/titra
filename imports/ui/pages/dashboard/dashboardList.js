@@ -284,7 +284,7 @@ Template.dashboardList.events({
       if (err) {
         showErrorToast(`Failed: ${err.reason || 'Update failed'}`)
       } else {
-        showToast('Dashboard updated sucessfully')
+        showToast('Dashboard updated successfully')
         template.editingDashboard.set(null)
         document.querySelector('.js-dashboard-modal .btn-close')?.click()
       }
