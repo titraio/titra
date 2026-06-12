@@ -223,7 +223,7 @@ Template.dashboardList.events({
         if (err) {
           showErrorToast(`Could not remove dashboard. \n${err.reason}`)
         } else {
-          showToast('Dashboard removed successfully')
+          showToast(t('dashboard.removedSuccessfully'))
         }
       })
     }
