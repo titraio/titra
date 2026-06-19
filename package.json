@@ -1,6 +1,6 @@
 {
   "name": "titra",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -63,7 +63,7 @@
   },
   "apidoc": {
     "name": "titra API",
-    "version": "1.0.6",
+    "version": "1.0.9",
     "description": "<div class='h5'>This is the official titra API documentation. For more information about the open source timetracking application developed with lots of ❤️ and ☕️ checkout <a href='https://titra.io'>titra.io</a>.</div>",
     "sampleUrl": "https://app.titra.io"
   },
