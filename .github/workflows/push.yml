@@ -24,7 +24,7 @@ jobs:
           body: ${{ github.event.head_commit.message }}
 
       - name: Create Release
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: softprops/action-gh-release@v3.0.0
         with:
           token: github.token
@@ -35,26 +35,26 @@ jobs:
           make_latest: true
 
       - name: Free disk space
-        if: steps.autotag.outputs.successful == 'true'
+ #       if: steps.autotag.outputs.successful == 'true'
         run: curl -fsSL https://raw.githubusercontent.com/kou/arrow/e49d8ae15583ceff03237571569099a6ad62be32/ci/scripts/util_free_space.sh | bash
 
       - name: Set up QEMU
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: docker/setup-qemu-action@v4.1.0
 
       - name: Set up Docker Buildx
-        if: steps.autotag.outputs.successful == 'true'
+ #       if: steps.autotag.outputs.successful == 'true'
         uses: docker/setup-buildx-action@v4.1.0
 
       - name: Login to Docker Hub (kromit)
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: docker/login-action@v4.2.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push to kromit
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: docker/build-push-action@v7.2.0
         with:
           context: .
@@ -66,14 +66,14 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Login to Docker Hub (titraio)
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: docker/login-action@v4.2.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME_TITRAIO }}
           password: ${{ secrets.DOCKERHUB_TOKEN_TITRAIO }}
 
       - name: Build and push to titraio
-        if: steps.autotag.outputs.successful == 'true'
+#        if: steps.autotag.outputs.successful == 'true'
         uses: docker/build-push-action@v7.2.0
         with:
           context: .
