@@ -70,7 +70,7 @@ Template.dashboardModal.helpers({
     return Template.instance().slugAvailable.get()
   },
 
-  slugSanitzed() {
+  slugSanitized() {
     return Template.instance().slugSanitized.get()
   },
 
