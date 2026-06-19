@@ -494,8 +494,12 @@ function getLdapUsername(ldapUser) {
   const usernameField = LDAP.getSettings('LDAP_USERNAME_FIELD') || 'uid'
 
   if (usernameField.indexOf('#{') > -1) {
-    return usernameField.replace(/#{(.+?)}/g, (match, field) => ldapUser[field])
+    return usernameField.replace(/#{(.+?)}/g, (match, field) => {
+      const v = ldapUser[field]
+      return Array.isArray(v) ? v[0] : v
+    })
   }
+
   return ldapUser[usernameField]
 }
 
@@ -503,17 +507,26 @@ function getLdapEmail(ldapUser) {
   const emailField = LDAP.getSettings('LDAP_EMAIL_FIELD') || 'mail'
 
   if (emailField?.indexOf('#{') > -1) {
-    return emailField.replace(/#{(.+?)}/g, (match, field) => ldapUser[field][0])
+    return emailField.replace(/#{(.+?)}/g, (match, field) => l{
+      const v = ldapUser[field]
+      return Array.isArray(v) ? v[0] : v
+    })
   }
 
-  return ldapUser[emailField][0]
+  const v = ldapUser[emailField]
+  return Array.isArray(v) ? v[0] : v
 }
 
 function getLdapFullname(ldapUser) {
   const fullnameField = LDAP.getSettings('LDAP_FULLNAME_FIELD') || 'cn'
+
   if (fullnameField.indexOf('#{') > -1) {
-    return fullnameField.replace(/#{(.+?)}/g, (match, field) => ldapUser[field][0])
+    return fullnameField.replace(/#{(.+?)}/g, (match, field) => {
+      const v = ldapUser[field]
+      return Array.isArray(v) ? v[0] : v
+    })
   }
+
   return ldapUser[fullnameField]
 }
 
