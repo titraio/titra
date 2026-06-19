@@ -27,7 +27,7 @@ jobs:
 #        if: steps.autotag.outputs.successful == 'true'
         uses: softprops/action-gh-release@v3.0.0
         with:
-          token: github.token
+          token: ${{ github.token }}
           tag_name: ${{steps.autotag.outputs.version}}
           body: ${{ github.event.head_commit.message }}
           draft: false
