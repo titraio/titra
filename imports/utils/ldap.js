@@ -507,7 +507,7 @@ function getLdapEmail(ldapUser) {
   const emailField = LDAP.getSettings('LDAP_EMAIL_FIELD') || 'mail'
 
   if (emailField?.indexOf('#{') > -1) {
-    return emailField.replace(/#{(.+?)}/g, (match, field) => l{
+    return emailField.replace(/#{(.+?)}/g, (match, field) => {
       const v = ldapUser[field]
       return Array.isArray(v) ? v[0] : v
     })
