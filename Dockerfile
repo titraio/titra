@@ -1,4 +1,4 @@
-FROM node:22.22
+FROM node:24.15
 ENV METEOR_ALLOW_SUPERUSER true
 RUN curl https://install.meteor.com/\?release\=3.4.1 | sh
 RUN meteor --version
@@ -16,7 +16,7 @@ ENV DISABLE_CLIENT_STATS true
 ENV METEOR_DISABLE_OPTIMISTIC_CACHING 1
 RUN meteor build /build/ --server-only
 
-FROM node:22.22-alpine
+FROM node:24.15-alpine
 RUN apk --no-cache add \
 	bash \
     curl \
@@ -39,7 +39,7 @@ RUN rm -rf /app/bundle/programs/server/npm/node_modules/moment/src/locale
 RUN find /app/bundle/programs/server/npm/node_modules/astronomia/data/ -type f -not -name "deltat.js" -or -name "vsop87Bearth.js" -delete
 RUN find /app/bundle/programs/server/npm/node_modules/astronomia/lib/data/ -type f -not -name "deltat.js" -or -name "vsop87Bearth.js" -delete
 
-FROM node:22.22-alpine
+FROM node:24.15-alpine
 RUN apk --no-cache add \
 	bash \
 	ca-certificates
