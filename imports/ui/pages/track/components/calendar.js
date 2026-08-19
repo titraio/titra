@@ -8,6 +8,9 @@ import Timecards from '../../../../api/timecards/timecards.js'
 import Projects from '../../../../api/projects/projects.js'
 import './calendar.html'
 import './editTimeEntryModal.js'
+import 'fullcalendar/skeleton.css'
+import 'fullcalendar/themes/classic/theme.css'
+import 'fullcalendar/themes/classic/palette.css'
 import { getUserSetting } from '../../../../utils/frontend_helpers.js'
 import { getHolidays } from '../../../../utils/holiday.js'
 
@@ -27,9 +30,10 @@ Template.calendar.onRendered(() => {
   templateInstance.calendarInitialized = new ReactiveVar(false)
   templateInstance.autorun(async () => {
     if (window.BootstrapLoaded.get()) {
-      const { Calendar } = await import('@fullcalendar/core')
-      const interActionPlugin = await import('@fullcalendar/interaction')
-      const dayGridPlugin = await import('@fullcalendar/daygrid')
+      const { Calendar } = await import('fullcalendar')
+      const interActionPlugin = await import('fullcalendar/interaction')
+      const dayGridPlugin = await import('fullcalendar/daygrid')
+      const classicThemePlugin = await import('fullcalendar/themes/classic')
       const { Draggable } = interActionPlugin
       const draggable = new Draggable(document.querySelector('.js-project-container'), {
         itemSelector: '.drag',
@@ -37,14 +41,19 @@ Template.calendar.onRendered(() => {
       const calendarEl = document.getElementById('cal')
       calendarEl.innerHTML = ''
       templateInstance.calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin.default, interActionPlugin.default],
+        plugins: [classicThemePlugin.default, dayGridPlugin.default, interActionPlugin.default],
         initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'title',
+          center: '',
+          right: 'today prev,next',
+        },
         droppable: true,
         aspectRatio: 2,
         height: 'auto',
         timeZone: 'UTC', // Ensure consistent timezone usage
         firstDay: getUserSetting('startOfWeek'),
-        themeSystem: 'standard',
+        themeSystem: 'classic',
         buttonIcons: false,
         events: (fetchInfo, successCallback) => {
           templateInstance.startDate.set(fetchInfo.start)

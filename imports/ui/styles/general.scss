@@ -219,6 +219,9 @@ g.chart-legend {
       font-weight: 400;
       font-size: 1.5rem;
     }
+    .fc-col-header-cell-cushion {
+      font-weight: 700 !important;
+    }
     .fc-event:hover {
       color: var(--bs-primary) !important;
     }
@@ -226,7 +229,7 @@ g.chart-legend {
       z-index: 1060 !important;
     }
     .fc-daygrid-day.fc-day-today {
-      background: rgba(0,150,136,.5) !important;
+      background: var(--bs-primary) !important;
     }
     .fc-modal {
       background: rgba(0, 0, 0, 0.75);
@@ -458,6 +461,16 @@ body.is-dark {
   --fc-cell-border-color-width:           1px solid var(--grey); // calendar cell border width and border-color
   --fc-cell-font-color:                   #a9a9a9;       // calendar cell font color 
   --fc-cell-bg-color:                     #1d1f21;       // calendar cell BG-color 
+  --fc-classic-background:                var(--fc-cell-bg-color);
+  --fc-classic-foreground:                var(--bs-body-color);
+  --fc-classic-border:                    var(--grey);
+  --fc-classic-strong-border:             var(--dark-border);
+  --fc-classic-button:                    var(--fc-bg-color);
+  --fc-classic-button-border:             var(--fc-border-color);
+  --fc-classic-button-strong:             var(--titra-dark);
+  --fc-classic-button-strong-border:      var(--fc-border-color);
+  --fc-classic-button-foreground:         var(--fc-color);
+  --fc-classic-today:                     var(--bs-primary);
 
   //Body
   --bs-body-bg:                              #1d1d1d;
