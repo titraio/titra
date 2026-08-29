@@ -223,7 +223,7 @@ Template.dashboardList.events({
         if (err) {
           showErrorToast(`Could not remove dashboard. \n${err.reason}`)
         } else {
-          showToast('Dashboard removed successfully')
+          showToast(t('dashboard.removedSuccessfully'))
         }
       })
     }
@@ -284,7 +284,7 @@ Template.dashboardList.events({
       if (err) {
         showErrorToast(`Failed: ${err.reason || 'Update failed'}`)
       } else {
-        showToast('Dashboard updated sucessfully')
+        showToast(t('dashboard.updatedSuccessfully'))
         template.editingDashboard.set(null)
         document.querySelector('.js-dashboard-modal .btn-close')?.click()
       }

@@ -48,7 +48,7 @@ Template.outboundinterfacescomponent.events({
                     showToast(error)
                     console.error(error)
                 } else {
-                    showToast('notifications.success')
+                    showToast(t('notifications.success'))
                     templateInstance.$('#_id').val('')
                     templateInstance.$('#name').val('')
                     templateInstance.$('#description').val('')
