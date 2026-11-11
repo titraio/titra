@@ -5,11 +5,43 @@ import { check, Match } from 'meteor/check'
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import Timecards from '../../timecards/timecards'
 import Projects from '../projects.js'
+import CustomFields from '../../customfields/customfields.js'
 import Tasks from '../../tasks/tasks.js'
 import { addNotification } from '../../notifications/notifications.js'
 import { emojify } from '../../../utils/frontend_helpers'
 import { periodToDates } from '../../../utils/periodHelpers.js'
+import { buildSafePayload } from '../../../utils/sanitizer.js'
 import { authenticationMixin, transactionLogMixin, calculateSimilarity } from '../../../utils/server_method_helpers'
+
+const projectAllowedFields = new Set([
+  'name',
+  'color',
+  'startDate',
+  'endDate',
+  'desc',
+  'customer',
+  'defaultTask',
+  'notbillable',
+  'rate',
+  'target',
+  'public',
+  'wekanurl',
+  'selectedWekanList',
+  'selectedWekanSwimlanes',
+  'gitlabquery',
+])
+
+async function getProjectAllowedFields() {
+  const customFields = await CustomFields.find(
+    { classname: 'project' },
+    { fields: { name: 1 } },
+  ).fetchAsync()
+
+  return new Set([
+    ...projectAllowedFields,
+    ...customFields.map(({ name }) => name.replace(/[^A-Z0-9]/ig, '_')),
+  ])
+}
 
 /**
 Get the statistics of all projects based on the timecards.
@@ -167,9 +199,10 @@ const updateProject = new ValidatedMethod({
   },
   mixins: [authenticationMixin, transactionLogMixin],
   async run({ projectId, projectArray }) {
+    const allowedFields = await getProjectAllowedFields()
     const updateJSON = buildSafePayload(Object.fromEntries(
       projectArray.map((projectAttribute) => [projectAttribute.name, projectAttribute.value]),
-    ), projectAllowedFields)
+    ), allowedFields)
     if (!updateJSON.name) {
       throw new Meteor.Error('error-project-name-required', 'Project name is required')
     }
@@ -213,9 +246,10 @@ const createProject = new ValidatedMethod({
   },
   mixins: [authenticationMixin, transactionLogMixin],
   async run({ projectArray }) {
+    const allowedFields = await getProjectAllowedFields()
     const updateJSON = buildSafePayload(Object.fromEntries(
       projectArray.map((projectAttribute) => [projectAttribute.name, projectAttribute.value]),
-    ), projectAllowedFields)
+    ), allowedFields)
     if (!updateJSON.name) {
       throw new Meteor.Error('error-project-name-required', 'Project name is required')
     }
