@@ -11,7 +11,7 @@ Inserts a new project task into the Tasks collection.
 @param {string} args.projectId - The ID of the project for the task.
 @param {string} args.name - The name of the task.
 @param {Date} args.start - The start date of the task.
-@param {Date} args.end - The end date of the task.
+@param {Date} [args.end] - The end date of the task; defaults to the start date.
 @param {number} [args.estimatedHours] - The estimated/planned hours for the task.
 @param {string[]} [args.dependencies] - An array of task IDs that this task depends on.
 */
@@ -22,7 +22,7 @@ const insertProjectTask = new ValidatedMethod({
       projectId: String,
       name: String,
       start: Date,
-      end: Date,
+      end: Match.Optional(Date),
       estimatedHours: Match.Optional(Number),
       dependencies: Match.Optional([String]),
       customfields: Match.Optional(Object),
@@ -30,7 +30,7 @@ const insertProjectTask = new ValidatedMethod({
   },
   mixins: [authenticationMixin, transactionLogMixin],
   async run({
-    projectId, name, start, end, estimatedHours, dependencies, customfields,
+    projectId, name, start, end = start, estimatedHours, dependencies, customfields,
   }) {
     await Tasks.insertAsync({
       ...sanitizeObject(customfields, taskForbiddenCustomfieldKeys),

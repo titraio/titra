@@ -13,7 +13,7 @@ services:
       - "3000:3000"
     restart: always
   mongodb:
-    image: mongo:7.0
+    image: mongo:8.0
     container_name: titra_db
     restart: always
     environment:

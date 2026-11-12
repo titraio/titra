@@ -100,12 +100,12 @@ Template.editproject.onRendered(() => {
       } else {
         templateInstance.$('#color').val('#009688')
       }
-      if (project.desc instanceof Object && templateInstance.quill) {
+      if (project?.desc instanceof Object && templateInstance.quill) {
         import('quill-delta-to-html').then((deltaToHtml) => {
           const converter = new deltaToHtml.QuillDeltaToHtmlConverter(project.desc.ops, {})
           templateInstance.quill.setHtml(converter.convert())
         })
-      } else if (project.desc && templateInstance.quill) {
+      } else if (project?.desc && templateInstance.quill) {
         templateInstance.quill.setHtml(project.desc)
       }
     } else if (FlowRouter.getRouteName() !== 'createProject' && !templateInstance.deletion) {

@@ -2,6 +2,9 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { Modal } from 'bootstrap'
+// frappe-gantt exposes this stylesheet through a conditional export, not a package subpath.
+// eslint-disable-next-line import/no-relative-packages
+import '../../../../../node_modules/frappe-gantt/dist/frappe-gantt.css'
 import { i18nReady, t } from '../../../../utils/i18n.js'
 import './projectTasks.html'
 import Tasks from '../../../../api/tasks/tasks'
@@ -92,6 +95,27 @@ Template.projectTasks.onCreated(function projectTasksCreated() {
 Template.projectTasks.onRendered(() => {
   const templateInstance = Template.instance()
   const tasks = Tasks.find({ projectId: FlowRouter.getParam('id') })
+  const ganttElement = templateInstance.$('#projectGantt')[0]
+  templateInstance.ganttElement = ganttElement
+  const fitGanttContainer = () => {
+    const ganttContainer = ganttElement.querySelector('.gantt-container')
+    const ganttSvg = ganttContainer?.querySelector('svg.gantt')
+    const ganttHeader = ganttContainer?.querySelector('.grid-header')
+    if (!ganttContainer || !ganttSvg || !ganttHeader) return
+
+    ganttContainer.style.removeProperty('max-height')
+    ganttContainer.style.removeProperty('min-height')
+    const scrollbarHeight = ganttContainer.offsetHeight - ganttContainer.clientHeight
+    const chartHeight = Number(ganttSvg.getAttribute('height'))
+    ganttContainer.style.height = `${chartHeight + ganttHeader.offsetHeight + scrollbarHeight}px`
+  }
+  const preventTodayButtonSubmit = (event) => {
+    if (event.target.closest('.today-button')) event.preventDefault()
+  }
+  ganttElement.addEventListener('click', preventTodayButtonSubmit)
+  templateInstance.ganttResizeHandler = fitGanttContainer
+  templateInstance.preventTodayButtonSubmit = preventTodayButtonSubmit
+  window.addEventListener('resize', fitGanttContainer)
   templateInstance.autorun(() => {
     if (templateInstance.subscriptionsReady() && i18nReady.get() && tasks.count() > 0) {
       const columns = [
@@ -203,6 +227,8 @@ Template.projectTasks.onRendered(() => {
           dependencies: task.dependencies,
         }))
       const ganttOptions = {
+        infinite_padding: false,
+        scroll_to: 'start',
         on_date_change: (task, start, end) => {
           const taskId = task.id
           Meteor.call('updateTask', {
@@ -222,9 +248,11 @@ Template.projectTasks.onRendered(() => {
         import('frappe-gantt').then((gantt) => {
           const Gantt = gantt.default
           templateInstance.ganttchart = new Gantt('#projectGantt', ganttTasks, ganttOptions)
+          fitGanttContainer()
         })
       } else {
         templateInstance.ganttchart.refresh(ganttTasks)
+        fitGanttContainer()
       }
     }
   })
@@ -257,10 +285,13 @@ Template.projectTasks.events({
 })
 
 Template.projectTasks.onDestroyed(() => {
+  const templateInstance = Template.instance()
+  window.removeEventListener('resize', templateInstance.ganttResizeHandler)
+  templateInstance.ganttElement?.removeEventListener('click', templateInstance.preventTodayButtonSubmit)
   try {
-    Template.instance().datatable?.destroy()
+    templateInstance.datatable?.destroy()
   } catch (error) {
     console.error(error)
   }
-  Template.instance().datatable = undefined
+  templateInstance.datatable = undefined
 })

@@ -855,30 +855,27 @@ body.is-dark {
         color:                  var(--bs-success);
     //    text-decoration:        underline;
     }
-    g > text {
-        fill:                   #FFFFFF;
-    }
-    .gantt .grid-header {
-        fill:                   var(--grey) !important;
-        stroke:                 var(--grey) !important;
-    }
-    .gantt .grid-row {
-        fill:                   var(--grey) !important;
-    }
-    .gantt .grid-row:nth-child(even) {
-        fill:                   var(--dark-form) !important;
-    }
-    .gantt .row-line {
-        stroke:                 var(--bs-dark) !important;
-    }
-    .gantt .lower-text {
-        fill:                   var(--bs-body-color) !important;
-    }
-    .gantt .upper-text {
-        fill:                   var(--bs-body-color) !important;
-    }
-    .gantt .bar {
-        fill:                   var(--lightgrey) !important;
+    #projectGantt {
+        --g-arrow-color:                var(--bs-body-color);
+        --g-bar-color:                  var(--lightgrey);
+        --g-bar-border:                 var(--lightgrey);
+        --g-tick-color-thick:           var(--bs-dark);
+        --g-tick-color:                 var(--dark-form);
+        --g-actions-background:         var(--lightgrey);
+        --g-border-color:               var(--grey);
+        --g-text-muted:                 var(--bs-body-color);
+        --g-text-light:                 #FFFFFF;
+        --g-text-dark:                  var(--bs-body-color);
+        --g-progress-color:             var(--grey);
+        --g-handle-color:               var(--bs-light);
+        --g-weekend-label-color:        var(--lightgrey);
+        --g-expected-progress:          var(--lightgrey);
+        --g-header-background:          var(--grey);
+        --g-row-color:                  var(--grey);
+        --g-row-border-color:           var(--dark-border);
+        --g-today-highlight:            var(--bs-primary);
+        --g-popup-actions:               var(--lightgrey);
+        --g-weekend-highlight-color:    var(--dark-form);
     }
     #period {
         background-color:       var(--input-button-background-color) !important;
