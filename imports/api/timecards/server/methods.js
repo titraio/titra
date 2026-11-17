@@ -306,11 +306,18 @@ const updateTimeCard = new ValidatedMethod({
   async run({
     projectId, _id, task, date, hours, taskRate, customfields, user,
   }) {
-    let { userId } = this
-    if (user !== userId) {
-      userId = await checkProjectAdministratorAndUser(projectId, userId, user)
+    const callerId = this.userId
+    let userId = callerId
+    if (user !== callerId) {
+      userId = await checkProjectAdministratorAndUser(projectId, callerId, user)
     }
-    const timecard = await Timecards.findOneAsync({ _id })
+    const timecard = await Timecards.findOneAsync({ _id, userId })
+    if (!timecard) {
+      throw new Meteor.Error('globals.not_found')
+    }
+    if (user !== callerId && timecard.projectId !== projectId) {
+      await checkProjectAdministratorAndUser(timecard.projectId, callerId, user)
+    }
     await checkTimeEntryRule({
       userId, projectId, task, state: timecard.state, date, hours,
     })
@@ -327,11 +334,11 @@ const updateTimeCard = new ValidatedMethod({
     }
     if (taskRate) {
       fieldsToSet.taskRate = taskRate
-      await Timecards.updateAsync({ _id }, {
+      await Timecards.updateAsync({ _id, userId }, {
         $set: fieldsToSet,
       })
     } else {
-      await Timecards.updateAsync({ _id }, {
+      await Timecards.updateAsync({ _id, userId }, {
         $set: fieldsToSet,
         $unset: { taskRate: '' },
       })
